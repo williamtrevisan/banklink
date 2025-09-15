@@ -8,42 +8,15 @@ use DateTimeImmutable;
 
 abstract class Transaction
 {
-    public function __construct(
-        public readonly DateTimeImmutable $date,
-        public readonly string $description,
-        public readonly string $amount,
-        public readonly string $sign,
-        public readonly string $paymentMethod = 'credit',
-        public readonly ?Installment $installments = null,
-    ) {}
+    abstract public function date(): DateTimeImmutable;
 
-    final public function date(): DateTimeImmutable
-    {
-        return $this->date;
-    }
+    abstract public function description(): string;
 
-    final public function description(): string
-    {
-        return $this->description;
-    }
+    abstract public function amount(): string;
 
-    final public function amount(): string
-    {
-        return $this->amount;
-    }
+    abstract public function sign(): string;
 
-    final public function sign(): string
-    {
-        return $this->sign;
-    }
+    abstract public function paymentMethod(): string;
 
-    final public function paymentMethod(): string
-    {
-        return $this->paymentMethod;
-    }
-
-    final public function installments(): ?Installment
-    {
-        return $this->installments;
-    }
+    abstract public function installments(): ?Installment;
 }

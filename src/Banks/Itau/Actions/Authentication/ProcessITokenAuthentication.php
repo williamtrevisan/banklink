@@ -27,7 +27,7 @@ final readonly class ProcessITokenAuthentication
         session()->put('submit_itoken_operation', $pageParser->extract('__appValidOP', "/var\\s+__appValidOP\\s*=\\s*[\"']([^\"';]+)[;\"']/s"));
         session()->put('password_form_operation', $pageParser->value('input[name="op"]', 'value'));
 
-        $this->httpRepository->submitIToken();
+        $this->httpRepository->submitIToken($passable);
 
         return $next($passable);
     }

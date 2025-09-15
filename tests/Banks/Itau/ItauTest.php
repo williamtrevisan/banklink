@@ -84,7 +84,7 @@ beforeEach(function (): void {
 
 it('can authenticate', function (): void {
     $bank = app()->make(Bank::class)
-        ->authenticate();
+        ->authenticate(token: '::token::');
 
     expect($bank)
         ->toBeInstanceOf(Bank::class)
@@ -98,7 +98,7 @@ it('can authenticate', function (): void {
 
 it('can find and return the account', function (): void {
     $account = app()->make(Bank::class)
-        ->authenticate()
+        ->authenticate(token: '::token::')
         ->account();
 
     expect($account)
@@ -108,7 +108,7 @@ it('can find and return the account', function (): void {
 describe('transactions accessor', function (): void {
     it('can mount the accessor', function (): void {
         $transactions = app()->make(Bank::class)
-            ->authenticate()
+            ->authenticate(token: '::token::')
             ->account()
             ->transactions();
 
@@ -142,7 +142,7 @@ describe('transactions accessor', function (): void {
             });
 
         $transactions = app()->make(Bank::class)
-            ->authenticate()
+            ->authenticate(token: '::token::')
             ->account()
             ->transactions()
             ->between(Carbon::parse('2025-05-25'), Carbon::parse('2025-06-24'));
@@ -157,7 +157,7 @@ describe('transactions accessor', function (): void {
 describe('cards accessor', function (): void {
     it('can mount the accessor', function (): void {
         $cards = app()->make(Bank::class)
-            ->authenticate()
+            ->authenticate(token: '::token::')
             ->account()
             ->cards();
 
@@ -180,7 +180,7 @@ describe('cards accessor', function (): void {
             );
 
         $cards = app()->make(Bank::class)
-            ->authenticate()
+            ->authenticate(token: '::token::')
             ->account()
             ->cards()
             ->all();
@@ -207,7 +207,7 @@ describe('cards accessor', function (): void {
             );
 
         $cards = app()->make(Bank::class)
-            ->authenticate()
+            ->authenticate(token: '::token::')
             ->account()
             ->cards()
             ->firstWhere('name', 'UNICLASS BLACK CASHBACK');
@@ -235,7 +235,7 @@ describe('statements accessor', function (): void {
             );
 
         $statements = app()->make(Bank::class)
-            ->authenticate()
+            ->authenticate(token: '::token::')
             ->account()
             ->cards()
             ->firstWhere('name', 'UNICLASS BLACK CASHBACK')
@@ -273,7 +273,7 @@ describe('statements accessor', function (): void {
             });
 
         $statements = app()->make(Bank::class)
-            ->authenticate()
+            ->authenticate(token: '::token::')
             ->account()
             ->cards()
             ->firstWhere('name', 'UNICLASS BLACK CASHBACK')
@@ -314,7 +314,7 @@ describe('statements accessor', function (): void {
             });
 
         $statements = app()->make(Bank::class)
-            ->authenticate()
+            ->authenticate(token: '::token::')
             ->account()
             ->cards()
             ->firstWhere('name', 'UNICLASS BLACK CASHBACK')

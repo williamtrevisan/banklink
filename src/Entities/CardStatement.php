@@ -9,58 +9,28 @@ use DateTimeImmutable;
 
 abstract class CardStatement
 {
-    public function __construct(
-        public readonly string $cardId,
-        public readonly StatementStatus $status,
-        public readonly DateTimeImmutable $dueDate,
-        public readonly ?DateTimeImmutable $closingDate,
-        public readonly string $amount,
-        public readonly string $period,
-        /* @var Holder[] */
-        public readonly array $holders,
-    ) {}
-
     /**
      * @return CardStatement[]
      */
     abstract public function all(): array;
 
+    /** @return CardStatement[] */
     abstract public function byPeriod(string $period): array;
 
-    final public function cardId(): string
-    {
-        return $this->cardId;
-    }
+    abstract public function cardId(): string;
 
-    final public function status(): StatementStatus
-    {
-        return $this->status;
-    }
+    abstract public function status(): StatementStatus;
 
-    final public function dueDate(): DateTimeImmutable
-    {
-        return $this->dueDate;
-    }
+    abstract public function dueDate(): DateTimeImmutable;
 
-    final public function closingDate(): DateTimeImmutable
-    {
-        return $this->closingDate;
-    }
+    abstract public function closingDate(): ?DateTimeImmutable;
 
-    final public function amount(): string
-    {
-        return $this->amount;
-    }
+    abstract public function amount(): string;
 
-    final public function period(): string
-    {
-        return $this->period;
-    }
+    abstract public function period(): string;
 
-    final public function holders(): array
-    {
-        return $this->holders;
-    }
+    /** @return Holder[] */
+    abstract public function holders(): array;
 
     final public function isOpen(): bool
     {

@@ -6,9 +6,17 @@ namespace Banklink\Banks\Itau\Entities;
 
 use Banklink\Entities;
 use Banklink\Support\Date;
+use DateTimeImmutable;
 
 final class Installment extends Entities\Installment
 {
+    public function __construct(
+        private readonly int $current,
+        private readonly int $total,
+        private readonly DateTimeImmutable $dueDate,
+        private readonly string $amount,
+    ) {}
+
     public static function from(array $transaction): static
     {
         [$description] = str($transaction['descricao'])
@@ -25,5 +33,25 @@ final class Installment extends Entities\Installment
             dueDate: Date::normalizePtBrDate($transaction['data'], now()->year),
             amount: $transaction['valor'] ?? ''
         );
+    }
+
+    public function current(): int
+    {
+        return $this->current;
+    }
+
+    public function total(): int
+    {
+        return $this->total;
+    }
+
+    public function dueDate(): DateTimeImmutable
+    {
+        return $this->dueDate;
+    }
+
+    public function amount(): string
+    {
+        return $this->amount;
     }
 }

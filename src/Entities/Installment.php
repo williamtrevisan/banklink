@@ -8,30 +8,11 @@ use DateTimeImmutable;
 
 abstract class Installment
 {
-    public function __construct(
-        public readonly int $current,
-        public readonly int $total,
-        public readonly DateTimeImmutable $dueDate,
-        public readonly string $amount
-    ) {}
+    abstract public function current(): int;
 
-    final public function current(): int
-    {
-        return $this->current;
-    }
+    abstract public function total(): int;
 
-    final public function total(): int
-    {
-        return $this->total;
-    }
+    abstract public function dueDate(): DateTimeImmutable;
 
-    final public function dueDate(): DateTimeImmutable
-    {
-        return $this->dueDate;
-    }
-
-    final public function amount(): string
-    {
-        return $this->amount;
-    }
+    abstract public function amount(): string;
 }

@@ -6,31 +6,12 @@ namespace Banklink\Entities;
 
 abstract class Holder
 {
-    public function __construct(
-        public readonly string $name,
-        public readonly string $lastFourDigits,
-        public readonly string $amount,
-        /* @var Transaction[] */
-        public readonly array $transactions
-    ) {}
+    abstract public function name(): string;
 
-    final public function name(): string
-    {
-        return $this->name;
-    }
+    abstract public function lastFourDigits(): string;
 
-    final public function lastFourDigits(): string
-    {
-        return $this->lastFourDigits;
-    }
+    abstract public function amount(): string;
 
-    final public function amount(): string
-    {
-        return $this->amount;
-    }
-
-    final public function transactions(): array
-    {
-        return $this->transactions;
-    }
+    /** @return Transaction[] */
+    abstract public function transactions(): array;
 }

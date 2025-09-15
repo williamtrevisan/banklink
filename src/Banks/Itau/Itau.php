@@ -17,9 +17,9 @@ final readonly class Itau implements Bank
         private NavigationLoader $navigationLoader,
     ) {}
 
-    public function authenticate(): static
+    public function authenticate(string $token): static
     {
-        $this->authenticator->authenticate();
+        $this->authenticator->authenticate($token);
 
         session()->forget('sign_command_operation');
         session()->forget('anti_pirate_operation');

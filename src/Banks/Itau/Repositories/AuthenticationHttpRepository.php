@@ -99,14 +99,14 @@ final readonly class AuthenticationHttpRepository implements AuthenticationRepos
             ->body();
     }
 
-    public function submitIToken(): void
+    public function submitIToken(string $token): void
     {
         $this->http
             ->replaceHeaders([
                 'op' => session()->pull('submit_itoken_operation'),
             ])
             ->post('/router-app/router', [
-                'token' => config('banklink.banks.itau.itoken'),
+                'token' => $token,
             ]);
     }
 

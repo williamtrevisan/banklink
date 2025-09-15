@@ -32,14 +32,12 @@ php artisan vendor:publish --tag="banklink-config"
 Configure your bank credentials in your `.env` file:
 
 ```env
-BANK_DRIVER=itau
 BANK_BASE_URL=https://internetpf5.itau.com.br
 BANK_AGENCY=your_agency
 BANK_ACCOUNT=your_account
 BANK_ACCOUNT_DIGIT=your_digit
 BANK_PASSWORD=your_password
 BANK_HOLDER=your_name
-BANK_ITOKEN=your_itoken
 ```
 
 ## Supported Banks
@@ -50,7 +48,7 @@ Currently supported Brazilian banks:
 |------|---------------|----------|-------|--------------|--------|
 | **Itaú** | ✅ | ✅ | ✅ | ✅ | Full Support |
 
-*More banks coming soon! Contributions are welcome.*
+*More banks coming soon!*
 
 ## Table of Contents
 - [Quick Start](#-quick-start)
@@ -61,15 +59,14 @@ Currently supported Brazilian banks:
 - [Card Statements](#-card-statements)
 - [Error Handling](#-error-handling)
 - [Security Considerations](#-security-considerations)
-- [Testing](#-testing)
 
 ### 🚀 Quick Start
 
 ```php
 use Banklink\Facades\Banklink;
 
-// Authenticate with your bank
-$bank = Banklink::authenticate();
+// Authenticate with your bank using your iToken
+$bank = Banklink::authenticate('your-itoken-here');
 
 // Get account information
 $account = Banklink::account();
@@ -82,31 +79,23 @@ foreach ($cards as $card) {
 }
 
 // Get card by name
-$card = $account->cards()->firstWhere('name', 'UNICLASS BLACK CASHBACK');
+$card = $account->cards()->firstWhere('name', '::card_name::');
 ```
 
 ### 🔐 Authentication
 
-Banklink handles the complex authentication flow with Brazilian banks automatically:
+Authenticate with your bank using your iToken:
 
 ```php
 use Banklink\Facades\Banklink;
 
 try {
-    $bank = Banklink::authenticate();
-    // Authentication successful - you can now make API calls
+    $bank = Banklink::authenticate('your-itoken-here');
+    // Ready to make API calls
 } catch (\Exception $e) {
-    // Handle authentication errors
     echo "Authentication failed: " . $e->getMessage();
 }
 ```
-
-The authentication process includes:
-- Session initialization
-- Security challenge resolution
-- iToken validation
-- Password authentication
-- Guardian security checks
 
 ### 🏦 Account Information
 
@@ -115,10 +104,10 @@ Access your account details and balance:
 ```php
 $account = Banklink::account();
 
-echo "Agency: " . $account->agency;
-echo "Account: " . $account->number;
-echo "Digit: " . $account->digit;
-echo "Balance: " . $account->balance; // If available
+echo "Agency: " . $account->agency();
+echo "Account: " . $account->number();
+echo "Digit: " . $account->digit();
+echo "Balance: " . $account->balance(); // If available
 ```
 
 ### 💳 Card Management
@@ -136,14 +125,18 @@ $card = $account->cards()->firstWhere('name', 'UNICLASS BLACK CASHBACK');
 echo "Card Name: " . $card->name();
 echo "Last 4 digits: " . $card->lastFourDigits();
 echo "Brand: " . $card->brand();
-echo "Expiration: " . $card->expiration()->format('Y-m-d');
 
 // Check card limits
-$limits = $card->limits();
-echo "Total limit: " . $limits->total();
-echo "Available: " . $limits->available();
-echo "Used: " . $limits->used();
-echo "Usage percentage: " . $limits->getUsagePercentage() . "%";
+$limits = $card->limit();
+echo "Total limit: " . $limits->total();        // "43.656,00"
+echo "Available: " . $limits->available();      // "28.516,10"
+echo "Used: " . $limits->used();               // "15.139,90"
+echo "Usage percentage: " . $limits->usagePercentage() . "%"; // 34.68%
+
+// Check limit status
+if ($limits->isNearMax()) {
+    echo "Warning: Credit limit nearly maxed out!";
+}
 ```
 
 ### 📊 Transactions
@@ -161,7 +154,13 @@ foreach ($transactions as $transaction) {
     echo "Date: " . $transaction->date()->format('Y-m-d');
     echo "Description: " . $transaction->description();
     echo "Amount: " . $transaction->amount();
-    echo "Type: " . $transaction->type();
+    echo "Sign: " . $transaction->sign();
+    echo "Payment Method: " . $transaction->paymentMethod();
+    
+    // Check for installments
+    if ($installments = $transaction->installments()) {
+        echo "Installment: " . $installments->current() . "/" . $installments->total();
+    }
 }
 ```
 
@@ -179,16 +178,29 @@ foreach ($statements as $statement) {
     echo "Amount: " . $statement->amount();
     echo "Status: " . $statement->status()->value;
     
+    // Check statement status
+    if ($statement->isOverdue()) {
+        echo "⚠️ Statement is overdue!";
+    }
+    
+    echo "Days until due: " . $statement->daysUntilDue();
+    
     // Get statement holders (for shared cards)
     $holders = $statement->holders();
     foreach ($holders as $holder) {
         echo "Holder: " . $holder->name();
+        echo "Card ending: " . $holder->lastFourDigits();
         echo "Amount: " . $holder->amount();
         
         // Get transactions for this holder
         $transactions = $holder->transactions();
         foreach ($transactions as $transaction) {
             echo "  - " . $transaction->description() . ": " . $transaction->amount();
+            
+            // Show installment info if available
+            if ($installments = $transaction->installments()) {
+                echo " (" . $installments->current() . "/" . $installments->total() . ")";
+            }
         }
     }
 }
@@ -220,67 +232,11 @@ try {
 
 ### 🔒 Security Considerations
 
-When working with banking data, security is paramount:
-
-1. **Environment Variables**: Never commit credentials to version control
-2. **HTTPS Only**: Always use HTTPS in production
-3. **Session Management**: Implement proper session handling and timeouts
-4. **Data Encryption**: Encrypt sensitive data at rest
-5. **Audit Logging**: Log all banking operations for security auditing
-6. **Rate Limiting**: Implement rate limiting to prevent abuse
-
-```php
-// Example secure implementation
-class SecureBankingService
-{
-    public function getAccountData(): array
-    {
-        // Log the operation
-        Log::info('Banking operation started', ['user_id' => auth()->id()]);
-        
-        try {
-            $bank = Banklink::authenticate();
-            $data = $bank->account()->toArray();
-            
-            // Encrypt sensitive data before storing
-            $encryptedData = encrypt($data);
-            
-            Log::info('Banking operation completed successfully');
-            return $data;
-            
-        } catch (\Exception $e) {
-            Log::error('Banking operation failed', ['error' => $e->getMessage()]);
-            throw $e;
-        }
-    }
-}
-```
-
-### 🧪 Testing
-
-Banklink provides testing utilities to help you test your integration:
-
-```php
-// In your tests
-use Banklink\Facades\Banklink;
-
-public function test_can_get_account_information()
-{
-    // Mock the banking service
-    Banklink::fake([
-        'account' => [
-            'agency' => '::agency::',
-            'number' => '::account::',
-            'digit' => '::account_digit::',
-        ]
-    ]);
-    
-    $account = Banklink::account();
-    
-    $this->assertEquals('::agency::', $account->agency);
-    $this->assertEquals('::account::', $account->number);
-}
-```
+- Never commit credentials to version control
+- Always use HTTPS in production
+- Encrypt sensitive data at rest
+- Log banking operations for auditing
+- Implement proper session handling
 
 ## Development
 

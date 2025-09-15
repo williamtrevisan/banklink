@@ -9,12 +9,13 @@ use Banklink\Accessors\TransactionsAccessor;
 
 abstract class Account
 {
-    public function __construct(
-        public readonly string $agency,
-        public readonly string $number,
-        public readonly string $digit,
-        public readonly ?string $balance = null,
-    ) {}
+    abstract public function agency(): string;
+
+    abstract public function number(): string;
+
+    abstract public function digit(): string;
+
+    abstract public function balance(): ?string;
 
     abstract public function cards(): CardsAccessor;
 

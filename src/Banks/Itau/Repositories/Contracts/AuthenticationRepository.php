@@ -24,7 +24,7 @@ interface AuthenticationRepository
 
     public function loadITokenForm(): string;
 
-    public function submitIToken(): void;
+    public function submitIToken(string $token): void;
 
     public function loadPasswordForm(): void;
 

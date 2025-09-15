@@ -8,7 +8,7 @@ use Banklink\Entities\Account;
 
 interface Bank
 {
-    public function authenticate(): static;
+    public function authenticate(string $token): static;
 
     public function account(): Account;
 }

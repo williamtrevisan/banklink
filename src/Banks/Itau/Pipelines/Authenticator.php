@@ -13,10 +13,10 @@ use Illuminate\Pipeline\Pipeline;
 
 final class Authenticator
 {
-    public function authenticate(): void
+    public function authenticate(string $token): void
     {
         app(Pipeline::class)
-            ->send(null)
+            ->send($token)
             ->through([
                 InitializeAuthenticationSession::class,
                 LoadSecurityChallengeComponents::class,

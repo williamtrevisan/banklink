@@ -21,7 +21,7 @@ final readonly class GetCheckingAccountTransactions
 
         return array_filter(
             $transactions,
-            fn (Transaction $transaction): bool => ! str($transaction->description)->contains(['SALDO']),
+            fn (Transaction $transaction): bool => ! str($transaction->description())->contains(['SALDO']),
         );
     }
 }

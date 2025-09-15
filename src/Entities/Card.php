@@ -8,42 +8,15 @@ use Banklink\Accessors\StatementsAccessor;
 
 abstract class Card
 {
-    public function __construct(
-        public readonly string $id,
-        public readonly string $name,
-        public readonly string $lastFourDigits,
-        public readonly string $brand,
-        public readonly CardLimit $limit,
-        public readonly CardStatement $statement,
-    ) {}
+    abstract public function id(): string;
 
-    final public function id(): string
-    {
-        return $this->id;
-    }
+    abstract public function name(): string;
 
-    final public function name(): string
-    {
-        return $this->name;
-    }
+    abstract public function lastFourDigits(): string;
 
-    final public function lastFourDigits(): string
-    {
-        return $this->lastFourDigits;
-    }
+    abstract public function brand(): string;
 
-    final public function brand(): string
-    {
-        return $this->brand;
-    }
+    abstract public function limit(): CardLimit;
 
-    final public function limit(): CardLimit
-    {
-        return $this->limit;
-    }
-
-    final public function statements(): StatementsAccessor
-    {
-        return new StatementsAccessor($this->statement);
-    }
+    abstract public function statements(): StatementsAccessor;
 }
