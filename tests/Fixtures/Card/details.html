@@ -1,0 +1,1674 @@
+<nav class="breadcrumbs text-left container itau-bootstrap" aria-label="Breadcrumb">
+    <ol>
+        <li><a title="Home" data-op="oIWgl5ID8I86EqGjygEeuL008Q96qWiu9JxCudNird0=;home" href='javascript:;'>Home</a>
+        </li>
+        <li><span aria-current="page">cart&otilde;es</span></li>
+    </ol>
+</nav>
+
+
+<div class="relative">
+
+    <div id="boxCartoesContextoCarrinhoPF" style="width: 1190px; margin-top: 20px;"></div>
+</div>
+
+
+<div id="containerApp" class="itau-bootstrap element-clean ng-cloak">
+    <div data-ng-controller="appController as ac"
+         data-ng-init="ac.init()">
+        <div class="content-cards block-soft" ng-class="{'block-soft-bg-clean' : ac.cartoes.length === 0 }">
+            <div id="containerAjuste" class="container container--ajuste">
+
+
+                <cpv-page-header titulo="cart&otilde;es"
+                                 texto="acompanhe aqui os seus cart&otilde;es de cr&eacute;dito"
+                                 data-ng-show="ac.cartoes.length > 0">
+                </cpv-page-header>
+                <div id="0O"></div>
+                <div id="your-card-select" class="itau-text-regular">
+                    <div class="card-list" role="main">
+                        <div ng-repeat="cartao in ac.cartoes track by $index" class="card-list__item row"
+                             data-ng-show="ac.quantidadeCartoesVisiveis > $index">
+                            <div class="col-3 card-list__col-card col-3--ajuste">
+                                <cpv-cartao cor="cartao.cor" titulo="cartao.titulo"
+                                            nome="cartao.nome" bandeira="cartao.bandeira"
+                                            numero="cartao.numero" class="no-shadow"></cpv-cartao>
+                            </div>
+                            <div class="col-9 col-9--ajuste">
+                                <div class="list-status d-flex align-items-center area-ajuste--ul">
+                                                        <span data-ng-show="cartao.erroFatura === 'true'"
+                                                              class="tooltip-custom-fixed tooltip-errolimites tooltip-color-purple tooltip--position"
+                                                              role="alert">
+                        <span class="tooltip-custom-fixed__label">informa&ccedil;&atilde;o de fatura, valor total e vencimento est&atilde;o indispon&iacute;veis no momento<span
+                            class="tooltip-custom-fixed__arrow" aria-hidden="true"></span></span>
+                    </span>
+                                    <div class="list-status__item list-status__item--no-mrg"
+                                         ng-class="{'class-error--color': cartao.erroFatura}">
+                                        <div>fatura</div>
+                                        <div class="list-status__value" data-ng-show="cartao.erroFatura === null">
+                                            {{cartao.faturas[cartao.indicePrimeiraFaturaExibida].faturaTimeline.status}}
+                                        </div>
+                                        <span class="category-status-error category-status-error-fatura--width"
+                                              data-ng-show="cartao.erroFatura === 'true'"></span>
+                                    </div>
+                                    <div class="list-status__item" ng-class="{'class-error--color': cartao.erroFatura}">
+                                        <div>{{cartao.faturas[cartao.indicePrimeiraFaturaExibida].faturaTimeline.status
+                                            === "fechada" ? 'valor total': 'valor at&eacute; o momento'}}
+                                        </div>
+                                        <div class="list-status__value" data-ng-show="cartao.erroFatura === null">
+                                            <strong>R$
+                                                {{cartao.faturas[cartao.indicePrimeiraFaturaExibida].valorAberto}}</strong>
+                                        </div>
+                                        <span class="category-status-error category-status-error-valor--width"
+                                              data-ng-show="cartao.erroFatura === 'true'"></span>
+                                    </div>
+                                    <div class="list-status__item" ng-class="{'class-error--color': cartao.erroFatura}">
+                                        <div>vencimento</div>
+                                        <div class="list-status__value" data-ng-show="cartao.erroFatura === null">
+                                            {{cartao.faturas[cartao.indicePrimeiraFaturaExibida].dataVencimento |
+                                            date:'dd'}} de
+                                            {{cartao.faturas[cartao.indicePrimeiraFaturaExibida].dataVencimento |
+                                            date:'MMMM'}}
+                                        </div>
+                                        <span class="category-status-error category-status-error-venc--width"
+                                              data-ng-show="cartao.erroFatura === 'true'"></span>
+                                    </div>
+                                    <div class="list-status__item cancelado"
+                                         ng-if="ac.toggleCartaoCanceladoCartaoInativo(cartao.situacaoContaCartao.codigo)">
+                                        <div>status</div>
+                                        <div class="list-status__value">cancelado</div>
+                                    </div>
+                                    <div
+                                        class="list-status__item list-status__item--border list-status__item--accordion d-flex align-items-center link-right--detalhes"
+                                        ng-class="{'aberto' : $first}">
+                                        <a class="accordion link-default link-default--clean text-right link-right--detalhes link-default--detalhes-pd"
+                                           href="javascript:void()"
+                                           data-toggle="collapse"
+                                           aria-expanded="{{cartao.cardExpanded || 'false'}}"
+                                           aria-controls="conteudo{{$index}}"
+                                           role="button"
+                                           tabindex="0" id="detalharCartao{{$index}}" ng-click="ac.detalhar($index);">detalhes<i
+                                            class="accordion__icon icon-itaufonts_seta_down"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="conteudo{{$index}}"
+                                 ng-show="cartao.cardExpanded && ac.quantidadeCartoesVisiveis > $index"
+                                 class="conteudo-custom" aria-hidden="{{!cartao.cardExpanded}}">
+                                <div class="row">
+                                    <div class="col-4 col-4--ajuste"
+                                         ng-if="ac.toggleCartaoCanceladoCartaoInativo(cartao.situacaoContaCartao.codigo)">
+                                        <div
+                                            class="c-category-status c-category-status--aside c-category-status--border c-category-status--line-small"
+                                            style="margin-top: 0px;">
+                                            <div class="c-category-status__item c-category-status-pontos--mg"
+                                                 ng-if="true" style="padding-top: 10px;">
+                                                <p class="c-category-status__label">
+                                                    <span
+                                                        class="c-category-status__icon icon-itaufonts_programa_de_pontos category--block"></span>
+                                                    <strong
+                                                        class="c-category-status__strong category--block c-category-status--line">programa
+                                                        de pontos</strong>
+
+                                                    <a href="#" data-op="04i5LFYSlqL4fZfA/NC5nBnOCZQOWnximuEQDZ2iji4=;"
+                                                       data-toggle="modal"
+                                                       data-backdrop="static" aria-label="detalhes" role="button"
+                                                       class="link-default link-default--no-mrg category--block"
+                                                       tabindex="0">detalhes</a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-4 col-4--ajuste"
+                                         ng-if="ac.toggleCartaoCanceladoCartaoAtivo(cartao.situacaoContaCartao.codigo);">
+                                        <div
+                                            class="c-category-status c-category-status--aside c-category-status--border c-category-status--line-small">
+                                            <div class=" c-category-status-border--mg" ng-if="true">
+                                                                                <span
+                                                                                    data-ng-show="cartao.erroDataMelhorCompra === 'true'"
+                                                                                    class="tooltip-custom-fixed tooltip-errolimites tooltip-color-purple tooltip-custom--position tooltip-custom--left"
+                                                                                    role="tooltip"
+                                                                                    aria-label="informa&ccedil;&atilde;o indispon&iacute;vel no momento">
+                                    <span class="tooltip-custom-fixed__label">informa&ccedil;&atilde;o indispon&iacute;vel no momento<span
+                                        class="tooltip-custom-fixed__arrow" aria-hidden="true"></span></span>
+                                </span>
+                                                <p class="c-category-status__label"
+                                                   ng-class="{'class-error--color': cartao.erroDataMelhorCompra}">melhor
+                                                    data de compra
+                                                    <span
+                                                        class="itau-tooltip__container itau-tooltip__container--nofloat itau-tooltip__container--cartoes itau-tooltip__container--left">
+                                    <button class="icon-itaufonts_informacao" aria-expanded="false"
+                                            aria-label="mais informa&ccedil;&otilde;es" itau-tooltip-position="top"
+                                            itau-tooltip="as compras realizadas a partir desta data ser&atilde;o lan&ccedil;adas somente na pr&oacute;xima fatura"></button>
+                                    <span role="status"></span>
+                                </span>
+                                                </p>
+                                                <span class="category-status-error category-status-error-data--width"
+                                                      data-ng-show="cartao.erroDataMelhorCompra === 'true'"></span>
+                                                <p class="c-category-status__value c-category-status__value--date">
+                                                    <strong data-ng-show="cartao.erroDataMelhorCompra === null">dia
+                                                        <span ng-bind="cartao.melhorCompra | date : 'dd'"></span>&nbsp;</strong>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-8 col-8--ajuste"
+                                         ng-class="{'c-cancelado': ac.toggleCartaoCanceladoCartaoInativo(cartao.situacaoContaCartao.codigo)}">
+                                        <div id="lista-btn" class="list-status">
+                                            <div class="bloco-btn--lista">
+                                                <div class="list-status-info" data-ng-if="cartao.erroFatura === null && (cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'aberta'
+                                    || cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'abertaDA')">
+                                                    <div class="lc-info-da lc-info-da-mrg"
+                                                         ng-if="ac.toggleCartaoCanceladoCartaoAtivo(cartao.situacaoContaCartao.codigo);">
+                                                        compras feitas <strong>antes do dia {{cartao.melhorCompra | date
+                                                        : 'dd'}}</strong> ser&atilde;o lan&ccedil;adas nesta fatura
+                                                    </div>
+                                                    <div class="lc-info-da c-box-info debito-automatico"
+                                                         data-ng-if="cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'abertaDA'">
+                                                        <i class="icon-itaufonts_curtir"></i>
+                                                        <p class="d-table-cell">
+                                                            fatura cadastrada em <br aria-hidden="true"> <strong>d&eacute;bito
+                                                            autom&aacute;tico&nbsp;</strong>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="list-status-info d-flex" data-ng-if="cartao.erroFatura === null && (cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaPagaTotal'
+                                    || cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaPagaTotalDA')">
+                                                    <div class="lc-info">
+                                                        <p class="c-category-status__label">valor pago</p>
+                                                        <p class="c-category-status__value"><strong
+                                                            class="color-green-saldo lc-info_value">R$
+                                                            {{cartao.faturas[cartao.indicePrimeiraFaturaExibida].valorPago}}</strong>
+                                                        </p>
+                                                    </div>
+                                                    <div class="lc-info c-box-info debito-automatico"
+                                                         data-ng-if="cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaPagaTotalDA'">
+                                                        <i class="icon-itaufonts_curtir"></i>
+                                                        <p class="d-table-cell">
+                                                            fatura cadastrada em <br aria-hidden="true"> <strong>d&eacute;bito
+                                                            autom&aacute;tico&nbsp;</strong>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="list-status-info d-flex" data-ng-if="cartao.erroFatura === null && (cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaPagaParcial'
+                                    || cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaPagaParcialDA')">
+                                                    <div class="lc-info">
+                                                        <p class="c-category-status__label">valor pago at&eacute; o
+                                                            momento</p>
+                                                        <p class="c-category-status__value"><strong
+                                                            class="lc-info_value">R$
+                                                            {{cartao.faturas[cartao.indicePrimeiraFaturaExibida].valorPago}}</strong>
+                                                        </p>
+                                                    </div>
+                                                    <div class="lc-info c-box-info debito-automatico"
+                                                         data-ng-if="cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaPagaParcialDA'">
+                                                        <i class="icon-itaufonts_curtir"></i>
+                                                        <p class="d-table-cell">
+                                                            fatura cadastrada em <br aria-hidden="true"> <strong>d&eacute;bito
+                                                            autom&aacute;tico&nbsp;</strong>
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="list-status-info d-flex" data-ng-if="cartao.erroFatura === null && (cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'abertaSaldoCredor'
+                                    || cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'abertaSaldoCredorDA')">
+                                                    <div class="lc-info-da3 lc-info-value">
+                                                        saldo credor <strong class="color-green-saldo lc-info_value">R$
+                                                        {{cartao.faturas[cartao.indicePrimeiraFaturaExibida].saldoCredor}}</strong>
+                                                    </div>
+                                                    <div class="lc-info-da3 lc-info-block"
+                                                         ng-if="ac.toggleCartaoCanceladoCartaoAtivo(cartao.situacaoContaCartao.codigo);">
+                                                        os pr&oacute;ximos lan&ccedil;amentos ser&atilde;o descontados
+                                                        do <strong>saldo credor</strong>
+                                                    </div>
+                                                    <div class="lc-info-da3 c-box-info debito-automatico"
+                                                         data-ng-if="cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'abertaSaldoCredorDA'">
+                                                        <i class="icon-itaufonts_curtir"></i>
+                                                        <p class="d-table-cell">
+                                                            fatura cadastrada em <br aria-hidden="true"> <strong>d&eacute;bito
+                                                            autom&aacute;tico&nbsp;</strong>
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="list-status-info d-flex" data-ng-if="cartao.erroFatura === null && (cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'abertaAnteriorNaoPaga'
+                                    || cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'abertaAnteriorNaoPagaDA')">
+                                                    <div class="lc-info-da3">
+                                                        aguardando confirma&ccedil;&atilde;o de pagamento da <strong>fatura
+                                                        fechada&nbsp;</strong>
+                                                    </div>
+                                                    <div class="lc-info-da3 lc-info-textoda"
+                                                         ng-class="{'c-cancelado': ac.toggleCartaoCanceladoCartaoInativo(cartao.situacaoContaCartao.codigo)}">
+                                                        valor da fatura anterior <strong
+                                                        class="color-purple lc-info_value el-break">R$
+                                                        {{cartao.faturas[cartao.indicePrimeiraFaturaExibida].valorNaoPagoFaturaAnterior}}&nbsp;</strong>
+                                                    </div>
+                                                    <div class="lc-info-da3 c-box-info debito-automatico"
+                                                         data-ng-if="cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'abertaAnteriorNaoPagaDA'">
+                                                        <i class="icon-itaufonts_curtir"></i>
+                                                        <p class="d-table-cell">
+                                                            fatura cadastrada em <br aria-hidden="true"> <strong>d&eacute;bito
+                                                            autom&aacute;tico&nbsp;</strong>
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="list-status-info" data-ng-if="cartao.erroFatura === null && ((cartao.faturas[cartao.indicePrimeiraFaturaExibida].status
+ === 'fechadaDebitoAutomatico' ||  cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechada') || (cartao.faturas[cartao.indicePrimeir
+aFaturaExibida].status === 'fechadaAnteriorNaoPagaDA' ||  cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaAnteriorNaoPaga'))">
+
+                                                    <div class="lc-info-da3"
+                                                         ng-if="ac.toggleCartaoCanceladoCartaoAtivo(cartao.situacaoContaCartao.codigo);">
+                                                        sua fatura j&aacute; fechou e os novos gastos est&atilde;o sendo
+                                                        lan&ccedil;ados na fatura aberta
+                                                    </div>
+                                                    <div class="lc-info-da c-box-info debito-automatico"
+                                                         data-ng-if="cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaDebitoAutomatico'">
+                                                        <i class="icon-itaufonts_curtir"></i>
+                                                        <p class="d-table-cell">
+                                                            fatura cadastrada em <br aria-hidden="true"> <strong>d&eacute;bito
+                                                            autom&aacute;tico&nbsp;</strong>
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="list-status-info" data-ng-if="cartao.erroFatura === null && (cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaZerada'
+                                        || cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaZeradaDA')">
+                                                    <p class="lc-info-da">
+                                                        <strong>sua fatura est&aacute; zerada</strong>, n&atilde;o ser&aacute;
+                                                        necess&aacute;rio pagar nada este m&ecirc;s
+                                                    </p>
+                                                    <div class="lc-info-da c-box-info debito-automatico"
+                                                         data-ng-if="cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaZeradaDA'">
+                                                        <i class="icon-itaufonts_curtir"></i>
+                                                        <p class="d-table-cell">
+                                                            fatura cadastrada em <br aria-hidden="true"> <strong>d&eacute;bito
+                                                            autom&aacute;tico&nbsp;</strong>
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="list-status-info d-flex" data-ng-if="cartao.erroFatura === null && (cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaSaldoCredor'
+                                    || cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaSaldoCredorDA')">
+                                                    <div class="lc-info-da3 no-break">
+                                                        <p class="c-category-status__label">saldo credor </p>
+                                                        <p class="c-category-status__value"><strong
+                                                            class="color-green-saldo lc-info_value">R$
+                                                            {{cartao.faturas[cartao.indicePrimeiraFaturaExibida].saldoCredor}}</strong>
+                                                        </p>
+                                                    </div>
+                                                    <div class="lc-info-da3">
+                                                        sua fatura fechou com saldo credor e n&atilde;o ser&aacute;
+                                                        necess&aacute;rio o pagamento
+                                                    </div>
+                                                    <div class="lc-info-da3 c-box-info debito-automatico"
+                                                         data-ng-if="cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaSaldoCredorDA'">
+                                                        <i class="icon-itaufonts_curtir"></i>
+                                                        <p class="d-table-cell">
+                                                            fatura cadastrada em <br aria-hidden="true"> <strong>d&eacute;bito
+                                                            autom&aacute;tico&nbsp;</strong>
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="list-status-info d-flex" data-ng-if="cartao.erroFatura === null && (cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaGerandoSaldoCredor'
+                                    || cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaGerandoSaldoCredorDA')">
+                                                    <div class="lc-info-da3">
+                                                        <p class="c-category-status__label color-green-saldo">voc&ecirc;
+                                                            pagou</p>
+                                                        <p class="c-category-status__value"><strong
+                                                            class="color-green-saldo lc-info_value">R$
+                                                            {{cartao.faturas[cartao.indicePrimeiraFaturaExibida].valorPago}}</strong>
+                                                        </p>
+                                                    </div>
+                                                    <div class="lc-info-da3">
+                                                        o saldo credor ser&aacute; adicionado na <strong>fatura
+                                                        seguinte</strong>
+                                                    </div>
+                                                    <div class="lc-info-da3 c-box-info debito-automatico"
+                                                         data-ng-if="cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaGerandoSaldoCredorDA'">
+                                                        <i class="icon-itaufonts_curtir"></i>
+                                                        <p class="d-table-cell">
+                                                            fatura cadastrada em <br aria-hidden="true"> <strong>d&eacute;bito
+                                                            autom&aacute;tico&nbsp;</strong>
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+
+                                                <a class="link-default link-default--no-mrg" href="javascript:void()"
+                                                   data-ng-click="ac.verFatura($index);" data-backdrop="static"
+                                                   aria-label="ver fatura" tabindex="0">
+                                                    ver fatura
+                                                </a>
+
+
+                                                <span
+                                                    class="category-status-error category-status-error-ver-fatura--width"
+                                                    data-ng-show="cartao.erroFatura === 'true'"></span>
+                                                <span class="category-status-error category-status-error-ver--width"
+                                                      data-ng-show="cartao.erroFatura === 'true'"></span>
+                                            </div>
+                                            <div class="warning-status cancelado-credor" data-ng-if="
+                            (cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaSaldoCredor'
+                            || cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaSaldoCredorDA')
+                            && (ac.toggleCartaoCanceladoCartaoInativo(cartao.situacaoContaCartao.codigo) && cartao.situacaoSaldoFatura.codigo === 'C')
+                            && (cartao.erroFatura === null)">
+
+                                                <cpv-warning type="'warning-clean'" icon="'icon-itaufonts_exclamacao'">
+                                                    Seu cart&atilde;o de cr&eacute;dito est&aacute; cancelado e possui
+                                                    um saldo credor. Solicite a devolu&ccedil;&atilde;o do valor
+                                                    atrav&eacute;s do nosso <a href="#"
+                                                                               data-op="gzT2EzeTTHkBUDtKNypMWP3dq41QGrUFZAZvRIeJtcw=;">atendimento
+                                                    digital</a> ou entre em contato com a <a
+                                                    href="javascript: executaConvivenciaMenu('d1cosJbxVHU2ZT7fPxRa3Q==');">central
+                                                    de atendimento</a>.
+                                                </cpv-warning>
+
+
+                                            </div>
+                                            <div class="warning-status cancelado-aberta" data-ng-if="cartao.erroFatura === null && ac.toggleCartaoCanceladoCartaoInativo(cartao.situacaoContaCartao.codigo)
+                            && (cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'aberta'
+                            || cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'abertaDA'
+                            || cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'abertaSaldoCredor'
+                            || cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'abertaSaldoCredorDA'
+                            || cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'abertaAnteriorNaoPaga'
+                            || cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'abertaAnteriorNaoPagaDA')">
+                                                <cpv-warning type="'warning-clean'" icon="'icon-itaufonts_exclamacao'">
+                                                    N&atilde;o ser&aacute; poss&iacute;vel fazer novas compras com esse
+                                                    cart&atilde;o.
+                                                </cpv-warning>
+                                            </div>
+                                            <div class="warning-status cancelado-devedor" data-ng-if="
+                            (cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechada'
+                            || cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaPagaParcial'
+                            || cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaAnteriorNaoPaga'
+                            || cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaAnteriorAbaixoMinimo')
+                            && (ac.toggleCartaoCanceladoCartaoInativo(cartao.situacaoContaCartao.codigo) &&&nbsp;cartao.situacaoSaldoFatura.codigo&nbsp;===&nbsp;'D')
+                            && (cartao.erroFatura === null)">
+                                                <cpv-warning type="'warning-clean'" icon="'icon-itaufonts_exclamacao'">
+                                                    Seu cart&atilde;o de cr&eacute;dito foi cancelado e possui um valor
+                                                    a ser quitado. Pagando at&eacute; a data de vencimento, voc&ecirc;
+                                                    evita multas e encargos.
+                                                </cpv-warning>
+                                            </div>
+                                            <div class="d-flex bloco-bts" data-ng-show="cartao.erroFatura === null">
+                                                <button class="btn btn-outline-primary"
+                                                        role="button"
+                                                        tabindex="0"
+                                                        ng-if="true"
+                                                        data-ng-show="(cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechada'
+                                            || cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaPagaParcial'
+                                            || cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaAnteriorNaoPaga'
+                                            || cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaAnteriorAbaixoMinimo')
+                                            && (ac.toggleCartaoCanceladoCartaoAtivo(cartao.situacaoContaCartao.codigo))"
+                                                        data-ng-click="ac.gerarBoleto($index)"><span
+                                                    class="icon-itaufonts_pagamentos_contas txt24 align-text-bottom margem-direita8"></span>boleto
+                                                    para pagamento
+                                                </button>
+
+                                                <button class="btn btn-outline-primary"
+                                                        role="button"
+                                                        tabindex="0"
+                                                        ng-if="true"
+                                                        data-ng-show="(cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechada'
+                                            || cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaPagaParcial'
+                                            || cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaAnteriorNaoPaga'
+                                            || cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaAnteriorAbaixoMinimo')
+                                            && (ac.toggleCartaoCanceladoCartaoInativo(cartao.situacaoContaCartao.codigo) && cartao.situacaoSaldoFatura.codigo&nbsp;!=&nbsp;'C')"
+                                                        data-ng-click="ac.gerarBoleto($index)"><span
+                                                    class="icon-itaufonts_pagamentos_contas txt24 align-text-bottom margem-direita8"></span>boleto
+                                                    para pagamento
+                                                </button>
+
+                                                <button class="btn-more--gerar-boleto btn btn-outline-primary"
+                                                        role="button"
+                                                        data-toggle="modal"
+                                                        data-backdrop="static"
+                                                        data-target="#modal-debito-automatico"
+                                                        ng-click="ac.abrirModalDebitoAutomatico($index,'gerarBoleto')"
+                                                        tabindex="0"
+                                                        data-ng-show="(cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaDebitoAutomatico'
+                                            || cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaDA'
+                                            || cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaPagaParcialDA'
+                                            || cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaAnteriorNaoPagaDA'
+                                            || cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaAnteriorAbaixoMinimoDA')
+                                            && (ac.toggleCartaoCanceladoCartaoAtivo(cartao.situacaoContaCartao.codigo))"
+                                                        ng-if="true"
+                                                ><span
+                                                    class="icon-itaufonts_pagamentos_contas txt24 align-text-bottom margem-direita8"></span>boleto
+                                                    para pagamento
+                                                </button>
+
+                                                <button class="btn-more--gerar-boleto btn btn-outline-primary"
+                                                        role="button"
+                                                        data-toggle="modal"
+                                                        data-backdrop="static"
+                                                        data-target="#modal-debito-automatico"
+                                                        ng-click="ac.abrirModalDebitoAutomatico($index,'gerarBoleto')"
+                                                        tabindex="0"
+                                                        data-ng-show="(cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaDebitoAutomatico'
+                                            || cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaDA'
+                                            || cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaPagaParcialDA'
+                                            || cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaAnteriorNaoPagaDA'
+                                            || cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaAnteriorAbaixoMinimoDA')
+                                            && (ac.toggleCartaoCanceladoCartaoInativo(cartao.situacaoContaCartao.codigo) && cartao.situacaoSaldoFatura.codigo&nbsp;!=&nbsp;'C')"
+                                                        ng-if="true"
+                                                ><span
+                                                    class="icon-itaufonts_pagamentos_contas txt24 align-text-bottom margem-direita8"></span>boleto
+                                                    para pagamento
+                                                </button>
+
+
+                                                <button class="btn btn-outline-primary"
+                                                        role="button"
+                                                        onClick='enviarAdobeLayerItemClicado("IT:LG:PF:Cartoes:MinhaFatura:Parcelar:ParcelamentoDaFatura:SimulacaoPasso2", "", "", "", "", "BTN:Cartoes:PagarFatura")'
+                                                        data-ng-click="ac.pagarFatura($index)"
+                                                        tabindex="0"
+                                                        data-ng-show="(cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechada'
+                                            || cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaPagaParcial'
+                                            || cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaAnteriorNaoPaga'
+                                            || cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaAnteriorAbaixoMinimo')
+                                            && (ac.toggleCartaoCanceladoCartaoAtivo(cartao.situacaoContaCartao.codigo))"
+                                                >pagar fatura
+                                                </button>
+                                                <button class="btn"
+                                                        role="button"
+                                                        onClick='enviarAdobeLayerItemClicado("IT:LG:PF:Cartoes:MinhaFatura:Parcelar:ParcelamentoDaFatura:SimulacaoPasso2", "", "", "", "", "BTN:Cartoes:PagarFatura")'
+                                                        data-ng-click="ac.pagarFatura($index)"
+                                                        tabindex="0"
+                                                        data-ng-show="(cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechada'
+                                            || cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaPagaParcial'
+                                            || cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaAnteriorNaoPaga'
+                                            || cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaAnteriorAbaixoMinimo')
+                                            && (ac.toggleCartaoCanceladoCartaoInativo(cartao.situacaoContaCartao.codigo) &&&nbsp;cartao.situacaoSaldoFatura.codigo&nbsp;!=&nbsp;'C')"
+                                                >pagar fatura
+                                                </button>
+
+                                                <button class="btn btn-outline-primary"
+                                                        role="button"
+                                                        data-toggle="modal"
+                                                        data-backdrop="static"
+                                                        data-target="#modal-debito-automatico"
+                                                        onClick='enviarAdobeLayerItemClicado("IT:LG:PF:Cartoes:MinhaFatura:Parcelar:ParcelamentoDaFatura:SimulacaoPasso2", "", "", "", "", "BTN:Cartoes:PagarFatura")'
+                                                        ng-click="ac.abrirModalDebitoAutomatico($index,'pagarFatura')"
+                                                        tabindex="0"
+                                                        data-ng-show="(cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaDebitoAutomatico'
+                                                || cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaDA'
+                                                || cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaPagaParcialDA'
+                                                || cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaAnteriorNaoPagaDA'
+                                                || cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaAnteriorAbaixoMinimoDA')
+                                                && (ac.toggleCartaoCanceladoCartaoAtivo(cartao.situacaoContaCartao.codigo))"
+                                                >pagar fatura
+                                                </button>
+
+                                                <!-- cartoes -->
+                                                <a data-toggle="modal"
+                                                   data-ng-show="(cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechada'
+                                            || cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaPagaParcial'
+                                            || cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaAnteriorNaoPaga')
+                                            && (ac.toggleCartaoCanceladoCartaoAtivo(cartao.situacaoContaCartao.codigo))"
+                                                   data-backdrop="static"
+                                                   href="javascript: executaConvivenciaMenu('XWKtehVVEsdRvOS8A6u4Rg==');"
+                                                   class="btn"
+                                                   onClick='enviarAdobeLayerItemClicado("IT:LG:PF:Cartoes:MinhaFatura:Parcelar:ParcelamentoDaFatura:SimulacaoPasso2", "", "", "", "", "BTN:Cartoes:ParcelarFatura")'
+                                                   style="line-height: 1.8;"
+                                                   role="button"
+                                                   tabindex="0">parcelar fatura</a>
+
+                                                <a data-toggle="modal"
+                                                   data-ng-show="(cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechada'
+                                            || cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaPagaParcial'
+                                            || cartao.faturas[cartao.indicePrimeiraFaturaExibida].status === 'fechadaAnteriorNaoPaga')
+                                            && (ac.toggleCartaoCanceladoCartaoInativo(cartao.situacaoContaCartao.codigo) &&&nbsp;cartao.situacaoSaldoFatura.codigo&nbsp;===&nbsp;'D')"
+                                                   data-backdrop="static"
+                                                   href="javascript: executaConvivenciaMenu('XWKtehVVEsdRvOS8A6u4Rg==');"
+                                                   class="btn"
+                                                   onClick='enviarAdobeLayerItemClicado("IT:LG:PF:Cartoes:MinhaFatura:Parcelar:ParcelamentoDaFatura:SimulacaoPasso2", "", "", "", "", "BTN:Cartoes:ParcelarFatura")'
+                                                   style="line-height: 1.8;"
+                                                   role="button"
+                                                   tabindex="0"
+                                                   disabled="disabled">parcelar fatura</a>
+                                                <!-- cartoes -->
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-4 col-4--ajuste"
+                                         ng-if="ac.toggleCartaoCanceladoCartaoAtivo(cartao.situacaoContaCartao.codigo);">
+                                        <div
+                                            class="c-category-status c-category-status--aside c-category-status--border c-category-status--line-small"
+                                            style="margin-top: 0px;">
+                                            <div class="c-category-status__item c-category-status-pontos--mg"
+                                                 ng-if="true" style="padding-top: 10px;">
+                                                <p class="c-category-status__label">
+                                                    <span
+                                                        class="c-category-status__icon icon-itaufonts_programa_de_pontos category--block"></span>
+                                                    <strong
+                                                        class="c-category-status__strong category--block c-category-status--line">programa
+                                                        de pontos</strong>
+
+                                                    <a href="#" data-op="04i5LFYSlqL4fZfA/NC5nBnOCZQOWnximuEQDZ2iji4=;"
+                                                       data-toggle="modal"
+                                                       data-backdrop="static" aria-label="detalhes" role="button"
+                                                       class="link-default link-default--no-mrg category--block"
+                                                       tabindex="0">detalhes</a>
+
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-8 col-8--ajuste">
+                                        <div class="lista-cartoes-limites"
+                                             ng-if="true && ac.toggleCartaoCanceladoCartaoAtivo(cartao.situacaoContaCartao.codigo);">
+                                                                        <span
+                                                                            data-ng-show="cartao.erroLimites === 'true'"
+                                                                            class="tooltip-custom-fixed tooltip-errolimites tooltip-color-purple"
+                                                                            role="tooltip">
+                                <span class="tooltip-custom-fixed__label tooltip--left tooltip-errolimites--position">informa&ccedil;&otilde;es sobre seu limite est&atilde;o indispon&iacute;veis no momento<span
+                                    class="tooltip-custom-fixed__arrow" aria-hidden="true"></span></span>
+                            </span>
+                                            <div class="c-progress-bar__container c-progress-bar__container--margin"
+                                                 ng-class="{'c-progress-bar__container--wm': cartao.limites.flexivel === 'false'}">
+                                                <div class="c-progress-bar__item c-progress-bar__item--open"
+                                                     aria-valuenow="{{cartao.erroLimites === 'true'? '0': cartao.limites.percentualUtilizado}}"
+                                                     aria-valuemin="0" aria-valuemax="100"
+                                                     ng-attr-style="width: {{cartao.erroLimites === 'true'? '0': cartao.limites.percentualUtilizado}}%;"></div>
+                                                <div
+                                                    class="c-progress-bar__item c-progress-bar__item--default c-progress-bar__item--status"></div>
+                                            </div>
+                                            <div class="c-category-status">
+                                                <div
+                                                    class="c-category-status__item c-category-status__item--icon c-category-status__item--open"
+                                                    aria-label="Voc&ecirc; utilizou R$ {{cartao.limites.limiteUtilizado}} do seu limite total">
+                                                    <p class="c-category-status__label">limite utilizado&nbsp;</p>
+                                                    <p class="c-category-status__value"
+                                                       data-ng-show="cartao.erroLimites === null">
+                                                        <strong>R$ <span
+                                                            ng-bind="cartao.limites.limiteUtilizado"></span></strong>
+                                                    </p>
+                                                    <span
+                                                        class="category-status-error category-status-error-valor--width"
+                                                        data-ng-show="cartao.erroLimites === 'true'"></span>
+                                                </div>
+                                                <div
+                                                    class="c-category-status__item c-category-status__item--icon c-category-status__item--default c-category-status__item--padding"
+                                                    aria-label="Sendo que voc&ecirc; utilizou R$ {{cartao.limites.saldoDisponivel}} nas pr&oacute;ximas faturas">
+                                                    <p class="c-category-status__label"
+                                                       ng-bind="cartao.limites.flexivel ==='true' ? 'limite': 'limite dispon&iacute;vel'"></p>
+                                                    <p class="c-category-status__value"
+                                                       data-ng-show="cartao.limites.flexivel != 'true'">
+                                                        <strong data-ng-show="cartao.erroLimites === null">R$ <span
+                                                            ng-bind="cartao.limites.saldoDisponivel"></span></strong>
+                                                    </p>
+                                                    <p class="c-category-status__value"
+                                                       data-ng-show="cartao.erroLimites === null && cartao.limites.flexivel === 'true'">
+                                                        <strong>flex&iacute;vel</strong>
+                                                    </p>
+                                                    <span
+                                                        class="category-status-error category-status-error-limite--width"
+                                                        data-ng-show="cartao.erroLimites === 'true'"></span>
+                                                </div>
+                                                <div
+                                                    class="c-category-status__item c-category-status__item--default u-line-l c-category-status__item--margin"
+                                                    data-ng-hide="cartao.limites.flexivel === 'true'">
+                                                    <p class="c-category-status__label">limite total&nbsp;</p>
+                                                    <p class="c-category-status__value  lwcase"
+                                                       data-ng-show="cartao.erroLimites === null">
+                                                        <strong>R$ <span ng-bind="cartao.limites.total"></span></strong>&nbsp;
+                                                        <a ng-if="false"
+                                                           href="javascript: executaConvivenciaMenu('Gps1RcFyAF8T5DEB9+Ve/Q==');"
+                                                           aria-label="ajustar" role="button"
+                                                           class="link-default link-default--pd">ajustar</a>
+                                                    </p>
+                                                    <span
+                                                        class="category-status-error category-status-error category-status-error-venc--width"
+                                                        data-ng-show="cartao.erroLimites === 'true'"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-lc">
+                    <button
+                        class="btn btn--more-less btn-outline-primary grupo-btn btn-more-less--ajuste btn--mais-cartoes"
+                        role="button" tabindex="0"
+                        data-ng-show="ac.quantidadeCartoesVisiveis < ac.cartoes.length"
+                        data-ng-click="ac.mostrarMaisCartoes(); ac.feedbackLeitor('cart&otilde;es exibidos')">exibir
+                        mais cart&otilde;es
+                    </button>
+                </div>
+                <div class="text-access-hide" role="status" ng-bind-html="ac.ariaLabelAlert"></div>
+                <form name="formPagarFaturaRedesenho" id="formPagarFaturaRedesenho" method="POST" action="#">
+                    <input type="hidden" name="op" data-op='I4AWl6h0DwLqrEjqGZwt86O+J60n4bR2l5CkPeGyP4w=;'/>
+                    <input type="hidden" name="idCartao" id="idCartao"/>
+                </form>
+                <form name="formPagarFatura" id="formPagarFatura" method="POST"
+                      action="/banklinepf//GRIPNET/bklcom.dll">
+                    <input type="hidden" name="dadoStart" value="E">
+                </form>
+                <form id="formGerarBoleto" data-type="download" method="post" action="#">
+                    <input type="hidden" name="op" data-op='I9uGz3wpNVBOH/4/zMKX6gCcoSIOE+WUUat5ACRjwsw=;'/>
+                    <input type="hidden" name="idCartao" id="idCartao"/>
+                    <input type="hidden" name="valorPagamento" id="valorPagamento"/>
+                </form>
+                <form id="formVerFatura" method="post" action="#">
+                    <input type="hidden" name="idCartao" value="0">
+                    <input type="hidden" name="op" data-op='dRmOcnm2Ny7WQeVDjcl0+yZ6nOnAamDVFnmcSyHmIHQ=;'/>
+                </form>
+                <form id="formVerFaturaRedesenho" method="post" action="#">
+                    <input type="hidden" name="idCartao" value="0">
+                    <input type="hidden" name="op" data-op='dRmOcnm2Ny7WQeVDjcl0+yZ6nOnAamDVFnmcSyHmIHQ=;'/>
+                </form>
+
+                <script>
+                    function detalheFatura(numeroCartao, dnCartao, nomeCartao) {
+                        session.setItem("passoResolve", "0");
+                        session.setItem("templateACI", 'meusCartoesACI');
+                        session.setItem("passouTransaction", "S");
+                        session.setItem("autoCompleteInteligente", '[{"tipo":"array.objeto","valorUsuario":{"num_cartao":"' + numeroCartao + '","dn_cartao":"' + dnCarta
+                        o + '","nome_cartao":"' + nomeCartao + '"},"campoForm":null,"finaliza":null,"callInit":true},{"tipo":"array.objeto","valor":[{"acao":"Pagar fatura"},{"acao":"Ver fatura"}],"valorUsuario":{"acao":"Ver fatura"},"campoForm":null,"finaliza":null,"funcDisplay":null}]'
+                    )
+                        ;
+                        javascript: executaConvivenciaMenu('6OPW9y0vQAdX3PKJ4fDW0A==');
+                    }
+
+                    function verFaturaRedesenho(idCartao) {
+                        var formulario = document.getElementById("formVerFaturaRedesenho");
+                        $('input[name=idCartao]', formulario).val(idCartao);
+                        $("#formVerFaturaRedesenho").submit();
+                    }
+
+                    function irPaginaCategoria() {
+                        $("#formPaginaCategoria").submit();
+                    }
+
+                    var segmento = "Uniclass";
+                    var idpf = "::customer_id::";
+                    var tipoCliente = "Cliente PF|Correntista";
+                    var url = window.location.protocol + "//" + window.location.hostname + window.location.pathname;
+                    var habilitaFluxoCartaoCancelado = "true";
+
+                    function enviarAdobeLayerItemClicado(pageName, secao, subSecao1, subSecao2, subSecao3, itemClicado) {
+                        adobeDataLayer.init();
+                        adobeDataLayer.pushSite("IT", "NI", "PF", "Web");
+                        adobeDataLayer.pushPage(secao, url, subSecao1, subSecao2, subSecao3, "", "NI", "", pageName, "", false);
+                        adobeDataLayer.pushVisitor(tipoCliente, segmento, idpf, "", "");
+                        adobeDataLayer.clearCustom();
+                        adobeDataLayer.pushCustom("itemClicado", itemClicado);
+                        adobeDataLayer.pushCustom("events", ["ClickElement"]);
+                        adobeDataLayer.pushRule("customLink");
+                        adobeDataLayer.sendDataLayer();
+                        debugger;
+                    };
+
+                </script>
+
+
+            </div>
+        </div>
+
+
+        <cpv-modal target="modal-programa-iupp" titulo="{{ac.programaRecompensa.nomePrograma}}"
+                   subtitulo="consulte os pontos acumulados em seu CPF">
+            <modal-body>
+                <div class="info-points">
+                    <ul class="c-category-status c-category-status--list">
+                        <li
+                            class="c-category-status__item c-category-status__item--flex-list c-category-status__item--icon ico--orange">
+                            <p class="c-category-status__label">total de pontos</p>
+                            <p class="c-category-status__value c-category-status__color">
+                                <strong>{{ac.programaRecompensa.saldoPontos| number}}</strong>
+                            </p>
+                        </li>
+                        <!-- <li
+        class="c-category-status__item c-category-status__item--flex-list c-category-status__item--icon ico--purple">
+        <p class="c-category-status__label">pontos a expirar</p>
+        <p class="c-category-status__value">
+            <span class="item-points date-points">em {{ac.programaRecompensa.dataExpiracao }}</span>
+            <strong class="item-points">{{ac.programaRecompensa.pontosAExpirar | number}}</strong>
+        </p>
+    </li> -->
+                    </ul>
+                    <div class="control-links text-right">
+                        <a class="link-default fechar-modal"
+                           href="javascript:;" op="5KuaW53uX5yaqU9j6/4H1asRGIPY6phq2jY3Fbfq/44=;">
+                            acelerador de pontos</a>
+                    </div>
+                </div>
+            </modal-body>
+            <modal-footer>
+                <div class="control-links control-links--iupp text-right fechado">
+                    <a class="accordion link-default link-default--clean text-right" href="javascript:void()"
+                       data-toggle="collapse" role="button" aria-expanded="false" tabindex="0">
+                        extrato e resgate de pontos
+                        <i class="accordion__icon icon-itaufonts_seta_down"></i>
+                    </a>
+
+                    <div aria-hidden="true" class="collapse conteudo conteudo--iupp text-left">
+                        <div class="alerta-iupp">
+                            <p class="alerta-iupp__p">
+                                para consultar e usar os seus pontos acesse o Aplicativo Ita&uacute;: menu produtos >
+                                produtos exclusivos > pontos e cashback
+                            </p>
+                            <!-- <a class="alerta-iupp__link" href="javascript:goToCatalogoRecompensas('')">acessar site do IUPP</a> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="control-links text-right fechado">
+                    <a class="accordion link-default link-default--clean text-right" href="javascript:void()"
+                       data-toggle="collapse" role="button" aria-expanded="false" tabindex="0">
+                        cart&otilde;es contemplados<i class="accordion__icon icon-itaufonts_seta_down"></i>
+                    </a>
+
+                    <div aria-hidden="true" class="collapse conteudo text-left">
+                        <ul class="c-category-status c-category-status--list">
+                            <li ng-repeat="cartoes in ac.programaRecompensa.cartoes"
+                                class="c-category-status__item c-category-status__item--flex-list">
+                                <p class="c-category-status__label">
+                                    <cpv-cartao cor="cartoes.customizacao.nome" bandeira="cartoes.bandeira"
+                                                apenas-bandeira="true">
+                                    </cpv-cartao>
+                                    <strong
+                                        class="cartao_modal_pontos_nome c-category-status__color">{{cartoes.nome |
+                                        lowercase}}</strong>
+                                </p>
+                                <p class="c-category-status__value">
+                                    <span>final {{cartoes.numero}}</span>
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </modal-footer>
+        </cpv-modal>
+
+        <cpv-modal target="modal-programa-pontos" titulo="{{ac.programaRecompensa.nomePrograma}}"
+                   subtitulo="consulte os pontos acumulados em seu CPF">
+            <modal-body>
+                <div class="info-points">
+                    <ul class="c-category-status c-category-status--list">
+                        <li
+                            class="c-category-status__item c-category-status__item--flex-list c-category-status__item--icon ico--orange">
+                            <p class="c-category-status__label">total de pontos</p>
+                            <p class="c-category-status__value c-category-status__color">
+                                <strong>{{ac.programaRecompensa.saldoPontos| number}}</strong>
+                            </p>
+                        </li>
+                        <li
+                            class="c-category-status__item c-category-status__item--flex-list c-category-status__item--icon ico--purple">
+                            <p class="c-category-status__label">pontos a expirar</p>
+                            <p class="c-category-status__value">
+                                <span
+                                    class="item-points date-points">em {{ ac.programaRecompensa.dataExpiracao }}</span>
+                                <strong class="item-points">{{ac.programaRecompensa.pontosAExpirar | number}}</strong>
+                            </p>
+                        </li>
+                    </ul>
+                    <div class="control-links text-right">
+                        <a href="javascript:goToCatalogoRecompensas('{{ ac.programaRecompensa.idProduto }}')"
+                           class="link-default" tabindex="0">usar meus pontos</a>
+
+                        <a ng-if="false" href="javascript: executaConvivenciaMenu('izEs2Y9PCDep8thvKGwXhw==');"
+                           class="link-default" tabindex="0">extrato</a>
+
+                        <a ng-if="true" href="javascript:;"
+                           op="04i5LFYSlqL4fZfA/NC5nBnOCZQOWnximuEQDZ2iji4=;"
+                           class="link-default fechar-modal" tabindex="0">extrato</a>
+
+                        <a href="javascript:;"
+                           op="5KuaW53uX5yaqU9j6/4H1asRGIPY6phq2jY3Fbfq/44=;"
+                           class="link-default fechar-modal" tabindex="0">acelerador de pontos</a>
+                    </div>
+                </div>
+            </modal-body>
+            <modal-footer>
+                <div class="control-links text-right fechado">
+                    <a class="accordion link-default link-default--clean text-right" href="javascript:void()"
+                       data-toggle="collapse" role="button" aria-expanded="false" tabindex="0">cart&otilde;es
+                        contemplados<i
+                            class="accordion__icon icon-itaufonts_seta_down"></i></a>
+
+                    <div aria-hidden="true" class="collapse conteudo text-left">
+                        <ul class="c-category-status c-category-status--list">
+                            <li ng-repeat="cartoes in ac.programaRecompensa.cartoes"
+                                class="c-category-status__item c-category-status__item--flex-list">
+                                <p class="c-category-status__label">
+                                    <cpv-cartao cor="cartoes.customizacao.nome" bandeira="cartoes.bandeira"
+                                                apenas-bandeira="true">
+                                    </cpv-cartao>
+                                    <strong
+                                        class="cartao_modal_pontos_nome c-category-status__color">{{cartoes.nome |
+                                        lowercase}}</strong>
+                                </p>
+                                <p class="c-category-status__value">
+                                    <span>final {{cartoes.numero}}</span>
+                                </p>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </modal-footer>
+        </cpv-modal>
+
+        <cpv-modal target="modal-nao-gerido" titulo="{{ac.programaRecompensa.nomePrograma}}"
+                   subtitulo="para consultas de saldo total atual ou resgate de pontos, acesse o site do parceiro">
+
+            <modal-footer class="u-flex-right">
+                <button data-dismiss="modal" class="btn">ok</button>
+            </modal-footer>
+
+        </cpv-modal>
+
+        <cpv-modal target="modal-nao-cadastrado" titulo="fa&ccedil;a parte de um programa de pontos">
+
+            <modal-body>
+                <p class="modal-description-custom">Caso o seu cart&atilde;o seja eleg&iacute;vel, cadastre-se para
+                    participar de um programa
+                    de pontos ou solicite um cart&atilde;o eleg&iacute;vel e aproveite todos os benef&iacute;cios.</p>
+            </modal-body>
+
+            <modal-footer>
+                <div class="text-right">
+                    <a href="javascript:;"
+                       op="WBqCRUD1zDwWHjrAM7JvULYVJ+D2Y+jnxPnb0xcpMjo=;"
+                       class="fechar-modal link-default">cadastrar</a>
+
+                    <a href="javascript: executaConvivenciaMenu('65BUuuC1V5h/EHq9h8Indw==');" class="link-default"
+                       tabindex="0">pe&ccedil;a um cart&atilde;o</a>
+                </div>
+            </modal-footer>
+        </cpv-modal>
+
+        <cpv-modal target="modal-nao-elegivel" titulo="programa de pontos">
+            <modal-body>
+                <p class="modal-description-custom">Neste momento, voc&ecirc; n&atilde;o possui cart&atilde;o com
+                    programa de pontos. Para verificar
+                    outros cart&otilde;es dispon&iacute;veis, acesse <a href="http://www.itau.com.br/cartoes/escolha"
+                                                                        style="border-bottom: 1px solid #106EB0;"
+                                                                        target="_blank">www.itau.com.br/cartoes/escolha</a>.
+                </p>
+            </modal-body>
+        </cpv-modal>
+
+        <cpv-modal target="modal-pontos-indisponivel" titulo="programa de pontos">
+            <modal-body>
+                <div class="modal-container">
+                    <cpv-warning type="'error-clean'" icon="'icon-itaufonts_exclamacao'">
+                        Servi&ccedil;o indispon&iacute;vel, tente novamente mais tarde.
+                    </cpv-warning>
+                </div>
+            </modal-body>
+            <modal-footer class="u-flex-right">
+                <button data-dismiss="modal" class="btn">ok</button>
+            </modal-footer>
+        </cpv-modal>
+
+
+        <form id="formDados" method="POST" action="#">
+            <input type="hidden" name="op" data-op='Su9qGlSdiEbDD5iDgfUIfOShf8reavVfopc8fKMZoZ8=;'/>
+            <input type="hidden" name="idPrograma"/>
+        </form>
+        <script>
+            function goToCatalogoRecompensas(idPrograma) {
+                $('#formDados input[name=idPrograma]').val(idPrograma);
+                if ($('#containerApp .modal').length) {
+                    $('#containerApp .modal').modal('hide');
+                }
+                setTimeout(function () {
+                    $('#formDados').submit();
+                }, 100);
+            }
+        </script>
+        <style>
+            .control-links--iupp {
+                padding-bottom: 24px;
+                margin-bottom: 24px;
+                border-bottom: 2px solid rgb(233, 236, 239);
+            }
+
+            .conteudo--iupp {
+                margin-top: 17px;
+            }
+
+            .alerta-iupp {
+                display: flex;
+                padding: 20px 18px;
+                background: #EFE9E5;
+                border-radius: 5px;
+                align-items: center;
+            }
+
+            .alerta-iupp__p {
+                line-height: 21px !important;
+                margin: 0 20px 0 0 !important;
+                font-size: 16px !important;
+            }
+
+            .alerta-iupp__link {
+                transition: All .2s ease-in-out;
+                font-family: itau-display-bold, Arial;
+                font-weight: 700;
+                font-size: 1.1875rem;
+                padding: 0 1.5rem;
+                border: .0625rem solid #106eb0;
+                border-radius: .25rem;
+                background: #fff !important;
+                height: 3rem;
+                line-height: 3rem;
+                text-transform: lowercase;
+                min-width: 210px;
+                cursor: pointer;
+                text-decoration: none !important;
+            }
+
+            .alerta-iupp__link:hover {
+                background: #ecf4f9 !important;
+            }
+        </style>
+
+        <script>
+            $(document).off('click', '.fechar-modal');
+
+            $(document).on('click', '.fechar-modal', function () {
+                var $this = $(this);
+
+                if ($this.length && $this.attr('op')) {
+                    $("#containerApp .modal").modal("hide");
+
+                    setTimeout(function () {
+                        window.router.performRequest($this.attr('op'));
+                    }, 100);
+                }
+            });
+        </script>
+
+
+        <cpv-modal target="modal-debito-automatico"
+                   titulo="este cart&atilde;o est&aacute; em d&eacute;bito autom&aacute;tico">
+            <modal-body>
+                <cpv-warning type="'warning-clean'" icon="'icon-itaufonts_exclamacao'">
+                    O pagamento antecipado <strong>n&atilde;o inibir&aacute;</strong> o d&eacute;bito autom&aacute;tico
+                    de sua fatura.
+                </cpv-warning>
+                <div>
+                    <p>Evite o pagamento em duplicidade, caso deseje realizar o pagamento desta fatura
+                        antes da data de <br aria-hidden="true"> vencimento, ou pagar outro valor desta fatura, voc&ecirc;
+                        deve:
+                    </p>
+                    <ol class="list-higlight">
+                        <li>
+                            <strong>suspender o d&eacute;bito autom&aacute;tico desta fatura</strong>
+                            <span>(suas pr&oacute;xima faturas continuar&atilde;o em d&eacute;bito autom&aacute;tico)</span>
+                        </li>
+                        <li>
+                            <strong>ap&oacute;s a suspens&atilde;o, realizar o pagamento da sua fatura</strong>
+                        </li>
+                    </ol>
+                </div>
+            </modal-body>
+            <modal-footer>
+                <a class="btn btn-outline-primary"
+                   href="javascript: executaConvivenciaMenu('5+3ZwVwP+6g3xx0cLBZdZQ==');" tabindex="1" role="button">suspender
+                    d&eacute;bito autom&aacute;tico</a>
+                <a href="javascript: executaConvivenciaMenu('XWKtehVVEsdRvOS8A6u4Rg==');"
+                   class="btn btn-outline-primary" ng-if="ac.acaoModal ==='parcelarFatura'" tabindex="2" role="button">parcelar
+                    fatura</a>
+                <a data-ng-click="ac.gerarBoleto(ac.indexCartaoModal)" class="btn btn-outline-primary"
+                   ng-if="ac.acaoModal ==='gerarBoleto'" tabindex="3" role="button">gerar boleto</a>
+                <a data-ng-click="ac.pagarFatura(ac.indexCartaoModal)" class="btn btn-outline-primary"
+                   ng-if="ac.acaoModal ==='pagarFatura'" tabindex="4" role="button">pagar fatura</a>
+                <a data-ng-click="ac.nextStepper(false);" data-dismiss="modal" class="btn btn-outline-primary"
+                   ng-if="ac.acaoModal ==='continuarPagamentoFatura'" tabindex="5" role="button">pagar fatura</a>
+            </modal-footer>
+        </cpv-modal>
+
+    </div>
+</div>
+
+
+<!--********************************************** NOVA LISTAGEM DE CART&Otilde;ES ********************************************-->
+<link rel="stylesheet" media="screen"
+      href="https://estatico.itau.com.br/ibanking/pessoa-fisica-cartoes-app/css/elementos/carrossel.css"></link>
+
+<link
+    href="https://estatico.itau.com.br/ibanking/cdn-pf//pessoa-fisica-cartoes-estatico/cpv-selecao-cartoes/1.0.6//dist/cpv-selecao-cartoes.css"
+    rel="stylesheet">
+<link rel="stylesheet" media="screen"
+      href="https://estatico.itau.com.br/ibanking/pessoa-fisica-cartoes-app/css/paginas/estiloFatura.2.0.0.css"></link>
+
+
+<link rel="stylesheet" media="screen"
+      href="https://estatico.itau.com.br/ibanking/pessoa-fisica-cartoes-app/css/paginas/estiloCartoes.css"></link>
+
+
+<script src="https://estatico.itau.com.br/ibanking/commons/js/bootstrap/util.js"></script>
+<script src="https://estatico.itau.com.br/ibanking/commons/js/bootstrap/modal.js"></script>
+<script src="https://estatico.itau.com.br/ibanking/commons/js/bootstrap/carousel.js"></script>
+<script src="https://estatico.itau.com.br/ibanking/pessoa-fisica-cartoes-app/js/elementos/cardCartoes.js"></script>
+<script src="https://estatico.itau.com.br/ibanking/pessoa-fisica-cartoes-app/js/adobe/adobeTagueamento.js"></script>
+
+<script src="https://estatico.itau.com.br/ibanking/pessoa-fisica-cartoes-app/js/elementos/carrosselCartoes.js"></script>
+<script
+    src="https://estatico.itau.com.br/ibanking/cdn-pf//pessoa-fisica-cartoes-estatico/cpv-selecao-cartoes/1.0.6//dist/cpv-selecao-cartoes.min.js"></script>
+
+<script type="text/javascript">
+
+    let app = angular.module('app', ['ngSanitize', 'CpvCartaoModule', 'PageHeaderModule', 'ModalModule', 'WarningModule']);
+
+    app.config(function ($compileProvider) {
+        $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|javascript):/);
+    });
+
+    app.controller('appController', ['$scope', '$timeout', '$filter', function ($scope, $timeout, $filter) {
+        var self = this;
+        self.cartoes = [];
+        self.indexCartaoSelecionado = 0;
+        self.dataModalFatura = {};
+        self.qtdCartoes;
+        self.showLimites = false;
+        self.showOferta = false;
+        self.programaRecompensa = {};
+        self.quantidadeCartoesVisiveis = 2;
+        self.quantidadeBuscaCartoes = 2;
+        self.acaoModal = '';
+        self.indexCartaoModal = 0;
+        self.adobe = {};
+        self.habilitaFluxoCartaoCancelado = "true";
+
+        self.ajustarBandeiras = function (cartoes) {
+            angular.forEach(cartoes, function (cartao, key) {
+                if ("escuro" == cartao.customizacao.cor_do_icone && cartao.bandeira == "visa") {
+                    cartao.bandeira = cartao.bandeira + "_azul";
+                } else {
+                    cartao.bandeira = cartao.bandeira;
+                }
+            });
+        }
+
+        self.feedbackLeitor = function (mensagem) {
+            self.ariaLabelAlert = mensagem;
+
+            $timeout(function () {
+                self.ariaLabelAlert = '';
+            }, 2000);
+        }
+
+
+        self.enviarAdobe = function (data, objectData, sucesso, erro) {
+
+            var params = {
+                type: "POST",
+                async: true,
+                url: "ax//Z+AnhzIgQge7v/AQnisSZPeawLGw90GJtk384+8=;",
+                dataType: "json",
+                data: data,
+                headers: {
+                    ajaxRequest: true,
+                    scrollToTop: false,
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            };
+
+            $.ajax(params)
+                .success(function (response) {
+                    var obj = {
+                        'adobe': response.object,
+                        'data': objectData
+                    }
+                    sucesso(obj);
+                })
+                .error(function (response) {
+                    erro(response);
+                });
+        };
+
+        self.enviarAdobeRetornoModal = function () {
+            tagPaginaCategoria({'adobe': self.adobe}, {'qtd': self.cartoes.length - 1});
+        }
+
+        /*
+        self.abrirModalPontos = function(indexCartao){
+                var params = {
+                    type: "POST",
+                    data: { dnCartao: self.cartoes[indexCartao].dn },
+                    async: true,
+                    dataType: "json",
+                    url: "48Gq+VEF92WNxjBTB0Lz7UCA+smMKRWmr5sJZDPY7vM=;",
+                    headers: {
+                        ajaxRequest: true,
+                        scrollToTop: false,
+                        Accept: "application/vnd.itau.json"
+                    }
+                };
+
+                $.ajax(params)
+                    .success(function(response) {
+                        if (response.ok) {
+                            var fluxo;
+                            self.programaRecompensa = response.object;
+
+                            if(self.programaRecompensa){
+                                self.programaRecompensa.dataExpiracao = $filter('date')(self.programaRecompensa.dataExpiracao, "dd/MM/yyyy");
+
+                                if (self.programaRecompensa.plataforma === "iupp") {
+                                    $("#modal-programa-iupp").modal("show");
+                                    fluxo = "Iupp";
+                                } else if (self.programaRecompensa.parceiro) {
+                                    $("#modal-nao-gerido").modal("show");
+                                    fluxo = "Parceiros";
+                                } else {
+                                    $("#modal-programa-pontos").modal("show");
+                                    fluxo = "Itau";
+                                }
+                            } else {
+                                $("#modal-nao-cadastrado").modal("show");
+                                fluxo = "NaoCadastrado";
+                            }
+
+                            window.analyticsData.page = Object.assign(window.analyticsData.page, {"page": "IT:LG:PF:Cartoes:MinhaFatura:ProgramadePontos:" + fluxo});
+                        } else {
+                            $("#modal-pontos-indisponivel").modal("show");
+                            window.analyticsData.custom = Object.assign(
+                                window.analyticsData.custom,
+                                {
+                                    'item': 'Cartoes:MinhaFatura:ErroCarregamentoProgramadePontos',
+                                    'evento': 'erro',
+                                    'secao': 'Cartoes:MinhaFatura:ProgramadePontos'
+                                }
+                            );
+                        }
+                        $scope.$apply();
+                        window.adobeDataLayer.sendDataLayer();
+                    })
+                    .error(function() {
+                        $("#modal-pontos-indisponivel").modal("show");
+                        window.analyticsData.custom = Object.assign(
+                            window.analyticsData.custom,
+                            {
+                                'item': 'Cartoes:MinhaFatura:ErroCarregamentoProgramadePontos',
+                                'evento': 'erro',
+                                'secao': 'Cartoes:MinhaFatura:ProgramadePontos'
+                            }
+                        );
+
+                        window.adobeDataLayer.sendDataLayer();
+                    });
+        }
+            */
+
+        self.mostrarMaisCartoes = function () {
+            self.buscarFaturasAtuaisProximas(function () {
+                self.quantidadeCartoesVisiveis += self.quantidadeBuscaCartoes;
+                $scope.$apply();
+            });
+            var data = {
+                'item': 'ExibirMaisCartoes',
+                'evento': 'cliqueEmBotao',
+                'secao': 'Cartoes'
+            }
+            self.enviarAdobe(data, {"useLastPageName": true}, customLinkAdobe, function (response) {
+                console.log(response);
+            });
+        }
+
+        self.buscarDadosCompletos = function (idCartao, indexCartao) {
+            var cartaoSelecionado = self.cartoes[indexCartao];
+            if (cartaoSelecionado.fatura == undefined) {
+                var params = {
+                    type: "POST",
+                    async: true,
+                    contentType: "application/json",
+                    data: cartaoSelecionado.id,
+                    url: "pr/98/CFO4S7RfvRE739/zuZibIeVejHXAc8xvaMJrQ=;",
+                    dataType: "json",
+                    headers: {
+                        ajaxRequest: true,
+                        scrollToTop: false
+                    }
+                };
+                $.ajax(params)
+                    .success(function (response) {
+                        cartaoSelecionado = self.popularDadosCompletos(response.object, cartaoSelecionado);
+                        $scope.$apply();
+                    })
+                    .error(function (response) {
+                        console.log(response);
+                    });
+            }
+        }
+
+        self.popularFaturaAtualProxima = function (cartoes, atualizarVisualizacao) {
+            for (var i = self.quantidadeCartoesVisiveis, indexCartao = 0; i <= (self.quantidadeCartoesVisiveis + self.quantidadeBuscaCartoes) && i < self.cartoes.length; i++, indexCartao++) {
+                cartao = self.cartoes[i];
+                cartao.vencimento = cartoes[indexCartao].vencimento;
+                cartao.erroFatura = cartoes[indexCartao].erroFatura;
+                cartao.faturas = cartoes[indexCartao].faturas;
+                cartao.indicePrimeiraFaturaExibida = cartoes[indexCartao].indicePrimeiraFaturaExibida;
+            }
+            atualizarVisualizacao();
+        }
+
+
+        self.buscarFaturasAtuaisProximas = function (atualizarVisualizacao) {
+            var idCartoes = [];
+            for (var i = self.quantidadeCartoesVisiveis; i <= (self.quantidadeCartoesVisiveis + self.quantidadeBuscaCartoes) && i < self.cartoes.length; i++) {
+                idCartoes.push(self.cartoes[i].id);
+            }
+
+            var params = {
+                type: "POST",
+                async: true,
+                contentType: "application/json",
+                data: JSON.stringify(idCartoes),
+                url: "GHkcQ8yZy1id1NtyMhZPHojf1odAD9n18qfMQpyIhf8=;",
+                dataType: "json",
+                headers: {
+                    ajaxRequest: true,
+                    scrollToTop: false
+                }
+            };
+            $.ajax(params)
+                .success(function (response) {
+                    cartaoSelecionado = self.popularFaturaAtualProxima(response.object, atualizarVisualizacao);
+                    $scope.$apply();
+                })
+                .error(function (response) {
+                });
+        }
+
+        self.detalhar = function (indexCartao) {
+            self.cartoes[indexCartao].cardExpanded = !self.cartoes[indexCartao].cardExpanded;
+            var params = {
+                type: "POST",
+                async: true,
+                contentType: "application/json",
+                data: self.cartoes[indexCartao].id,
+                url: "buz/Mfnf87T8sIxgeCc4NPAU847zRxdJ29IKIBfLukA=;",
+                dataType: "json",
+                headers: {
+                    ajaxRequest: true,
+                    scrollToTop: false
+                }
+            };
+            $.ajax(params)
+                .success(function (response) {
+                    self.cartoes[indexCartao] = self.popularDadosCompletos(response.object, self.cartoes[indexCartao]);
+                    $scope.$apply();
+                })
+                .error(function (response) {
+                });
+
+            var data = {
+                'item': 'Detalhes',
+                'evento': 'cliqueEmBotao',
+                'secao': 'Cartoes'
+            }
+            self.enviarAdobe(data, {"useLastPageName": true}, customLinkAdobe, function (response) {
+                console.log(response);
+            });
+
+        }
+
+        self.popularDadosCompletos = function (objeto, cartao) {
+            cartao.situacaoContaCartao = objeto.situacaoContaCartao;
+            cartao.situacaoSaldoFatura = objeto.situacaoSaldoFatura;
+            cartao.melhorCompra = objeto.melhorCompra;
+            cartao.erroDataMelhorCompra = objeto.erroDataMelhorCompra;
+            cartao.erroFatura = objeto.erroFatura;
+            cartao.erroLimites = objeto.erroLimites;
+            cartao.timelineFatura = objeto.timelineFatura;
+            cartao.indicePrimeiraFaturaExibida = objeto.indicePrimeiraFaturaExibida;
+            if (objeto.vencimento != null) {
+                cartao.vencimento = objeto.vencimento;
+            }
+            if (objeto.limites != undefined) {
+                cartao.limites = self.popularLimites(objeto.limites);
+            }
+            if (objeto.faturas != undefined && objeto.faturas.length != 0) {
+                cartao.faturas = objeto.faturas;
+            }
+            return cartao;
+        }
+
+        self.montarCartao = function (objeto) {
+            var cartao = {};
+            cartao.cor = objeto.customizacao.nome;
+            cartao.titulo = objeto.nome;
+            cartao.nome = objeto.nomeCliente;
+            cartao.id = objeto.id;
+            cartao.dn = objeto.codigoProduto;
+
+            if ("escuro" == objeto.customizacao.cor_do_icone && objeto.bandeira == "visa") {
+                cartao.bandeira = objeto.bandeira + "_azul";
+            } else if (objeto.bandeira != "") {
+                cartao.bandeira = objeto.bandeira;
+            } else {
+                cartao.bandeira = "";
+            }
+
+            cartao.numero = "final " + objeto.numero;
+            cartao.digitosFinais = objeto.numero;
+            return cartao;
+        }
+
+        self.gerarBoleto = function (index) {
+            if (!index) {
+                index = self.indexCartaoModal;
+            }
+            var formulario = document.getElementById("formGerarBoleto");
+            $('input[name=idCartao]', formulario).val(self.cartoes[index].id);
+            $('input[name=valorPagamento]', formulario).val(self.cartoes[index].faturas[self.cartoes[index].indicePrimeiraFaturaExibida].valorAberto);
+            $("#formGerarBoleto").submit();
+
+            var data = {
+                'item': 'GerarBoleto',
+                'evento': 'cliqueEmBotao',
+                'secao': 'Cartoes'
+            }
+            self.enviarAdobe(data, {"useLastPageName": true}, customLinkAdobe, function (response) {
+                console.log(response);
+            });
+        }
+
+        self.verFatura = function (indexCartao) {
+            var formulario = document.getElementById("formVerFatura");
+            $('input[name=idCartao]', formulario).val(self.cartoes[indexCartao].id);
+            $("#formVerFatura").submit();
+        }
+
+        self.pagarFatura = function (indexCartao) {
+            if (!indexCartao) {
+                indexCartao = self.indexCartaoModal;
+            }
+            self.salvarDadosPagarFatura(indexCartao, function (response) {
+                if (response.ok) {
+                    if (response.object != undefined) {
+                        executaConvivenciaOp('::convivencia_op::', 'formPagarFatura');
+                    } else {
+                        var formulario = document.getElementById("formPagarFaturaRedesenho");
+                        $('input[name=idCartao]', formulario).val(self.cartoes[indexCartao].id);
+                        $("#modal-debito-automatico").modal("hide");
+                        $("#formPagarFaturaRedesenho").submit();
+
+                    }
+                }
+            }, function (response) {
+            });
+        }
+
+        self.abrirModalDebitoAutomatico = function (indexCartao, acao) {
+
+            self.indexCartaoModal = indexCartao;
+            self.acaoModal = acao;
+            if (acao === "pagarFatura") {
+                self.salvarDadosPagarFatura(indexCartao, function (sucesso) {
+                }, function (error) {
+                });
+            }
+            tagModal({'adobe': self.adobe}, "DebitoAutomatico");
+            $("#modal-debito-automatico").modal("show");
+
+
+        }
+
+        self.salvarDadosPagarFatura = function (indexCartao, sucesso, erro) {
+            var params = {
+                type: "POST",
+                async: true,
+                contentType: "application/json",
+                data: self.cartoes[indexCartao].numero.replace("final ", ""),
+                url: "nrYtt/nrH5x7In2NkE/JoYQ78Oil3/qkAF71aenzUeE=;",
+                dataType: "json",
+                headers: {
+                    ajaxRequest: true,
+                    scrollToTop: false
+                }
+            };
+
+            $.ajax(params)
+                .success(function (response) {
+                    sucesso(response);
+                })
+                .error(function (response) {
+                    erro(response);
+                });
+        };
+
+        self.popularLimites = function (limites) {
+            var limiteObjeto = limites;
+            var limites = {};
+            if (limiteObjeto != undefined && limiteObjeto != null) {
+                self.showLimites = true;
+                limites.saldoDisponivel = limiteObjeto.limiteCreditoDisponivelValor;
+                limites.limiteUtilizado = limiteObjeto.limiteCreditoUtilizadoValor;
+                limites.total = limiteObjeto.limiteCreditoValor;
+                limites.percentualDisponivel = limiteObjeto.percentualDisponivel;
+                limites.percentualUtilizado = limiteObjeto.percentualUtilizado;
+                limites.flexivel = limiteObjeto.limiteFlexivel;
+                limites.overLimit = limiteObjeto.overLimit;
+
+                if (limites.overLimit === "true") {
+                    limites.tipoLimite = "overLimit";
+                    limites.saldoDisponivel = "0,00";
+                } else if (limites.flexivel === "true") {
+                    if (limites.limiteUtilizado === "0,00" || limites.limiteUtilizado === "0") {
+                        limites.tipoLimite = "flexivelNaoUtilizado";
+                    } else {
+                        limites.tipoLimite = "flexivelUtilizado";
+                    }
+                } else if (limites.limiteUtilizado === "0,00" || limites.limiteUtilizado === "0") {
+                    limites.tipoLimite = "naoUtilizado";
+                } else if (limites.limiteUtilizado === limites.total) {
+                    limites.tipoLimite = "totalmenteUtilizado";
+                } else {
+                    limites.tipoLimite = "parcialmenteUtilizado";
+                }
+            }
+            return limites;
+        }
+
+        self.toggleCartaoCanceladoCartaoAtivo = function (situacaoContaCartao) {
+            if (self.habilitaFluxoCartaoCancelado === 'true') {
+                if (!['1', '2', '8', 'A'].includes(situacaoContaCartao)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return true;
+            }
+        }
+
+        self.toggleCartaoCanceladoCartaoInativo = function (situacaoContaCartao) {
+            if (self.habilitaFluxoCartaoCancelado === 'true') {
+                if (['1', '2', '8', 'A'].includes(situacaoContaCartao)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
+
+        self.init = function () {
+            var habilitaDashboardCotacaoDolar = "true";
+
+            var urlContingencia = "YgLcCQIiECECi+AtK17u3ftEqUR3xfzr631qki5bBts=;";
+
+            if (habilitaDashboardCotacaoDolar === "true") {
+                urlContingencia = "uMEt45VJA6pfMQKzhdgfxohT4B5/Utifih3Rh4OnTQg=;";
+            }
+
+            var params = {
+                type: "POST",
+                async: true,
+                url: urlContingencia,
+                dataType: "json",
+                data: {
+                    'secao': 'Cartoes',
+                    'item': 'Home'
+                },
+                headers: {
+                    ajaxRequest: true,
+                    scrollToTop: false,
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            };
+
+            var populaCartao = function (data) {
+                var listaCartao = [];
+                for (var i = 0; i < data.length; i++) {
+                    var objeto = data[i];
+
+                    if (objeto.customizacao != null) {
+
+                        var cartao = self.montarCartao(objeto);
+                        cartao = self.popularDadosCompletos(objeto, cartao);
+                        if (i == 0) {
+                            cartao.cardExpanded = true;
+                        }
+                        listaCartao.push(cartao);
+                    }
+                }
+                self.cartoes = listaCartao;
+                self.qtdCartoes = self.cartoes.length;
+                $scope.$apply();
+            }
+
+            var initModal = function () {
+                $("#modal-debito-automatico").on("hidden.bs.modal", self.enviarAdobeRetornoModal);
+                $("#modal-nao-gerido").on("hidden.bs.modal", self.enviarAdobeRetornoModal);
+                $("#modal-programa-pontos").on("hidden.bs.modal", self.enviarAdobeRetornoModal);
+                $("#modal-nao-cadastrado").on("hidden.bs.modal", self.enviarAdobeRetornoModal);
+                $("#modal-pontos-indisponivel").on("hidden.bs.modal", self.enviarAdobeRetornoModal);
+            }
+
+            $.ajax(params)
+                .success(function (response) {
+                    self.adobe = response.object.adobe;
+                    tagPaginaCategoria(response.object);
+                    populaCartao(response.object.data);
+                    initModal();
+                })
+                .error(function (response) {
+                    console.log(response);
+                });
+        }
+
+        self.initWithError = function () {
+            let data = {
+                'item': 'Cartoes:Home:ErroCarregamentoDashboard',
+                'evento': 'erro',
+            }
+
+            self.enviarAdobe(data, null, pageLoadAdobe, function (response) {
+                console.log(response);
+            });
+        }
+
+    }]);
+
+    var initPage = function () {
+        try {
+            var loadedModules = typeof (angular.module('CpvCartaoModule')) == "object";
+
+            if (loadedModules) {
+                angular.element(document).ready(function () {
+                    angular.bootstrap($('#containerApp'), ['app']);
+                });
+            } else {
+                setTimeout(initPage, 50);
+            }
+        } catch (err) {
+            setTimeout(initPage, 50);
+
+        }
+    }
+
+    $(document).ready(function () {
+        initPage();
+    })
+</script>
+
+
+<div class="col12 mrg-menu">
+    <div class="banner-mkt">
+        <div id="AM" data-tipo="informativo"></div>
+    </div>
+
+
+    <div id='menuContexto'></div>
+
+    <script id='scriptmenuContexto' type="text/javascript">
+        var obterMenuContextomenuContexto = function () {
+            $(".blockUI").remove();
+            $.ajax({
+                url: "hg4k9VW51yajpgu82a+q+JbqRuGGhDHRIVvukY1UleQ=;",
+                dataType: "html",
+                method: "POST",
+                showLoading: false,
+                data: {
+                    "contexto": "",
+                    "montarModulo": "",
+                    "mapaDoSite": ""
+                },
+                headers: {
+                    "ajaxRequest": true
+                },
+                success: function (data) {
+                    $('#menuContexto').replaceWith(data);
+                    $('html').removeClass("uiConfiguration-runed");
+                }
+            });
+        };
+
+        $(function () {
+            obterMenuContextomenuContexto();
+        });
+    </script>
+
+
+</div>
+<div class="banner-mkt banner-mkt--categoria">
+    <div id="AO"></div>
+</div>
+
+
+<div class="clearfix">
+    <div id="AP" data-tipo="popup"></div>
+
+    <!--********************************************************************* Script de Chamada AVI/Messenger ***************************************************************-->
+    <input type="hidden" id="modulo" value="cartao">
+    <script type="text/javascript">
+        $(document).ready(function () {
+            (function () {
+                var url = $("#chatBolacha").val();
+                var modulo = $("input#modulo").val();
+                if (typeof (callBolachaChat) == "function") {
+                    callBolachaChat(modulo, url);
+                }
+            })();
+        });
+
+        BoxHelper.renderBox({
+            urlBox: "PfyB6T1jAZPy6mB2u1JBEICtK40ZuNsJdxj5KOTfBls=;",
+            seletorContainer: "#boxCartoesContextoCarrinhoPF",
+            tratarError: false,
+            data: {
+                isHome: false,
+                localExibicao: 'CARTOES_PF'
+            }
+        });
+    </script>
+    <!--********************************************************************* Script de Chamada AVI/Messenger ***************************************************************-->

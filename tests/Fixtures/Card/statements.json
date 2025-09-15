@@ -1,0 +1,1578 @@
+{
+    "ok": true,
+    "object": {
+        "numero": "::card_number::",
+        "id": "::card_id::",
+        "nome": "UNICLASS BLACK CASHBACK",
+        "nomeTitular": null,
+        "codigoProduto": "01194",
+        "bandeira": "Mastercard",
+        "vencimento": "2025-10-01",
+        "nomeCliente": "::client_name::",
+        "melhorCompra": "2025-09-25",
+        "chpras": "::chpras::",
+        "erroFatura": null,
+        "indicePrimeiraFaturaExibida": 4,
+        "customizacao": {
+            "nome": "preto",
+            "cor_da_fonte": {
+                "red": "255",
+                "green": "255",
+                "blue": "255"
+            },
+            "cor_do_icone": "claro",
+            "gradientes": {
+                "gradienteCartao_0": {
+                    "red": "0",
+                    "green": "0",
+                    "blue": "0"
+                },
+                "gradienteCartao_1": {
+                    "red": "90",
+                    "green": "90",
+                    "blue": "90"
+                }
+            },
+            "lista_dn": [
+                "01075",
+                "01288",
+                "01036",
+                "01099",
+                "01101",
+                "01192",
+                "01088",
+                "01193",
+                "01194",
+                "01195",
+                "01196",
+                "04331",
+                "01077",
+                "01068",
+                "01066",
+                "01064",
+                "01197",
+                "01290",
+                "01375",
+                "01862",
+                "01569",
+                "01294",
+                "01295",
+                "01838",
+                "01861",
+                "01992",
+                "02011",
+                "02014",
+                "02018",
+                "02153",
+                "02188",
+                "04890",
+                "04891",
+                "05017",
+                "05020",
+                "05054",
+                "05055",
+                "05056",
+                "05057",
+                "05117",
+                "05718",
+                "05931",
+                "06038",
+                "09017",
+                "09410",
+                "09411",
+                "09415",
+                "09416",
+                "09417",
+                "09704",
+                "09714",
+                "09801",
+                "09935",
+                "01882",
+                "01993",
+                "01883"
+            ]
+        },
+        "erroDataMelhorCompra": null,
+        "faturas": [
+            {
+                "status": "paga",
+                "descricao": "fatura paga",
+                "dataVencimento": "2025-06-01",
+                "dataMelhorCompra": null,
+                "debitoAutomatico": null,
+                "dataFechamentoFatura": null,
+                "textoInformativo": null,
+                "codigoBarras": null,
+                "cabecalhoFaturaViewModel": null,
+                "saldoFaturaAnteriorViewModel": null,
+                "faturaTimeline": {
+                    "label": "junho",
+                    "value": 1195.71,
+                    "status": "paga",
+                    "statusLabel": "paga"
+                },
+                "informacoesFaturaViewModel": null,
+                "cotacaoDolarViewModel": null,
+                "idStatusPagamento": null,
+                "totalPago": "1.195,71",
+                "totalNaoPago": null,
+                "faturaPagaParcialmente": null,
+                "saldoCredor": null,
+                "totalFatura": "1.195,71"
+            },
+            {
+                "status": "paga",
+                "descricao": "fatura paga",
+                "dataVencimento": "2025-07-01",
+                "dataMelhorCompra": null,
+                "debitoAutomatico": null,
+                "dataFechamentoFatura": null,
+                "textoInformativo": null,
+                "codigoBarras": null,
+                "cabecalhoFaturaViewModel": null,
+                "saldoFaturaAnteriorViewModel": null,
+                "faturaTimeline": {
+                    "label": "julho",
+                    "value": 3748.58,
+                    "status": "paga",
+                    "statusLabel": "paga"
+                },
+                "informacoesFaturaViewModel": null,
+                "cotacaoDolarViewModel": null,
+                "idStatusPagamento": null,
+                "totalPago": "3.748,58",
+                "totalNaoPago": null,
+                "faturaPagaParcialmente": null,
+                "saldoCredor": null,
+                "totalFatura": "3.748,58"
+            },
+            {
+                "status": "paga",
+                "descricao": "fatura paga",
+                "dataVencimento": "2025-08-01",
+                "dataMelhorCompra": null,
+                "debitoAutomatico": null,
+                "dataFechamentoFatura": null,
+                "textoInformativo": null,
+                "codigoBarras": null,
+                "cabecalhoFaturaViewModel": null,
+                "saldoFaturaAnteriorViewModel": null,
+                "faturaTimeline": {
+                    "label": "agosto",
+                    "value": 4194.95,
+                    "status": "paga",
+                    "statusLabel": "paga"
+                },
+                "informacoesFaturaViewModel": null,
+                "cotacaoDolarViewModel": null,
+                "idStatusPagamento": null,
+                "totalPago": "4.194,95",
+                "totalNaoPago": null,
+                "faturaPagaParcialmente": null,
+                "saldoCredor": null,
+                "totalFatura": "4.194,95"
+            },
+            {
+                "status": "fechadaPagaTotal",
+                "descricao": "fatura fechada",
+                "dataVencimento": "2025-09-01",
+                "dataMelhorCompra": null,
+                "debitoAutomatico": "false",
+                "dataFechamentoFatura": "2025-08-25",
+                "textoInformativo": null,
+                "codigoBarras": "::barcode::",
+                "cabecalhoFaturaViewModel": {
+                    "sinalTotalFatura": "+",
+                    "totalFatura": "5.852,29",
+                    "sinalPagamentoMinimo": "+",
+                    "pagamentoMinimo": "585,23",
+                    "sinalSaldoFaturaAnterior": "+",
+                    "saldoFaturaAnterior": "0,00",
+                    "sinalLancamentosNacionais": "+",
+                    "totalLancamentosNacionais": "5.852,29",
+                    "sinalLancamentosInternacionais": "+",
+                    "totalLancamentosInternacionais": "0,00",
+                    "sinalEncargosServicos": "+",
+                    "totalEncargosServicos": "0,00"
+                },
+                "saldoFaturaAnteriorViewModel": {
+                    "totalPagamentoFatura": "5.243,53",
+                    "sinalTotalFaturaAnterior": "+",
+                    "totalFaturaAnterior": "4.194,95",
+                    "creditosPagamentosViewModel": [
+                        {
+                            "dataLancamento": "07-29",
+                            "dataLancamentoCompleta": "2025-07-29",
+                            "descricaoLancamento": "PAGAMENTO EFETUADO",
+                            "moeda": "BRL",
+                            "sinalLancamento": "-",
+                            "valorLancamento": "4.194,95"
+                        }
+                    ]
+                },
+                "faturaTimeline": {
+                    "label": "setembro",
+                    "value": 5852.29,
+                    "status": "fechada",
+                    "statusLabel": "fechada"
+                },
+                "informacoesFaturaViewModel": {
+                    "itens": [
+                        {
+                            "titulo": "fatura",
+                            "descricao": "fechada"
+                        },
+                        {
+                            "titulo": "você pagou 5.852,29 de",
+                            "descricao": "5.852,29"
+                        },
+                        {
+                            "titulo": "venc. da fatura",
+                            "descricao": "01/09/2025"
+                        }
+                    ],
+                    "debitoAutomatico": false,
+                    "textoInformativo": "o processamento do pagamento e portanto do status da fatura, pode demorar até o fechamento da fatura seguinte"
+                },
+                "cotacaoDolarViewModel": {
+                    "sinalValorCotacao": "+",
+                    "valorCotacao": "0,00"
+                },
+                "lancamentosNacionais": {
+                    "titularidades": [
+                        {
+                            "totalTitularidade": "2.137,55",
+                            "sinalTotalTitularidade": "+",
+                            "nomeCliente": "::client_name:: - final ::card_suffix::",
+                            "numeroCartao": "::card_suffix::",
+                            "lancamentos": [
+                                {
+                                    "data": "2025-06-24",
+                                    "descricao": "Giuliana Market In02/03",
+                                    "valor": "42,90",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-07-03",
+                                    "descricao": "Moveis Kappesberg 02/12",
+                                    "valor": "477,02",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-07-03",
+                                    "descricao": "Tramont*lojaoficia02/10",
+                                    "valor": "60,52",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-07-03",
+                                    "descricao": "Moveis Kappesberg",
+                                    "valor": "0,55",
+                                    "sinalValor": "-"
+                                },
+                                {
+                                    "data": "2025-07-03",
+                                    "descricao": "Tramont*lojaoficial",
+                                    "valor": "0,27",
+                                    "sinalValor": "-"
+                                },
+                                {
+                                    "data": "2025-07-08",
+                                    "descricao": "Madeiramadeira    02/08",
+                                    "valor": "73,57",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-07-08",
+                                    "descricao": "Mlp*magalu-aliexpr02/07",
+                                    "valor": "28,94",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-07-08",
+                                    "descricao": "Pg *leroy Merlin Leroy",
+                                    "valor": "0,14",
+                                    "sinalValor": "-"
+                                },
+                                {
+                                    "data": "2025-07-08",
+                                    "descricao": "Pg *leroy Merlin L01/08",
+                                    "valor": "133,80",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-07-08",
+                                    "descricao": "Mlp*magalu-aliexpress",
+                                    "valor": "0,36",
+                                    "sinalValor": "-"
+                                },
+                                {
+                                    "data": "2025-07-09",
+                                    "descricao": "Pg *leroy Merlin L02/08",
+                                    "valor": "120,86",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-07-09",
+                                    "descricao": "Pg *leroy Merlin L02/08",
+                                    "valor": "17,48",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-07-09",
+                                    "descricao": "Tramont*lojaoficia02/05",
+                                    "valor": "52,56",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-07-19",
+                                    "descricao": "Br1*chikabum*modas02/06",
+                                    "valor": "25,82",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-07-19",
+                                    "descricao": "Mercadopago *bebef02/06",
+                                    "valor": "18,34",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-07-19",
+                                    "descricao": "Mercadopago *cabid02/05",
+                                    "valor": "33,04",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-07-19",
+                                    "descricao": "Mercadopago *lojab02/06",
+                                    "valor": "25,00",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-07-19",
+                                    "descricao": "Br1*chikabum*modas",
+                                    "valor": "0,10",
+                                    "sinalValor": "-"
+                                },
+                                {
+                                    "data": "2025-07-25",
+                                    "descricao": "Ifd*60.631.930 Larissa",
+                                    "valor": "30,88",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-07-26",
+                                    "descricao": "Conta Vivo",
+                                    "valor": "59,00",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-07-26",
+                                    "descricao": "Conta Vivo",
+                                    "valor": "59,00",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-07-27",
+                                    "descricao": "Ifd*monte Claro Comerc",
+                                    "valor": "117,98",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-07-31",
+                                    "descricao": "Ifd*daiane Caregnato 8",
+                                    "valor": "125,98",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-08-05",
+                                    "descricao": "Uber Uber *trip Help.u",
+                                    "valor": "18,98",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-08-09",
+                                    "descricao": "Ifd*x Calota Caxias Do",
+                                    "valor": "152,39",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-08-10",
+                                    "descricao": "Ppro   *microsoft",
+                                    "valor": "59,99",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-08-10",
+                                    "descricao": "Operador Nacional Do S",
+                                    "valor": "82,92",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-08-11",
+                                    "descricao": "Google Youtube",
+                                    "valor": "16,90",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-08-12",
+                                    "descricao": "Pg *hinova Realvale",
+                                    "valor": "167,50",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-08-12",
+                                    "descricao": "Pg *hinova Realvale",
+                                    "valor": "167,50",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-08-12",
+                                    "descricao": "Pg *hinova Realvale",
+                                    "valor": "167,50",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-08-12",
+                                    "descricao": "Pg *hinova Realvale",
+                                    "valor": "167,50",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-08-12",
+                                    "descricao": "Pg *hinova Realvale",
+                                    "valor": "167,50",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-08-12",
+                                    "descricao": "Pg *hinova Realvale",
+                                    "valor": "167,50",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-08-12",
+                                    "descricao": "Uber Uber *trip Help.u",
+                                    "valor": "8,72",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-08-12",
+                                    "descricao": "Pg *hinova Realvale",
+                                    "valor": "167,50",
+                                    "sinalValor": "-"
+                                },
+                                {
+                                    "data": "2025-08-12",
+                                    "descricao": "Pg *hinova Realvale",
+                                    "valor": "167,50",
+                                    "sinalValor": "-"
+                                },
+                                {
+                                    "data": "2025-08-12",
+                                    "descricao": "Pg *hinova Realvale",
+                                    "valor": "167,50",
+                                    "sinalValor": "-"
+                                },
+                                {
+                                    "data": "2025-08-12",
+                                    "descricao": "Pg *hinova Realvale",
+                                    "valor": "167,50",
+                                    "sinalValor": "-"
+                                },
+                                {
+                                    "data": "2025-08-12",
+                                    "descricao": "Pg *hinova Realvale",
+                                    "valor": "167,50",
+                                    "sinalValor": "-"
+                                },
+                                {
+                                    "data": "2025-08-12",
+                                    "descricao": "Pg *hinova Realvale",
+                                    "valor": "167,50",
+                                    "sinalValor": "-"
+                                },
+                                {
+                                    "data": "2025-08-13",
+                                    "descricao": "Pg *nio Fibra",
+                                    "valor": "49,90",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-08-17",
+                                    "descricao": "Ifd*pastel 1000 Pastel",
+                                    "valor": "78,98",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-08-20",
+                                    "descricao": "Pg *hinova Realvale",
+                                    "valor": "167,50",
+                                    "sinalValor": "+"
+                                }
+                            ],
+                            "lancamentosTotal": 44,
+                            "lancamentosTela": 30,
+                            "titular": true
+                        },
+                        {
+                            "totalTitularidade": "3.714,74",
+                            "sinalTotalTitularidade": "+",
+                            "nomeCliente": "::client_name:: - final ::card_number::",
+                            "numeroCartao": "::card_number::",
+                            "lancamentos": [
+                                {
+                                    "data": "2025-05-17",
+                                    "descricao": "Rua Os Dezoi-ct O 04/06",
+                                    "valor": "54,10",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-06-26",
+                                    "descricao": "Farmacia Pre-ct Op02/03",
+                                    "valor": "66,56",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-06-26",
+                                    "descricao": "Farmacia Pre-ct Opular",
+                                    "valor": "0,02",
+                                    "sinalValor": "-"
+                                },
+                                {
+                                    "data": "2025-07-03",
+                                    "descricao": "Havan Caxias Do Su02/05",
+                                    "valor": "51,19",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-07-03",
+                                    "descricao": "Havan Caxias Do Sul",
+                                    "valor": "0,12",
+                                    "sinalValor": "-"
+                                },
+                                {
+                                    "data": "2025-07-19",
+                                    "descricao": "Bellenzier Pneus L02/10",
+                                    "valor": "134,40",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-07-19",
+                                    "descricao": "Rua Os Dezoi-ct O 02/06",
+                                    "valor": "67,11",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-07-25",
+                                    "descricao": "Evo*santa Lu-ct C",
+                                    "valor": "64,90",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-07-25",
+                                    "descricao": "Evo*clinica -ct R 01/03",
+                                    "valor": "118,64",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-07-25",
+                                    "descricao": "Evo*clinica -ct R",
+                                    "valor": "0,02",
+                                    "sinalValor": "-"
+                                },
+                                {
+                                    "data": "2025-07-26",
+                                    "descricao": "Sorvenzisorv-ct I",
+                                    "valor": "85,23",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-07-26",
+                                    "descricao": "Achoupegou  -ct",
+                                    "valor": "93,26",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-07-28",
+                                    "descricao": "Andreazza Supermercado",
+                                    "valor": "50,17",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-07-28",
+                                    "descricao": "Farmacia Preco Pop01/05",
+                                    "valor": "43,32",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-07-30",
+                                    "descricao": "Di Bracco Pi-ct Ia",
+                                    "valor": "186,00",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-08-01",
+                                    "descricao": "Issacburguer",
+                                    "valor": "96,00",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-08-01",
+                                    "descricao": "Programa De Cashback",
+                                    "valor": "42,00",
+                                    "sinalValor": "-"
+                                },
+                                {
+                                    "data": "2025-08-02",
+                                    "descricao": "Stok Center -ct",
+                                    "valor": "159,48",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-08-02",
+                                    "descricao": "Andreazza Supermercado",
+                                    "valor": "70,62",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-08-03",
+                                    "descricao": "Gustavoborto-ct O",
+                                    "valor": "99,90",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-08-05",
+                                    "descricao": "Shopping",
+                                    "valor": "145,45",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-08-05",
+                                    "descricao": "Osmarnunesjunior",
+                                    "valor": "80,00",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-08-05",
+                                    "descricao": "Eiffel      -ct   01/03",
+                                    "valor": "123,34",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-08-12",
+                                    "descricao": "Andreazza Su-ct Ercado",
+                                    "valor": "62,20",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-08-12",
+                                    "descricao": "Farmacia Pre-ct Opular",
+                                    "valor": "74,30",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-08-12",
+                                    "descricao": "Pantera     -ct   01/03",
+                                    "valor": "890,00",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-08-15",
+                                    "descricao": "Sushiame Vin-ct S",
+                                    "valor": "67,90",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-08-18",
+                                    "descricao": "Cafeteriakdelicia",
+                                    "valor": "20,50",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-08-19",
+                                    "descricao": "Bento",
+                                    "valor": "146,52",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-08-19",
+                                    "descricao": "Andreazza Su-ct Ercado",
+                                    "valor": "3,99",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-08-21",
+                                    "descricao": "Pdb Pizzaria",
+                                    "valor": "159,98",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-08-22",
+                                    "descricao": "Andreazza Supermercado",
+                                    "valor": "28,43",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-08-22",
+                                    "descricao": "Stok Center 35",
+                                    "valor": "278,61",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-08-22",
+                                    "descricao": "Cpp Oliveira M Eletric",
+                                    "valor": "45,00",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-08-22",
+                                    "descricao": "Cpp Oliveira M Eletric",
+                                    "valor": "53,00",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-08-23",
+                                    "descricao": "Hora Do Pastel",
+                                    "valor": "87,50",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-08-23",
+                                    "descricao": "Ferragem1001",
+                                    "valor": "35,50",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-08-24",
+                                    "descricao": "Mercadex24horas",
+                                    "valor": "13,80",
+                                    "sinalValor": "+"
+                                }
+                            ],
+                            "lancamentosTotal": 38,
+                            "lancamentosTela": 30,
+                            "titular": true
+                        }
+                    ]
+                },
+                "lancamentosInternacionais": {
+                    "titularidades": null,
+                    "possuiTaxaDolarPorTransacao": null
+                },
+                "encargosServicos": {
+                    "lancamentos": null,
+                    "lancamentosTotal": null,
+                    "lancamentosTela": null
+                },
+                "comprasParceladas": null,
+                "valorAberto": "5.852,29",
+                "saldoCredor": null,
+                "valorNaoPagoFaturaAnterior": "0,00",
+                "valorPago": "5.852,29"
+            },
+            {
+                "status": "aberta",
+                "descricao": "fatura aberta",
+                "dataVencimento": "2025-10-01",
+                "dataMelhorCompra": "2025-09-25",
+                "debitoAutomatico": "false",
+                "dataFechamentoFatura": "2025-09-24",
+                "textoInformativo": null,
+                "codigoBarras": null,
+                "cabecalhoFaturaViewModel": {
+                    "sinalTotalFatura": "+",
+                    "totalFatura": "3.908,37",
+                    "sinalPagamentoMinimo": "+",
+                    "pagamentoMinimo": "0,00",
+                    "sinalSaldoFaturaAnterior": "+",
+                    "saldoFaturaAnterior": "0,00",
+                    "sinalLancamentosNacionais": "+",
+                    "totalLancamentosNacionais": "3.908,37",
+                    "sinalLancamentosInternacionais": "+",
+                    "totalLancamentosInternacionais": "0,00",
+                    "sinalEncargosServicos": "+",
+                    "totalEncargosServicos": "0,00"
+                },
+                "saldoFaturaAnteriorViewModel": {
+                    "totalPagamentoFatura": "5.852,29",
+                    "sinalTotalFaturaAnterior": "+",
+                    "totalFaturaAnterior": "5.852,29",
+                    "creditosPagamentosViewModel": [
+                        {
+                            "dataLancamento": "08-26",
+                            "dataLancamentoCompleta": "2025-08-26",
+                            "descricaoLancamento": "PAGAMENTO EFETUADO",
+                            "moeda": "BRL",
+                            "sinalLancamento": "-",
+                            "valorLancamento": "5.852,29"
+                        }
+                    ]
+                },
+                "faturaTimeline": {
+                    "label": "outubro",
+                    "value": 3908.37,
+                    "status": "aberta",
+                    "statusLabel": "aberta"
+                },
+                "informacoesFaturaViewModel": {
+                    "itens": [
+                        {
+                            "titulo": "fatura",
+                            "descricao": "aberta"
+                        },
+                        {
+                            "titulo": "valor até o momento ",
+                            "descricao": "R$ 3.908,37"
+                        },
+                        {
+                            "titulo": "venc. da fatura",
+                            "descricao": "01/10/2025"
+                        },
+                        {
+                            "titulo": "melhor data de compra",
+                            "descricao": "25/09/2025"
+                        }
+                    ],
+                    "debitoAutomatico": false,
+                    "textoInformativo": "compras feitas antes do dia 24 serão lançadas nesta fatura"
+                },
+                "cotacaoDolarViewModel": {
+                    "sinalValorCotacao": "+",
+                    "valorCotacao": "0,00"
+                },
+                "lancamentosNacionais": {
+                    "titularidades": [
+                        {
+                            "totalTitularidade": "2.330,53",
+                            "sinalTotalTitularidade": "+",
+                            "nomeCliente": "::client_name:: - final ::card_number::",
+                            "numeroCartao": "::card_number::",
+                            "lancamentos": [
+                                {
+                                    "data": "2025-05-17",
+                                    "descricao": "Rua Os Dezoi-ct O 05/06",
+                                    "valor": "54,10",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-06-26",
+                                    "descricao": "Farmacia Pre-ct Op03/03",
+                                    "valor": "66,56",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-07-03",
+                                    "descricao": "Havan Caxias Do Su03/05",
+                                    "valor": "51,19",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-07-19",
+                                    "descricao": "Bellenzier Pneus L03/10",
+                                    "valor": "134,40",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-07-19",
+                                    "descricao": "Rua Os Dezoi-ct O 03/06",
+                                    "valor": "67,11",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-07-25",
+                                    "descricao": "Evo*clinica -ct R 02/03",
+                                    "valor": "118,64",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-07-28",
+                                    "descricao": "Farmacia Preco Pop02/05",
+                                    "valor": "43,32",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-08-05",
+                                    "descricao": "Eiffel      -ct   02/03",
+                                    "valor": "123,34",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-08-12",
+                                    "descricao": "Pantera     -ct   02/03",
+                                    "valor": "890,00",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-08-25",
+                                    "descricao": "Vidracaria Rieter 01/03",
+                                    "valor": "250,00",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-08-27",
+                                    "descricao": "Andreazza Supermercado",
+                                    "valor": "97,24",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-08-28",
+                                    "descricao": "Mercadex24horas",
+                                    "valor": "15,80",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-08-28",
+                                    "descricao": "Andreazza Su-ct Ercado",
+                                    "valor": "36,68",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-08-30",
+                                    "descricao": "Cidade Nova",
+                                    "valor": "360,35",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-08-31",
+                                    "descricao": "Lavanderia",
+                                    "valor": "29,80",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-08-31",
+                                    "descricao": "7ijl Sorveteria",
+                                    "valor": "50,00",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-09-01",
+                                    "descricao": "Programa De Cashback",
+                                    "valor": "58,00",
+                                    "sinalValor": "-"
+                                }
+                            ]
+                        },
+                        {
+                            "totalTitularidade": "1.577,84",
+                            "sinalTotalTitularidade": "+",
+                            "nomeCliente": "::client_name:: - final ::card_suffix::",
+                            "numeroCartao": "::card_suffix::",
+                            "lancamentos": [
+                                {
+                                    "data": "2025-06-24",
+                                    "descricao": "Giuliana Market In03/03",
+                                    "valor": "42,90",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-07-03",
+                                    "descricao": "Moveis Kappesberg 03/12",
+                                    "valor": "477,02",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-07-03",
+                                    "descricao": "Tramont*lojaoficia03/10",
+                                    "valor": "60,52",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-07-08",
+                                    "descricao": "Pg *leroy Merlin L02/08",
+                                    "valor": "133,80",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-07-08",
+                                    "descricao": "Madeiramadeira    03/08",
+                                    "valor": "73,57",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-07-08",
+                                    "descricao": "Mlp*magalu-aliexpr03/07",
+                                    "valor": "28,94",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-07-09",
+                                    "descricao": "Pg *leroy Merlin L03/08",
+                                    "valor": "120,86",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-07-09",
+                                    "descricao": "Pg *leroy Merlin L03/08",
+                                    "valor": "17,48",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-07-09",
+                                    "descricao": "Tramont*lojaoficia03/05",
+                                    "valor": "52,56",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-07-19",
+                                    "descricao": "Br1*chikabum*modas03/06",
+                                    "valor": "25,82",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-07-19",
+                                    "descricao": "Mercadopago *bebef03/06",
+                                    "valor": "18,34",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-07-19",
+                                    "descricao": "Mercadopago *cabid03/05",
+                                    "valor": "33,04",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-07-19",
+                                    "descricao": "Mercadopago *lojab03/06",
+                                    "valor": "25,00",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-08-26",
+                                    "descricao": "Conta Vivo",
+                                    "valor": "59,00",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-08-26",
+                                    "descricao": "Conta Vivo",
+                                    "valor": "59,00",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-08-26",
+                                    "descricao": "Emilyemanuelle",
+                                    "valor": "250,00",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "2025-09-01",
+                                    "descricao": "Mercadolivre*lgele01/12",
+                                    "valor": "99,99",
+                                    "sinalValor": "+"
+                                }
+                            ],
+                            "lancamentosTotal": 17,
+                            "lancamentosTela": 30,
+                            "titular": true
+                        }
+                    ]
+                },
+                "lancamentosInternacionais": {
+                    "titularidades": null,
+                    "possuiTaxaDolarPorTransacao": null
+                },
+                "encargosServicos": {
+                    "lancamentos": null,
+                    "lancamentosTotal": null,
+                    "lancamentosTela": null
+                },
+                "comprasParceladas": null,
+                "valorAberto": "3.908,37",
+                "saldoCredor": null,
+                "valorNaoPagoFaturaAnterior": "0,00",
+                "valorPago": "5.852,29"
+            },
+            {
+                "status": "proxima",
+                "descricao": "próxima fatura",
+                "dataVencimento": "2025-11-01",
+                "dataMelhorCompra": null,
+                "debitoAutomatico": null,
+                "dataFechamentoFatura": null,
+                "textoInformativo": null,
+                "codigoBarras": null,
+                "cabecalhoFaturaViewModel": null,
+                "saldoFaturaAnteriorViewModel": null,
+                "faturaTimeline": {
+                    "label": "novembro",
+                    "value": 2899.04,
+                    "status": "proxima",
+                    "statusLabel": "próxima"
+                },
+                "informacoesFaturaViewModel": {
+                    "itens": [
+                        {
+                            "titulo": "fatura",
+                            "descricao": "próxima"
+                        },
+                        {
+                            "titulo": "valor até o momento ",
+                            "descricao": "R$ 2.899,04"
+                        },
+                        {
+                            "titulo": "venc. da fatura",
+                            "descricao": "01/11/2025"
+                        }
+                    ],
+                    "debitoAutomatico": false,
+                    "textoInformativo": "você tem 22 compras parceladas nesta fatura"
+                },
+                "cotacaoDolarViewModel": null,
+                "lancamentosNacionais": null,
+                "lancamentosInternacionais": null,
+                "encargosServicos": null,
+                "comprasParceladas": {
+                    "sinalTotalMes": "+",
+                    "totalMes": "2.899,04",
+                    "titularidades": [
+                        {
+                            "nomeCliente": "::client_name::",
+                            "numeroCartao": "::card_number::",
+                            "lancamentos": [
+                                {
+                                    "data": "17 / maio",
+                                    "descricao": "Rua Os Dezoi-ct O F(06/06)",
+                                    "valor": "54,10",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "03 / julho",
+                                    "descricao": "Havan Caxias Do Sul(04/05)",
+                                    "valor": "51,19",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "19 / julho",
+                                    "descricao": "Bellenzier Pneus Lt(04/10)",
+                                    "valor": "134,40",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "19 / julho",
+                                    "descricao": "Rua Os Dezoi-ct O F(04/06)",
+                                    "valor": "67,11",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "25 / julho",
+                                    "descricao": "Evo*clinica -ct R  (03/03)",
+                                    "valor": "118,64",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "28 / julho",
+                                    "descricao": "Farmacia Preco Popu(03/05)",
+                                    "valor": "43,32",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "05 / agosto",
+                                    "descricao": "Eiffel      -ct    (03/03)",
+                                    "valor": "123,34",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "12 / agosto",
+                                    "descricao": "Pantera     -ct    (03/03)",
+                                    "valor": "890,00",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "25 / agosto",
+                                    "descricao": "Vidracaria Rieter  (02/03)",
+                                    "valor": "250,00",
+                                    "sinalValor": "+"
+                                }
+                            ]
+                        },
+                        {
+                            "nomeCliente": "::client_name::",
+                            "numeroCartao": "::card_suffix::",
+                            "lancamentos": [
+                                {
+                                    "data": "08 / julho",
+                                    "descricao": "Madeiramadeira     (04/08)",
+                                    "valor": "73,57",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "08 / julho",
+                                    "descricao": "Mlp*magalu-aliexpre(04/07)",
+                                    "valor": "28,94",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "09 / julho",
+                                    "descricao": "Pg *leroy Merlin Le(04/08)",
+                                    "valor": "120,86",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "09 / julho",
+                                    "descricao": "Pg *leroy Merlin Le(04/08)",
+                                    "valor": "17,48",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "09 / julho",
+                                    "descricao": "Tramont*lojaoficial(04/05)",
+                                    "valor": "52,56",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "19 / julho",
+                                    "descricao": "Br1*chikabum*modas (04/06)",
+                                    "valor": "25,82",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "19 / julho",
+                                    "descricao": "Mercadopago *bebefo(04/06)",
+                                    "valor": "18,34",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "19 / julho",
+                                    "descricao": "Mercadopago *cabide(04/05)",
+                                    "valor": "33,04",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "19 / julho",
+                                    "descricao": "Mercadopago *lojaba(04/06)",
+                                    "valor": "25,00",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "03 / julho",
+                                    "descricao": "Moveis Kappesberg  (04/12)",
+                                    "valor": "477,02",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "08 / julho",
+                                    "descricao": "Pg *leroy Merlin Le(04/08)",
+                                    "valor": "133,80",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "03 / julho",
+                                    "descricao": "Tramont*lojaoficial(04/10)",
+                                    "valor": "60,52",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "01 / setembro",
+                                    "descricao": "Mercadolivre*lgelec(02/12)",
+                                    "valor": "99,99",
+                                    "sinalValor": "+"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "valorAberto": "2.899,04",
+                "quantidadeLancamentosParcelados": 22
+            },
+            {
+                "status": "proxima",
+                "descricao": "próxima fatura",
+                "dataVencimento": "2025-12-01",
+                "dataMelhorCompra": null,
+                "debitoAutomatico": null,
+                "dataFechamentoFatura": null,
+                "textoInformativo": null,
+                "codigoBarras": null,
+                "cabecalhoFaturaViewModel": null,
+                "saldoFaturaAnteriorViewModel": null,
+                "faturaTimeline": {
+                    "label": "dezembro",
+                    "value": 1712.96,
+                    "status": "proxima",
+                    "statusLabel": "próxima"
+                },
+                "informacoesFaturaViewModel": {
+                    "itens": [
+                        {
+                            "titulo": "fatura",
+                            "descricao": "próxima"
+                        },
+                        {
+                            "titulo": "valor até o momento ",
+                            "descricao": "R$ 1.712,96"
+                        },
+                        {
+                            "titulo": "venc. da fatura",
+                            "descricao": "01/12/2025"
+                        }
+                    ],
+                    "debitoAutomatico": false,
+                    "textoInformativo": "você tem 18 compras parceladas nesta fatura"
+                },
+                "cotacaoDolarViewModel": null,
+                "lancamentosNacionais": null,
+                "lancamentosInternacionais": null,
+                "encargosServicos": null,
+                "comprasParceladas": {
+                    "sinalTotalMes": "+",
+                    "totalMes": "1.712,96",
+                    "titularidades": [
+                        {
+                            "nomeCliente": "::client_name::",
+                            "numeroCartao": "::card_number::",
+                            "lancamentos": [
+                                {
+                                    "data": "03 / julho",
+                                    "descricao": "Havan Caxias Do Sul(05/05)",
+                                    "valor": "51,19",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "19 / julho",
+                                    "descricao": "Bellenzier Pneus Lt(05/10)",
+                                    "valor": "134,40",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "19 / julho",
+                                    "descricao": "Rua Os Dezoi-ct O F(05/06)",
+                                    "valor": "67,11",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "28 / julho",
+                                    "descricao": "Farmacia Preco Popu(04/05)",
+                                    "valor": "43,32",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "25 / agosto",
+                                    "descricao": "Vidracaria Rieter  (03/03)",
+                                    "valor": "250,00",
+                                    "sinalValor": "+"
+                                }
+                            ]
+                        },
+                        {
+                            "nomeCliente": "::client_name::",
+                            "numeroCartao": "::card_suffix::",
+                            "lancamentos": [
+                                {
+                                    "data": "19 / julho",
+                                    "descricao": "Br1*chikabum*modas (05/06)",
+                                    "valor": "25,82",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "19 / julho",
+                                    "descricao": "Mercadopago *bebefo(05/06)",
+                                    "valor": "18,34",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "09 / julho",
+                                    "descricao": "Pg *leroy Merlin Le(05/08)",
+                                    "valor": "120,86",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "19 / julho",
+                                    "descricao": "Mercadopago *cabide(05/05)",
+                                    "valor": "33,04",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "19 / julho",
+                                    "descricao": "Mercadopago *lojaba(05/06)",
+                                    "valor": "25,00",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "08 / julho",
+                                    "descricao": "Madeiramadeira     (05/08)",
+                                    "valor": "73,57",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "09 / julho",
+                                    "descricao": "Tramont*lojaoficial(05/05)",
+                                    "valor": "52,56",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "03 / julho",
+                                    "descricao": "Moveis Kappesberg  (05/12)",
+                                    "valor": "477,02",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "09 / julho",
+                                    "descricao": "Pg *leroy Merlin Le(05/08)",
+                                    "valor": "17,48",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "08 / julho",
+                                    "descricao": "Pg *leroy Merlin Le(04/08)",
+                                    "valor": "133,80",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "03 / julho",
+                                    "descricao": "Tramont*lojaoficial(05/10)",
+                                    "valor": "60,52",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "08 / julho",
+                                    "descricao": "Mlp*magalu-aliexpre(05/07)",
+                                    "valor": "28,94",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "01 / setembro",
+                                    "descricao": "Mercadolivre*lgelec(03/12)",
+                                    "valor": "99,99",
+                                    "sinalValor": "+"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "valorAberto": "1.712,96",
+                "quantidadeLancamentosParcelados": 18
+            },
+            {
+                "status": "proxima",
+                "descricao": "próxima fatura",
+                "dataVencimento": "2026-01-01",
+                "dataMelhorCompra": null,
+                "debitoAutomatico": null,
+                "dataFechamentoFatura": null,
+                "textoInformativo": null,
+                "codigoBarras": null,
+                "cabecalhoFaturaViewModel": null,
+                "saldoFaturaAnteriorViewModel": null,
+                "faturaTimeline": {
+                    "label": "janeiro",
+                    "value": 1326.17,
+                    "status": "proxima",
+                    "statusLabel": "próxima"
+                },
+                "informacoesFaturaViewModel": {
+                    "itens": [
+                        {
+                            "titulo": "fatura",
+                            "descricao": "próxima"
+                        },
+                        {
+                            "titulo": "valor até o momento ",
+                            "descricao": "R$ 1.326,17"
+                        },
+                        {
+                            "titulo": "venc. da fatura",
+                            "descricao": "01/01/2026"
+                        }
+                    ],
+                    "debitoAutomatico": false,
+                    "textoInformativo": "você tem 14 compras parceladas nesta fatura"
+                },
+                "cotacaoDolarViewModel": null,
+                "lancamentosNacionais": null,
+                "lancamentosInternacionais": null,
+                "encargosServicos": null,
+                "comprasParceladas": {
+                    "sinalTotalMes": "+",
+                    "totalMes": "1.326,17",
+                    "titularidades": [
+                        {
+                            "nomeCliente": "::client_name::",
+                            "numeroCartao": "::card_number::",
+                            "lancamentos": [
+                                {
+                                    "data": "19 / julho",
+                                    "descricao": "Bellenzier Pneus Lt(06/10)",
+                                    "valor": "134,40",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "28 / julho",
+                                    "descricao": "Farmacia Preco Popu(05/05)",
+                                    "valor": "43,32",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "19 / julho",
+                                    "descricao": "Rua Os Dezoi-ct O F(06/06)",
+                                    "valor": "67,11",
+                                    "sinalValor": "+"
+                                }
+                            ]
+                        },
+                        {
+                            "nomeCliente": "::client_name::",
+                            "numeroCartao": "::card_suffix::",
+                            "lancamentos": [
+                                {
+                                    "data": "03 / julho",
+                                    "descricao": "Moveis Kappesberg  (06/12)",
+                                    "valor": "477,02",
+                                    "sinalValor": "+"
+                                },
+                                {
+                                    "data": "19 / julho",
+                                    "descricao": "Mercadopago *bebefo(06/06)",
+                                    "valor": "18,34",
+                                    "sinalValor": "+"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "valorAberto": "1.326,17",
+                "quantidadeLancamentosParcelados": 14
+            }
+        ],
+        "erroLimites": null,
+        "idCartao": "::card_internal_id::",
+        "contaCartao": null,
+        "logoProduto": "247",
+        "situacaoContaCartao": {
+            "codigo": "0",
+            "descricao": "Ativa"
+        },
+        "situacaoSaldoFatura": {
+            "codigo": "D",
+            "descricao": "Devedor"
+        },
+        "configuracao": "CF02",
+        "organizacao": "004",
+        "limites": {
+            "limiteCreditoSinal": "+",
+            "limiteCreditoValor": "43.656,00",
+            "limiteCreditoDisponivelSinal": "+",
+            "limiteCreditoDisponivelValor": "28.477,20",
+            "limiteCreditoUtilizadoSinal": "+",
+            "limiteCreditoUtilizadoValor": "15.178,80",
+            "limiteSaqueExteriorSinal": "+",
+            "limiteSaqueExteriorValor": "25.000,00",
+            "limiteSaqueExteriorDisponivelSinal": "+",
+            "limiteSaqueExteriorDisponivelValor": "25.000,00",
+            "limiteCashSinal": "+",
+            "limiteCashValor": "2.500,00",
+            "moeda": null,
+            "tipoLimite": null,
+            "percentualUtilizado": "34.77",
+            "percentualDisponivel": "65.23",
+            "limiteFlexivel": "false",
+            "overLimit": "false"
+        },
+        "timelineFatura": null,
+        "timelineMesesSuporte": [
+            "maio",
+            "fevereiro"
+        ],
+        "exibirHistorico": false
+    }
+}

@@ -1,0 +1,277 @@
+<!doctype html>
+<html>
+<head></head>
+<body>
+<div class="col9" role="main">
+    <form id="formContinuar" class="modulo" name="formContinuar" action="#" method="post">
+        <input type="hidden" id="op" name="op" value="eMv2O20UFsCVG8brAB39e+Y4ctyJ9K6sJZHympj6/rk=;">
+        <div id="security_bottom">
+            <link rel="stylesheet" href="https://estatico.itau.com.br/ibanking/commons/css/font-itau.css"
+                  media="screen">
+            <script>
+                _isBVC = false;
+
+                if (typeof $specGb === 'undefined') {
+                    $spectGb = new JarbageS(this)
+                } else {
+                    $specGb.finalize_registered_variables();
+                }
+
+                var lsPro = Object.getOwnPropertyNames(SecUIHelper.prototype);
+                lsPro.forEach(function (e, i) {
+                    if (e[0] == "p") {
+                        eval("delete SecUIHelper.prototype." + e);
+                    }
+                    ;
+                });
+
+
+                ;SecUIHelper.prototype.function1 = function (val) {
+                    return val;
+                };
+
+
+                var __tokenBloqueado = 'XechMJ89oj34wvjrU0T0Pnz4eRNLNFFhtrdn6rS9y94=;';
+                var __tokenDesativado = 'MgqsQpHkF62hm8QZIZJSp2R/l+cI0PLfz9JIBpwmMro=;';
+
+
+                var __appValidOP = 'XUoQQhrqe5F9gJGt5LG0p9aZZq3ZhYwMjOyAoBK3rTo=;';
+
+                var __appModoDesbloqueio = false;
+                var __appModoDesbloqueioCodigoI = "";
+                var __appModoDesbloqueioCodigoII = "";
+
+
+                var __qrCodeObtem = "";
+
+
+                SecUIHelper.initModulo = function () {
+                    try {
+// Bloqueia Bot&Atilde;&pound;o Continuar
+                        $('#btn-continuar').addClass('desabilitado');
+
+                        /* Registra as Fun&Atilde;&sect;&Atilde;&micro;es Necess&Atilde;&iexcl;rias */
+                        var secUIHelper = new SecUIHelper();
+                        secUIHelper.registraFuncoesGerais();
+
+
+                        secUIHelper.registraTokenApp();
+
+
+                        /* Seleciona o Primeiro Dispositivo dispon&iacute;vel */
+                        var combo = $('#seleciona-autenticacao');
+                        if (combo != null && combo.children(0) != null && combo.children(0)[0] != null) {
+                            try {
+                                $(combo.children(0)[0]).attr("selected", true);
+                                combo.children(0).change();
+                            } catch (e) {
+                            }
+                        }
+                    } catch (e) {
+                    }
+                }
+
+                var initializationProcess = function () {
+                    SecUIHelper.initModulo();
+                    $SECAPDK.uidap('6rLNntIQceDfersgMWAHS04sqT+syvWfNQppHrbzq3g=;gerenciadorAppDesktopAtualiza');
+
+
+                    $(document).on('click', '[data-lightbox]', function (e) {
+                        var value = $(this).attr('data-lightbox');
+                        if (value.length > 0) {
+                            lity($(this).attr('data-lightbox'));
+                        }
+                    });
+
+                    var lastButtonFocus = $('.itoken_qrcode--last-button');
+                    lastButtonFocus.on('keydown', function (e) {
+                        if ((e.which === 9 && !e.shiftKey)) {
+                            e.preventDefault();
+                            $('.itoken_qrcode--closeCoach').focus();
+                        }
+                    });
+                };
+
+                if (typeof window.jQuery != 'undefined') {
+                    $(document).ready(initializationProcess);
+                } else {
+                    if (window.addEventListener) {
+                        window.addEventListener('load', initializationProcess);
+                    } else {
+                        window.attachEvent('onload', initializationProcess);
+                    }
+                }
+
+                /**
+                 * Acessibilidade - Inicio
+                 */
+
+                isAppEntraCodigGanhouFocus = false;
+
+
+                //Seta o focus no bot&atilde;o, configura a flag para aceitar o retorno para o input
+                function habilitaFocusBotao(idBotao) {
+                    $(idBotao).focus();
+                    isAppEntraCodigGanhouFocus = true;
+                }
+
+                //Solicita o focus para o bot&atilde;o ok e permite o teclado no bot&atilde;o para atender o leitor de tela
+                //A flag permite o controle do focus no bot&atilde;o para o retorno ao input via teclado
+                function trataFocusBotao(elemento, idBotao) {
+                    if (elemento.value.length == elemento.maxLength && !isAppEntraCodigGanhouFocus) {
+                        habilitaFocusBotao(idBotao);
+                    }
+                    if (elemento.value.length < elemento.maxLength) {
+                        isAppEntraCodigGanhouFocus = false;
+                    }
+                }
+
+                //focus botao OK token app
+                $("#app-entraCodigo").keyup(function () {
+                    var btnId = '#app-codigoOk';
+                    trataFocusBotao(this, btnId);
+                });
+
+                //focus botao OK token sms
+                $("#sms-codigoRecebido").keyup(function () {
+                    var btnId = '#sms-codigoOk';
+                    trataFocusBotao(this, btnId);
+                });
+
+                //focus botao OK token chaveiro
+                $("#chaveiro-entraCodigo").keyup(function () {
+                    var btnId = '#chaveiro-codigoOk';
+                    trataFocusBotao(this, btnId);
+                });
+
+                function rodapeUbiquitous() {
+//Voc&ecirc; tamb&eacute;m pode realizar esta opera&ccedil;&atilde;o atrav&eacute;s do seu celular
+                    $('#rodape-ubiquitous').text("Voc\u00EA tamb\u00E9m pode realizar esta opera\u00E7\u00E3o atrav\u00E9s do seu celular");
+                    $('#rodape-ubiquitous2').text("");
+                }
+
+            </script>
+            <div
+                class="modulo modulo-autenticacao padding-cima30 padding-direita20 padding-esquerda20 itoken_qrcode--box-size"
+                title="módulo de autenticação. Por favor escolha um dispositivo de segurança">
+                <h2 class="itoken_qrcode--titulo">autenticação</h2>
+                <section class="formulario">
+                    <fieldset>
+                        <legend>Preenchimento de dados para módulo de autenticação</legend>
+                        <div class="clearfix" id="div-modulo-autenticacao-conteudo">
+                            <!-- se o texto informativo do valor da transa&ccedil;&atilde;o n&atilde;o for vazio, ent&atilde;o ir&aacute; apresentar o texto para o usuario  -->
+                            <!-- se tiver token QR Code n&atilde;o valida token Chaveiro Experidado  -->
+                            <!-- se tiver token QR Code n&atilde;o valida token SMS  -->
+                            <div class="row clearfix hide" id="div-mensagem-superior">
+                                <div class="left box-info box-info-alerta" id="top-message" role="alert"
+                                     aria-live="assertive">
+                                    <span class="icone" id="iconeMensagemSuperior"></span>
+                                    <p><strong>MENSAGEM SUPERIOR</strong></p>
+                                </div>
+                            </div>
+                            <div class="left t9" id="escolheDispositivo">
+                                <label for="seleciona-autenticacao">Dispositivos de segurança</label>
+                                <label class="custom-select"><p class="hide" aria-hidden="true">x</p> <select
+                                    id="seleciona-autenticacao">
+                                    <option id="app" value="app">iToken no aplicativo</option>
+                                </select> </label>
+                            </div>
+                            <!-- Validar fluxo de desbloqueio de token qrcode -->
+                            <!-- Divs de Token e Senha -->
+                            <div>
+                                <!-- se tiver token QR Code n&atilde;o valida token SMS  -->
+                                <!-- se tiver token QR Code Code n&atilde;o valida token F&iacute;sico  -->
+                                <!-- Token Aplicativo -->
+                                <!-- se tiver token QR Code Code n&atilde;o valida token Aplicativo  -->
+                                <div class="content clearfix left margem-baixo10" id="id-div-content-token-app">
+                                    <div id="content-app" class="drop-conteudo hide itoken--auth-wrapper">
+                                        <div class="left t9" id="app-codigoSeguranca">
+                                            <label for="app-entraCodigo" id="labelCodigoDispApp">código de
+                                                segurança</label>
+                                            <input type="password" value="" id="app-entraCodigo" maxlength="6"
+                                                   data-idnextstep="app-codigoOk">
+                                            <label class="margen-cima5" for="app-entraCodigo">final<span
+                                                class="txt-bold"> 642</span></label>
+                                        </div>
+                                        <div class="left btn-form auth-codigoSeguranca">
+                                            <a href="javascript:;" class="btn btn-fluxo desabilitado" id="app-codigoOk"
+                                               role="button" tabindex="0">Ok</a>
+                                        </div>
+                                        <div class="left t5 margem-cima20 margem-direita45 hide" id="app-confirmacao"
+                                             role="alert" aria-live="assertive">
+                                            <span class="icone-grande"></span>
+                                            <p><strong>iToken no aplicativo validado</strong></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /Token Aplicativo -->
+                                <!-- Validar com o Marcos essa implementa&ccedil;&atilde;o -->
+                                <!-- se tiver token QR Code Code n&atilde;o valida token Aplicativo  -->
+                                <!-- Mensagem SMS -->
+                                <div class="left margem-cima20 hide" id="app-erro" style="clear: both;" role="alert"
+                                     aria-live="assertive">
+                                    <p> Aguarde, enviando código SMS.
+                                        <!-- c&oacute;digo enviado via SMS para (DDD AQUI) XXXXX-TELEFONE AQUI!!!!!. Insira no campo "c&oacute;digo recebido."<br />Caso n&iuml;&iquest;&frac12;o receba, clique em "gerar c&oacute;digo" novamente. --> </p>
+                                </div>
+                                <!-- /Mensagem SMS -->
+                            </div>
+                        </div>
+                        <div class="row clearfix hide" id="div-mensagem-inferior" role="alert" aria-live="assertive">
+                            <div class="left" id="bottom-message">
+                                <span class="icone-alerta"></span>
+                                <p><strong>MENSAGEM INFERIOR</strong></p>
+                            </div>
+                        </div>
+                        <div class="row clearfix margem-cima30 hide" id="div-modulo-autenticacao-sucesso" role="alert"
+                             aria-live="assertive">
+                            <span class="ico ico-check"></span>
+                            <p><strong>iToken e senha validados com sucesso. Clique em continuar para seguir sua
+                                transação.</strong></p>
+                        </div>
+                        <script type="text/javascript">
+                            $("#app-codigoOk").click(function () {
+                                try {
+                                    if (!$('#app-codigoOk').hasClass("desabilitado")) {
+                                        $SECAPDK.uidap('6rLNntIQceDfersgMWAHS04sqT+syvWfNQppHrbzq3g=;gerenciadorAppDesktopAtualiza');
+                                    }
+                                } catch (e) {
+                                }
+                            });
+                        </script>
+                        <script>
+                            window.onload = function () {
+                                try {
+                                    $SECAPDK.uidap('6rLNntIQceDfersgMWAHS04sqT+syvWfNQppHrbzq3g=;gerenciadorAppDesktopAtualiza');
+                                } catch (e) {
+                                }
+                            };
+                        </script>
+                    </fieldset>
+                </section>
+            </div>
+            <div class="col3"></div>
+            <script>
+                if (document.URL.indexOf('bklcom.dll') > -1) {
+                    setTimeout(function () {
+                        $('#seleciona-autenticacao').change();
+                    }, 0);
+                }
+            </script>
+        </div>
+    </form>
+    <div class="botoes clearfix">
+        <a href="javascript:javascript: continuar();" class="btn btn-fluxo right" id="btn-continuar">confirmar</a>
+        <script>
+            function continuar() {
+                $('#formContinuar').submit();
+            }
+        </script>
+    </div>
+</div>
+<style>
+    .itoken_qrcode--box-size {
+        width: 100% !important;
+    }
+</style>
+</body>
+</html>

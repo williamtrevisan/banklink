@@ -1,0 +1,14 @@
+{
+    "preset": "laravel",
+    "ignore": {
+        "words": [
+            "authenticator",
+            "banklink",
+            "getter",
+            "itau",
+            "itoken",
+            "php"
+        ],
+        "paths": []
+    }
+}

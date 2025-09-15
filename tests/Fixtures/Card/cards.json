@@ -1,0 +1,182 @@
+[
+    {
+        "numero": "::card_number::",
+        "id": "::card_id::",
+        "nome": "UNICLASS BLACK CASHBACK",
+        "nomeTitular": null,
+        "codigoProduto": "01194",
+        "bandeira": "Mastercard",
+        "vencimento": "2025-10-01",
+        "nomeCliente": "::client_name::",
+        "melhorCompra": "2025-09-26",
+        "chpras": "::chpras::",
+        "erroFatura": null,
+        "indicePrimeiraFaturaExibida": 1,
+        "customizacao": {
+            "nome": "preto",
+            "cor_da_fonte": {
+                "red": "255",
+                "green": "255",
+                "blue": "255"
+            },
+            "cor_do_icone": "claro",
+            "gradientes": {
+                "gradienteCartao_0": {
+                    "red": "0",
+                    "green": "0",
+                    "blue": "0"
+                },
+                "gradienteCartao_1": {
+                    "red": "90",
+                    "green": "90",
+                    "blue": "90"
+                }
+            },
+            "lista_dn": [
+                "01075", "01288", "01036", "01099", "01101", "01192", "01088", "01193", "01194", "01195",
+                "01196", "04331", "01077", "01068", "01066", "01064", "01197", "01290", "01375", "01862",
+                "01569", "01294", "01295", "01838", "01861", "01992", "02011", "02014", "02018", "02153",
+                "02188", "04890", "04891", "05017", "05020", "05054", "05055", "05056", "05057", "05117",
+                "05718", "05931", "06038", "09017", "09410", "09411", "09415", "09416", "09417", "09704",
+                "09714", "09801", "09935", "01882", "01993", "01883"
+            ]
+        },
+        "erroDataMelhorCompra": null,
+        "faturas": [
+            {
+                "status": "fechadaPagaTotal",
+                "descricao": "fatura fechada",
+                "dataVencimento": "2025-09-01",
+                "dataMelhorCompra": null,
+                "debitoAutomatico": "false",
+                "dataFechamentoFatura": "2025-08-25",
+                "textoInformativo": null,
+                "codigoBarras": null,
+                "cabecalhoFaturaViewModel": null,
+                "saldoFaturaAnteriorViewModel": null,
+                "faturaTimeline": {
+                    "label": "setembro",
+                    "value": 5852.29,
+                    "status": "fechada",
+                    "statusLabel": "fechada"
+                },
+                "informacoesFaturaViewModel": {
+                    "itens": [
+                        {
+                            "titulo": "fatura",
+                            "descricao": "fechada"
+                        },
+                        {
+                            "titulo": "você pagou null de",
+                            "descricao": null
+                        },
+                        {
+                            "titulo": "venc. da fatura",
+                            "descricao": ""
+                        }
+                    ],
+                    "debitoAutomatico": false,
+                    "textoInformativo": "o processamento do pagamento e portanto do status da fatura, pode demorar até o fechamento da fatura seguinte"
+                },
+                "cotacaoDolarViewModel": null,
+                "lancamentosNacionais": null,
+                "lancamentosInternacionais": null,
+                "encargosServicos": null,
+                "comprasParceladas": null,
+                "valorAberto": "5.852,29",
+                "saldoCredor": null,
+                "valorNaoPagoFaturaAnterior": "0,00",
+                "valorPago": "5.852,29",
+                "valorMinimo": null,
+                "encargoFatura": null,
+                "comprasParceladasJuros": null,
+                "demaisTaxasJuros": null,
+                "limiteCreditoFatura": null,
+                "parcelamentoFatura": null,
+                "financiamentoFatura": null,
+                "encargosProximoPeriodo": null,
+                "lancamentosMoedaInternacionalPrePago": null,
+                "saldoMoedaInternacionalPrePago": null
+            },
+            {
+                "status": "aberta",
+                "descricao": "fatura aberta",
+                "dataVencimento": "2025-10-01",
+                "dataMelhorCompra": null,
+                "debitoAutomatico": "false",
+                "dataFechamentoFatura": "2025-09-25",
+                "textoInformativo": null,
+                "codigoBarras": null,
+                "cabecalhoFaturaViewModel": null,
+                "saldoFaturaAnteriorViewModel": null,
+                "faturaTimeline": {
+                    "label": "outubro",
+                    "value": 3908.37,
+                    "status": "aberta",
+                    "statusLabel": "aberta"
+                },
+                "informacoesFaturaViewModel": {
+                    "itens": null,
+                    "debitoAutomatico": false,
+                    "textoInformativo": null
+                },
+                "cotacaoDolarViewModel": null,
+                "lancamentosNacionais": null,
+                "lancamentosInternacionais": null,
+                "encargosServicos": null,
+                "comprasParceladas": null,
+                "valorAberto": "3.908,37",
+                "saldoCredor": null,
+                "valorNaoPagoFaturaAnterior": "0,00",
+                "valorPago": "-5.852,29",
+                "valorMinimo": null,
+                "encargoFatura": null,
+                "comprasParceladasJuros": null,
+                "demaisTaxasJuros": null,
+                "limiteCreditoFatura": null,
+                "parcelamentoFatura": null,
+                "financiamentoFatura": null,
+                "encargosProximoPeriodo": null,
+                "lancamentosMoedaInternacionalPrePago": null,
+                "saldoMoedaInternacionalPrePago": null
+            }
+        ],
+        "erroLimites": null,
+        "idCartao": "::card_internal_id::",
+        "contaCartao": null,
+        "logoProduto": "247",
+        "situacaoContaCartao": {
+            "codigo": "0",
+            "descricao": "Ativa"
+        },
+        "situacaoSaldoFatura": {
+            "codigo": "D",
+            "descricao": "Devedor"
+        },
+        "configuracao": "CF02",
+        "organizacao": "004",
+        "limites": {
+            "limiteCreditoSinal": "+",
+            "limiteCreditoValor": "43.656,00",
+            "limiteCreditoDisponivelSinal": "+",
+            "limiteCreditoDisponivelValor": "28.516,10",
+            "limiteCreditoUtilizadoSinal": "+",
+            "limiteCreditoUtilizadoValor": "15.139,90",
+            "limiteSaqueExteriorSinal": "+",
+            "limiteSaqueExteriorValor": "25.000,00",
+            "limiteSaqueExteriorDisponivelSinal": "+",
+            "limiteSaqueExteriorDisponivelValor": "25.000,00",
+            "limiteCashSinal": "+",
+            "limiteCashValor": "2.500,00",
+            "moeda": null,
+            "tipoLimite": null,
+            "percentualUtilizado": "34.68",
+            "percentualDisponivel": "65.32",
+            "limiteFlexivel": "false",
+            "overLimit": "false"
+        },
+        "timelineFatura": null,
+        "timelineMesesSuporte": null,
+        "exibirHistorico": false
+    }
+]

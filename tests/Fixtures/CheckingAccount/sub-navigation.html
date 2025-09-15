@@ -1,0 +1,713 @@
+<script>
+
+    var menuOriginal;
+    var tituloOriginal;
+    var textoMenuOriginal;
+
+    $(function () {
+        adicionarEvento();
+        nomearHomeContexto();
+        adicionarInformacaoParaAcessibilidade();
+
+
+    });
+
+
+    function adicionarEvento() {
+        $("a[menuSimplificado]").off("click");
+        $("a[menuSimplificado]").click(function () {
+            var html = $(this).siblings("div").html();
+            var titulo = $(this).parents(".menuContexto").siblings("h2").text().replace("In&iacute;cio > ", "");
+            var caminho = $(this).parents(".menuContexto").siblings("h2").text() + " > " + $(this).text();
+            var breadcrumb = $(".breadcrumb").html();
+
+            html = html.replaceAll("\r", " ");
+            html = html.replaceAll("", " ");
+            html = html.replaceAll("", " ");
+
+            $("#htmlMenuSimplificado").val(html);
+            $("#tituloMenuSimplificado").val(titulo);
+            $("#caminhoMenuSimplificado").val(caminho);
+            $("#breadcrumbMenuSimplificado").val(breadcrumb);
+            $("#menuSimplificado").submit();
+        });
+    };
+
+    function nomearHomeContexto() {
+        $(".tituloContexto").html("Conta corrente");
+    };
+
+    function adicionarInformacaoParaAcessibilidade() {
+        var itensMenu = $(".menuContexto a");
+
+        for (var i = 0; i < itensMenu.length; i++) {
+            gerarInformacaoParaAcessibilidade(itensMenu[i]);
+        }
+    };
+
+    function gerarInformacaoParaAcessibilidade(elemento) {
+        var titulo = $(elemento).text();
+        var tituloH3 = $(elemento).parents("div").prev("h3").text();
+        var texto = "Voc&ecirc; est&aacute; em ";
+
+        if ($(elemento).parents("div").prev("h4").get(0) != undefined) {
+            var tituloH4 = $(elemento).parents("div").prev("h4").text();
+            var informacaoAcessibilidade = titulo + " " + texto + tituloH4 + " / " + tituloH3;
+        } else {
+            var informacaoAcessibilidade = titulo + " " + texto + tituloH3;
+        }
+        ;
+
+        var transformaHtml = $.parseHTML(informacaoAcessibilidade);
+        $(elemento).attr("aria-label", $(transformaHtml).text());
+    };
+
+    function incluirRotaBreadcrumb() {
+        $(".breadcrumb").append("<li> Conta corrente</li>");
+    };
+
+
+    function submitInternacionalizacao(bandeira) {
+        $("#bandeiraSelecionada").val(bandeira);
+        $("#internacionalizacao").submit();
+    };
+
+</script>
+
+
+<form id="menuSimplificado" name="menuSimplificado" method="POST">
+    <input type="hidden" name="op" id="op" value="eTLGeGfOx45ZH+0IFKekoiZU+z3dbudihI5hf/YDsX8=;"/>
+    <input type="hidden" name="html" id="htmlMenuSimplificado"/>
+    <input type="hidden" name="titulo" id="tituloMenuSimplificado"/>
+    <input type="hidden" name="caminho" id="caminhoMenuSimplificado"/>
+    <input type="hidden" name="breadcrumb" id="breadcrumbMenuSimplificado"/>
+</form>
+
+
+<div class="modulo menu-contexto">
+
+
+    <div class="row clearfix">
+
+
+        <h2 id="titulo">Home &gt; Conta corrente</h2>
+
+        <div class="row clearfix menuContexto">
+
+
+            <div class="texto texto-3col colunaMenu ">
+
+
+                <h3 title="Saldo e extrato" class="margem-cima15">Saldo e extrato</h3>
+                <div id="saldoExtrato">
+
+
+                    <ul>
+
+
+                        <li>
+                            <a onclick="GA.pushMenuCategoria('contaCorrente','saldoExtrato','contaCorrente/saldoExtrato/extrato');"
+                               data-op='ItMFv3knoP7ULLnnOk1FRqEZLW35nsbGlF4x8Eogqno=;' class="" href="javascript:;"
+                               aria-label="">Extrato</a>
+
+
+                            <span class="item-menu-novo">novo</span>
+
+
+                        </li>
+
+
+                        <li>
+                            <a onclick="GA.pushMenuCategoria('contaCorrente','saldoExtrato','contaCorrente/saldoExtrato/extratoAnualTarifas');"
+                               class="" href="javascript: executaConvivenciaMenu('wZ2Mse/XfF1aNWdVbKD+lQ==');"
+                               aria-label="">Extrato anual de tarifas</a>
+                        </li>
+
+
+                        <li>
+                            <a onclick="GA.pushMenuCategoria('contaCorrente','saldoExtrato','contaCorrente/saldoExtrato/extratoMensalConsolidado');"
+                               class="" href="javascript: executaConvivenciaMenu('28wcRy+TbrT9MkQZjbP0wA==');"
+                               aria-label="">Extrato mensal consolidado</a>
+                        </li>
+
+
+                    </ul>
+
+
+                </div>
+
+
+                <h3 title="Dados cadastrais" class="margem-cima15">Dados cadastrais</h3>
+                <div id="dadosCadastrais">
+
+
+                    <ul>
+
+
+                        <li>
+                            <a onclick="GA.pushMenuCategoria('contaCorrente','dadosCadastrais','contaCorrente/dadosCadastrais/atualizarMeusDadosCadastrais');"
+                               class="" href="javascript: executaConvivenciaMenu('kWqNcvK/usMYz7x1SK7gfw==');"
+                               aria-label="">Atualizar meus dados cadastrais</a>
+                        </li>
+
+
+                        <li>
+                            <a onclick="GA.pushMenuCategoria('contaCorrente','dadosCadastrais','contaCorrente/dadosCadastrais/alterarSenhaEletronica');"
+                               data-op='CSC3R4JYevrwozMmBu98Y5rspMDUS2d7gGjMp9IV8Xg=;' class="" href="javascript:;"
+                               aria-label="">Alterar senha eletr&ocirc;nica</a>
+
+
+                        </li>
+
+
+                        <li>
+                            <a onclick="GA.pushMenuCategoria('contaCorrente','dadosCadastrais','contaCorrente/dadosCadastrais/condicoesGerais');"
+                               class="" href="javascript: executaConvivenciaMenu('Mf1pG5fCEVtepUzWSwYBnw==');"
+                               aria-label="">Condi&ccedil;&otilde;es gerais</a>
+                        </li>
+
+
+                        <li>
+                            <a onclick="GA.pushMenuCategoria('contaCorrente','dadosCadastrais','contaCorrente/dadosCadastrais/condicoesGeraisContaUniversal')"
+                               class=""
+                               href="http://www.itau.com.br/_arquivosestaticos/Itau/PDF/para-voce/conta-corrente/abertura-conta/6212-5.pdf"
+                               target="_blank" aria-label="">Condi&ccedil;&otilde;es gerais de conta universal</a>
+
+                        </li>
+
+
+                    </ul>
+
+
+                </div>
+
+
+                <h3 title="Promo&ccedil;&otilde;es" class="margem-cima15">Promo&ccedil;&otilde;es</h3>
+                <div id="promocoes">
+
+
+                    <ul>
+
+
+                        <li>
+                            <a onclick="GA.pushMenuCategoria('contaCorrente','promocoes','contaCorrente/promocoes/programaAmigoIndicaItau');"
+                               class="" href="javascript: executaConvivenciaMenu('ZbBbssngVJ2pN4QclTdRqg==');"
+                               aria-label="">Programa Amigo Indica Ita&uacute;</a>
+                        </li>
+
+
+                    </ul>
+
+
+                </div>
+
+
+                <h3 title="Sal&aacute;rio" class="margem-cima15">Sal&aacute;rio</h3>
+                <div id="salario">
+
+
+                    <ul>
+
+
+                        <li>
+                            <a onclick="GA.pushMenuCategoria('contaCorrente','salario','contaCorrente/salario/habilitarRecebimentoSalarioContaCorrente');"
+                               class="" href="javascript: executaConvivenciaMenu('ov+kvmke/YBK8RP6Z2jF+w==');"
+                               aria-label="">Habilitar recebimento de sal&aacute;rio na conta-corrente</a>
+                        </li>
+
+
+                        <li>
+                            <a onclick="GA.pushMenuCategoria('contaCorrente','salario','contaCorrente/salario/portabilidadeSalarial');"
+                               data-op='ycWM45WrUil23VVhJlNYFyJErUe98BqXYmMpTlSjmkk=;' class="" href="javascript:;"
+                               aria-label="">Portabilidade salarial</a>
+
+
+                            <span class="item-menu-novo">novo</span>
+
+
+                        </li>
+
+
+                    </ul>
+
+
+                </div>
+
+
+            </div>
+            <div class="texto texto-3col colunaMenu ">
+
+
+                <h3 title="Pacotes de servi&ccedil;os" class="margem-cima15">Pacotes de servi&ccedil;os</h3>
+                <div id="pacotesServicos">
+
+
+                    <ul>
+
+
+                        <li>
+                            <a onclick="GA.pushMenuCategoria('contaCorrente','pacotesServicos','contaCorrente/pacotesServicos/meuPacote');"
+                               data-op='ES5caTCdho9+VxTbn2oEI8oO9l+ukeTizfrkEiWEcDw=;' class="" href="javascript:;"
+                               aria-label="">Meu pacote</a>
+
+
+                        </li>
+
+
+                        <li>
+                            <a onclick="GA.pushMenuCategoria('contaCorrente','pacotesServicos','contaCorrente/pacotesServicos/demonstrativoUtilizacao');"
+                               data-op='pWL2A4xyV5DGRuOF4ct6iZc8YVyw5L/GJ2E1ryNMUa0=;' class="" href="javascript:;"
+                               aria-label="">Demonstrativo de utiliza&ccedil;&atilde;o</a>
+
+
+                        </li>
+
+
+                        <li>
+                            <a onclick="GA.pushMenuCategoria('contaCorrente','pacotesServicos','contaCorrente/pacotesServicos/contratarAlterar');"
+                               class="" href="javascript: executaConvivenciaMenu('6MAInZVT5V6TaCGn3FbZew==');"
+                               aria-label="">Contratar ou alterar</a>
+                        </li>
+
+
+                        <li>
+                            <a onclick="GA.pushMenuCategoria('contaCorrente','pacotesServicos','contaCorrente/pacotesServicos/cancelar');"
+                               class="" href="javascript: executaConvivenciaMenu('hxkR/aZU3WHxzclIBES/MQ==');"
+                               aria-label="">Cancelar</a>
+                        </li>
+
+
+                    </ul>
+
+
+                </div>
+
+
+                <h3 title="Declara&ccedil;&atilde;o de imposto de renda" class="margem-cima15">Declara&ccedil;&atilde;o
+                    de imposto de renda</h3>
+                <div id="declaracaoImpostoRenda">
+
+
+                    <ul>
+
+
+                        <li>
+                            <a onclick="GA.pushMenuCategoria('contaCorrente','declaracaoImpostoRenda','contaCorrente/declaracaoImpostoRenda/informeRendimentos');"
+                               data-
+                               op='4qG/8AgKk0Tx6pJRPW41VRBKAEqncaHhwoi6qgCaAoY=;verificaTokenInformeRendimentos'
+                               class="" href="javascript:;" aria-label="">Informe de rendimentos</a>
+
+
+                        </li>
+
+
+                        <li>
+                            <a onclick="GA.pushMenuCategoria('contaCorrente','declaracaoImpostoRenda','contaCorrente/declaracaoImpostoRenda/guiaImpostoRenda')"
+                               class="" href="https://www.itau.com.br/imposto-renda/" target="_blank" aria-label="">Guia
+                                de imposto de renda</a>
+
+                        </li>
+
+
+                    </ul>
+
+
+                </div>
+
+
+                <h3 title="Cheques" class="margem-cima15">Cheques</h3>
+                <div id="cheques">
+
+
+                    <h4 title="Solicitar ou cadastrar" menuMarcacao="menuMarcacao" class=" margem-cima15">Solicitar ou
+                        cadastrar</h4>
+                    <div id="cheques-solicitarCadastrar">
+
+
+                        <ul>
+
+
+                            <li>
+                                <a onclick="GA.pushMenuCategoria('contaCorrente','cheques','contaCorrente/cheques/solicitarCadastrar/solicitarTaloes');"
+                                   class="" href="javascript: executaConvivenciaMenu('8PnPKkauKaXZ+BeCfMhnPA==');"
+                                   aria-label="">Solicitar tal&otilde;es</a>
+                            </li>
+
+
+                        </ul>
+
+
+                    </div>
+
+
+                    <h4 title="Bloquear ou desbloquear" menuMarcacao="menuMarcacao" class=" margem-cima15">Bloquear ou
+                        desbloquear</h4>
+                    <div id="cheques-bloquearDesbloquear">
+
+
+                        <ul>
+
+
+                            <li>
+                                <a onclick="GA.pushMenuCategoria('contaCorrente','cheques','contaCorrente/cheques/bloquearDesbloquear/bloquearPagamentoCheques');"
+                                   class="" href="javascript: executaConvivenciaMenu('srohlGS2ivakiGt9jhMHJA==');"
+                                   aria-label="">Bloquear pagamento de cheques</a>
+                            </li>
+
+
+                            <li>
+                                <a onclick="GA.pushMenuCategoria('contaCorrente','cheques','contaCorrente/cheques/bloquearDesbloquear/desbloquearTaloes');"
+                                   class="" href="javascript: executaConvivenciaMenu('1YkGeVmqsHNNXPm/QKyR3Q==');"
+                                   aria-label="">Desbloquear tal&otilde;es</a>
+                            </li>
+
+
+                            <li>
+                                <a onclick="GA.pushMenuCategoria('contaCorrente','cheques','contaCorrente/cheques/bloquearDesbloquear/desbloquearPagamentoCheques');"
+                                   class="" href="javascript: executaConvivenciaMenu('ajgGRJFjWfTU3gz8to//Bg==');"
+                                   aria-label="">Desbloquear pagamento de cheques</a>
+                            </li>
+
+
+                        </ul>
+
+
+                    </div>
+
+
+                </div>
+
+
+                <h3 title="Plano de Vantagens" class="margem-cima15">Plano de Vantagens</h3>
+                <div id="planoVantagens">
+
+
+                    <ul>
+
+
+                        <li>
+                            <a onclick="GA.pushMenuCategoria('contaCorrente','planoVantagens','contaCorrente/planoVantagens/oQueE?');"
+                               class="" href="javascript: executaConvivenciaMenu('4EYrrFRrQHoyqvG3ynNqJA==');"
+                               aria-label="">O que &eacute;?</a>
+                        </li>
+
+
+                        <li>
+                            <a onclick="GA.pushMenuCategoria('contaCorrente','planoVantagens','contaCorrente/planoVantagens/consultarPlanoVantagens');"
+                               data-op='WROadk2UydHkbMRN7IQSlhNm2Ljg1En2mhMcfAW4xOM=;' class="" href="javascript:;"
+                               aria-label="">Consultar plano de vantagens</a>
+
+
+                        </li>
+
+
+                        <li>
+                            <a onclick="GA.pushMenuCategoria('contaCorrente','planoVantagens','contaCorrente/planoVantagens/cancelar');"
+                               class="" href="javascript: executaConvivenciaMenu('Vlqgqhyaw5eiivv8DDsFTw==');"
+                               aria-label="">Cancelar</a>
+                        </li>
+
+
+                    </ul>
+
+
+                </div>
+
+
+            </div>
+            <div class="texto texto-3col colunaMenu ">
+
+
+                <h3 title="Cart&atilde;o Ita&uacute;" class="margem-cima15">Cart&atilde;o Ita&uacute;</h3>
+                <div id="cartaoItau">
+
+
+                    <h4 title="Bloquear ou desbloquear" menuMarcacao="menuMarcacao" class=" margem-cima15">Bloquear ou
+                        desbloquear</h4>
+                    <div id="cartaoItau-bloquearDesbloquear">
+
+
+                        <ul>
+
+
+                            <li>
+                                <a onclick="GA.pushMenuCategoria('contaCorrente','cartaoItau','contaCorrente/cartaoItau/bloquearDesbloquear/cartaoItau');"
+                                   class="" href="javascript: executaConvivenciaMenu('Ojtym4+9kWplc//x1QrEJQ==');"
+                                   aria-label="">Cart&atilde;o Ita&uacute;</a>
+                            </li>
+
+
+                            <li>
+                                <a onclick="GA.pushMenuCategoria('contaCorrente','cartaoItau','contaCorrente/cartaoItau/bloquearDesbloquear/saquesComprasExterior');"
+                                   data-op='tzgGtYZ3tFTJidYwcERrk8llSFlts2Ktr0nAvys5QwA=;' class="" href="javascript:;"
+                                   aria-label="">Saques e compras no exterior</a>
+
+
+                            </li>
+
+
+                        </ul>
+
+
+                    </div>
+
+
+                    <h4 title="Consultar" menuMarcacao="menuMarcacao" class=" margem-cima15">Consultar</h4>
+                    <div id="cartaoItau-consultar">
+
+
+                        <ul>
+
+
+                            <li>
+                                <a onclick="GA.pushMenuCategoria('contaCorrente','cartaoItau','contaCorrente/cartaoItau/consultar/limitesSaquesCompras');"
+                                   class="" href="javascript: executaConvivenciaMenu('TlBugPbN3SqOqmow82vLrQ==');"
+                                   aria-label="">Limites de saques e compras</a>
+                            </li>
+
+
+                        </ul>
+
+
+                    </div>
+
+                    <ul>
+
+
+                        <li>
+                            <a onclick="GA.pushMenuCategoria('contaCorrente','cartaoItau','contaCorrente/cartaoItau/simularCartaoProtegido');"
+                               data-op='m2YgbqAhTmYcmo/Y/0QqVKYOKdwyCkeqo28VxSFd4u8=;' class="" href="javascript:;"
+                               aria-label="">Simular Cart&atilde;o Protegido</a>
+
+
+                            <span class="item-menu-novo">novo</span>
+
+
+                        </li>
+
+
+                    </ul>
+
+
+                </div>
+
+
+                <h3 title="Provisionamento para saques" class="margem-cima15">Provisionamento para saques</h3>
+                <div id="provisionamentoSaques">
+
+
+                    <ul>
+
+
+                        <li>
+                            <a onclick="GA.pushMenuCategoria('contaCorrente','provisionamentoSaques','contaCorrente/provisionamentoSaques/oQueE?');"
+                               data-op='XqY60WNlQKuJZYgUU+co2SMbj1c9FAVwbdHx9tnjUlI=;' class="" href="javascript:;"
+                               aria-label="">O que &eacute;?</a>
+
+
+                        </li>
+
+
+                        <li>
+                            <a onclick="GA.pushMenuCategoria('contaCorrente','provisionamentoSaques','contaCorrente/provisionamentoSaques/solicitar');"
+                               data-op='j+YufeTFHYNIKcY/253yI0gC7GXG4OYZzqMCqZMEb2U=;' class="" href="javascript:;"
+                               aria-label="">Solicitar</a>
+
+
+                        </li>
+
+
+                        <li>
+                            <a onclick="GA.pushMenuCategoria('contaCorrente','provisionamentoSaques','contaCorrente/provisionamentoSaques/consultar');"
+                               data-op='9mP/EbiBuAkeXJNc9TKceWshkJFZThKw6ieKzW+FjEY=;' class="" href="javascript:;"
+                               aria-label="">Consultar</a>
+
+
+                        </li>
+
+
+                        <li>
+                            <a onclick="GA.pushMenuCategoria('contaCorrente','provisionamentoSaques','contaCorrente/provisionamentoSaques/cancelar');"
+                               data-op='g+FxxRenIagwEyb2CG3AjKrHwrFz1F201QPfwPxnqHE=;' class="" href="javascript:;"
+                               aria-label="">Cancelar</a>
+
+
+                        </li>
+
+
+                    </ul>
+
+
+                </div>
+
+
+                <h3 title="Minha Conta" class="margem-cima15">Minha Conta</h3>
+                <div id="minhaConta">
+
+
+                    <ul>
+
+
+                        <li>
+                            <a onclick="GA.pushMenuCategoria('contaCorrente','minhaConta','contaCorrente/minhaConta/comprovantes');"
+                               data-op='nTtRoFzT0Jc1PtBtILdSmgBDSIIOOJAj8DZ6bstVEWg=;' class="" href="javascript:;"
+                               aria-label="">Comprovantes</a>
+
+
+                        </li>
+
+
+                        <li>
+                            <a onclick="GA.pushMenuCategoria('contaCorrente','minhaConta','contaCorrente/minhaConta/operacoesAgendadasInternet');"
+                               data-op='DZfJI4Q2c0I2CrEphM9h3bXiBX87K0vZ0nZ3pXXqVCw=;' class="" href="javascript:;"
+                               aria-label="">Opera&ccedil;&otilde;es agendadas na internet</a>
+
+
+                        </li>
+
+
+                        <li>
+                            <a onclick="GA.pushMenuCategoria('contaCorrente','minhaConta','contaCorrente/minhaConta/termoTransferenciaSalarioContaCorrenteItau');"
+                               class
+                                   ="" href="javascript: executaConvivenciaMenu('L1TN5X3keZf2QUoJlUY17g==');"
+                               aria-label="">Termo de transfer&ecirc;ncia de sal&aacute;rio para conta corrente no Ita&uacute;</a>
+                        </li>
+
+
+                        <li>
+                            <a onclick="GA.pushMenuCategoria('contaCorrente','minhaConta','contaCorrente/minhaConta/duvidasSobreEncerramentodeContaAbertaAgencia');"
+                               cla
+                               ss="" href="javascript: executaConvivenciaMenu('X6mqKPXFwMH3LREblOgp1g==');"
+                               aria-label="">D&uacute;vidas sobre o encerramento&nbsp;de conta aberta na
+                                ag&ecirc;ncia</a>
+                        </li>
+
+
+                        <li>
+                            <a onclick="GA.pushMenuCategoria('contaCorrente','minhaConta','contaCorrente/minhaConta/duvidasSobreEncerramentodeContaAbertaPeloAplicativoA
+breconta');" class="" href="javascript: executaConvivenciaMenu('N0AVEnWxNChNT39Uj5q0wA==');" aria-label="">D&uacute;vidas
+                                sobre o encerramento&nbsp;de conta aberta pelo aplicativo abreconta</a>
+                        </li>
+
+
+                    </ul>
+
+
+                    <h4 title="App Ita&uacute;" menuMarcacao="menuMarcacao" class=" margem-cima15">App Ita&uacute;</h4>
+                    <div id="minhaConta-appItau">
+
+
+                        <ul>
+
+
+                            <li>
+                                <a onclick="GA.pushMenuCategoria('contaCorrente','minhaConta','contaCorrente/minhaConta/appItau/oQueE?');"
+                                   class="" href="javascript: executaConvivenciaMenu('GiKYkQTqZMJdBv24QuiXKg==');"
+                                   aria-label="">O que &eacute;?</a>
+                            </li>
+
+
+                        </ul>
+
+
+                    </div>
+
+
+                    <h4 title="Comunica&ccedil;&atilde;o digital Ita&uacute;" menuMarcacao="menuMarcacao"
+                        class=" margem-cima15">Comunica&ccedil;&atilde;o digital Ita&uacute;</h4>
+                    <div id="minhaConta-comunicacaoDigitalItau">
+
+
+                        <ul>
+
+
+                            <li>
+                                <a onclick="GA.pushMenuCategoria('contaCorrente','minhaConta','contaCorrente/minhaConta/comunicacaoDigitalItau/cadastrarAlterar');"
+                                   class="" href="javascript: executaConvivenciaMenu('w4yTXozNWVEpV7mUezCQNg==');"
+                                   aria-label="">Cadastrar ou alterar</a>
+                            </li>
+
+
+                            <li>
+                                <a onclick="GA.pushMenuCategoria('contaCorrente','minhaConta','contaCorrente/minhaConta/comunicacaoDigitalItau/cancelar');"
+                                   class="" href="javascript: executaConvivenciaMenu('4x0xQZdRtmQE6gY5NZL5og==');"
+                                   aria-label="">Cancelar</a>
+                            </li>
+
+
+                        </ul>
+
+
+                    </div>
+
+
+                </div>
+
+
+                <h3 title="Encerramento de conta" class="margem-cima15">Encerramento de conta</h3>
+                <div id="encerramentoConta">
+
+
+                    <ul>
+
+
+                        <li>
+                            <a onclick="GA.pushMenuCategoria('contaCorrente','encerramentoConta','contaCorrente/encerramentoConta/solicitarConsultar');"
+                               data-op='p9KL2dMBe/jJXQ26s/KnKG0Q2PpVRcq2jbLkd1e6wq0=;' class="" href="javascript:;"
+                               aria-label="">Solicitar ou consultar</a>
+
+
+                            <span class="item-menu-novo">novo</span>
+
+
+                        </li>
+
+
+                        <li>
+                            <a onclick="GA.pushMenuCategoria('contaCorrente','encerramentoConta','contaCorrente/encerramentoConta/cancelarSolicitacao');"
+                               data-op='ulKaqWUqTzYI66JsGv01+/NuijumjiNm50nlKE79qag=;' class="" href="javascript:;"
+                               aria-label="">Cancelar solicita&ccedil;&atilde;o</a>
+
+
+                            <span class="item-menu-novo">novo</span>
+
+
+                        </li>
+
+
+                    </ul>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+    </div>
+
+    <script type="text/javascript">
+
+        function executaLinkExterno(urlResolver) {
+            $.Ajax({
+                type: 'post',
+                async: true,
+                url: urlResolver,
+                success: function (data) {
+                    var div = "<div id='lightBoxLinksExternos'></div>";
+                    if (typeof $("#lightBoxLinksExternos")[0] == typeof undefined || $("#lightBoxLinksExternos")[0] == null) {
+                        $(div).prependTo("body");
+                    }
+                    $("#lightBoxLinksExternos").html(data);
+                }
+            });
+        }
+    </script>
+
+
+</div>
+
+
+
+

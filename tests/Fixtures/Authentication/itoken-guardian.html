@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<div class="row clearfix center">
+    <img src="https://estatico.itau.com.br/ibanking/commons/img/loading.gif" class="center"
+         alt="Carregando">
+    <p class="center margem-cima20 margem-esquerda20">Aguarde o
+        conte&uacute;do ser carregado</p>
+
+
+    <script type="text/javascript">
+        function block() {
+            var o = {};
+            o.load = function () {
+                loadPage("1Ryq1JvkcTz1cYwq+wAhrCRui3SGPc9nfkVHtywjuLQ=;");
+            };
+            return o;
+        }
+
+        var block = new block();
+        var controleLoopID = 0;
+
+        function token_pas() {
+            if ((controleLoopID > 20)
+                || ((typeof id != "undefined") && (id != ""))) {
+                block.load();
+            } else {
+                controleLoopID++;
+                requestAnimationFrame(token_pas);
+            }
+        }
+
+        token_pas();
+    </script>
+</div>

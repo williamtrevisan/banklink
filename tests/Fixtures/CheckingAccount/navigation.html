@@ -1,0 +1,97 @@
+<nav class="breadcrumbs text-left container itau-bootstrap" aria-label="Breadcrumb">
+    <ol>
+        <li><a title="Home" data-op="QpbgkAnfq3QJE3HKkQSzsp5tGRWd+nRpUPyAH2/PvIU=;home" href='javascript:;'>Home</a>
+        </li>
+        <li><span aria-current="page">conta corrente</span></li>
+    </ol>
+</nav>
+<div class="relative">
+    <h1 class="tituloContexto"></h1>
+    <div id="boxContaCorrenteCarrinhoPF"></div>
+</div>
+<div id="0K"></div>
+<div id="B5" data-tipo="informativo"></div>
+<div class="col12 row clearfix">
+</div>
+<section class="main">
+    <div class="row clearfix">
+        <div class="col12" role="main">
+
+
+            <div id='menuContexto'></div>
+
+            <script id='scriptmenuContexto' type="text/javascript">
+                var obterMenuContextomenuContexto = function () {
+                    $(".blockUI").remove();
+                    $.ajax({
+                        url : "vZ7I8OJYQ7XSGd9+tab64XT+GNV3xRF5r+OHrHO/FQU=;",
+                        dataType: "html",
+                        method: "POST",
+                        showLoading: false,
+                        data: {
+                            "contexto": "",
+                            "montarModulo": "",
+                            "mapaDoSite": ""
+                        },
+                        headers: {
+                            "ajaxRequest": true
+                        },
+                        success: function (data) {
+                            $('#menuContexto').replaceWith(data);
+                            $('html').removeClass("uiConfiguration-runed");
+                        }
+                    });
+                };
+
+                $(function () {
+                    obterMenuContextomenuContexto();
+                });
+            </script>
+
+
+            <div>
+                <div id="I7"></div>
+            </div>
+        </div>
+    </div>
+    <div id="B7"></div>
+</section>
+<div id="B8" data-tipo="popup"></div>
+
+<!-- end Conte&uacute;do Principal -->
+
+<!-- start JS -->
+<!-- end JS -->
+
+<!--*********************** Script de Chamada AVI/Messenger ***********************-->
+<input type="hidden" id="modulo" value="contacorrente"/>
+<input type="hidden" id="contexto" value="menucontacorrente">
+<script type="text/javascript">
+    (function () {
+        var url = $("input#chatBolacha").val();
+        var modulo = $("input#modulo").val();
+
+        if (typeof (callBolachaChat) == "function") {
+            callBolachaChat(modulo, url);
+        }
+    })();
+</script>
+<!--*********************** Script de Chamada AVI/Messenger ***********************-->
+
+<script>
+    BoxHelper.renderBox({
+        urlBox: "IugneCTSxKc11ICWwoQoOuQfksB5463iaCmRrL3CP7k=;",
+        seletorContainer: "#boxContaCorrenteCarrinhoPF",
+        tratarError: false,
+        data: {
+            isHome: false,
+            localExibicao: 'CONTA_CORRENTE_PF'
+        }
+    });
+
+    $(document).ready(function () {
+        sessionFixo = "ContaCorrente";
+        carregaDataLayerHome();
+    });
+
+</script>
