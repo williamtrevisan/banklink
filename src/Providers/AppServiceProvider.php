@@ -23,7 +23,7 @@ use Illuminate\Support\ServiceProvider;
 
 final class AppServiceProvider extends ServiceProvider
 {
-    public function boot(): void
+    public function register(): void
     {
         $this->app->scoped(InitializeAuthenticationSession::class);
         $this->app->scoped(LoadSecurityChallengeComponents::class);
@@ -40,6 +40,6 @@ final class AppServiceProvider extends ServiceProvider
         $this->app->scoped(CardsGetter::class);
 
         $this->app->scoped(Bank::class, fn ($app): Bank => new BankManager($app)->createBankDriver());
-        $this->app->scoped(Banklink::class, Banklink::class);
+        $this->app->scoped('banklink', Banklink::class);
     }
 }

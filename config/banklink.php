@@ -34,7 +34,6 @@ return [
             'account' => env('BANK_ACCOUNT'),
             'digit' => env('BANK_ACCOUNT_DIGIT'),
             'password' => env('BANK_PASSWORD'),
-            'holder' => env('BANK_HOLDER'),
         ],
     ],
 ];

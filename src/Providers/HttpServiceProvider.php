@@ -9,7 +9,7 @@ use Illuminate\Support\ServiceProvider;
 
 final class HttpServiceProvider extends ServiceProvider
 {
-    public function boot(): void
+    public function register(): void
     {
         Http::macro('itau', fn () => Http::baseUrl(config('banklink.banks.itau.base_url'))
             ->withHeaders([

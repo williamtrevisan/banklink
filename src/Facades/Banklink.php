@@ -15,6 +15,6 @@ final class Banklink extends Facade
 {
     protected static function getFacadeAccessor(): string
     {
-        return \Banklink\Banklink::class;
+        return 'banklink';
     }
 }

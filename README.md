@@ -37,7 +37,6 @@ BANK_AGENCY=your_agency
 BANK_ACCOUNT=your_account
 BANK_ACCOUNT_DIGIT=your_digit
 BANK_PASSWORD=your_password
-BANK_HOLDER=your_name
 ```
 
 ## Supported Banks

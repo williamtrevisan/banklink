@@ -17,7 +17,7 @@ use Illuminate\Support\ServiceProvider;
 
 final class RepositoryServiceProvider extends ServiceProvider
 {
-    public function boot(): void
+    public function register(): void
     {
         $this->app->singleton(AuthenticationRepository::class, fn (): AuthenticationHttpRepository => new AuthenticationHttpRepository(Http::itau()));
         $this->app->singleton(CardRepository::class, fn (): CardHttpRepository => new CardHttpRepository(Http::itau()));
