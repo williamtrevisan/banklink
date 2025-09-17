@@ -66,5 +66,15 @@
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Banklink\\Providers\\BanklinkServiceProvider"
+            ],
+            "aliases": {
+                "Banklink": "Banklink\\Facades\\Banklink"
+            }
+        }
+    }
 }
