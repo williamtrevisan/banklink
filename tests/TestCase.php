@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests;
 
-use Banklink\BanklinkServiceProvider;
+use Banklink\Providers\BanklinkServiceProvider;
 
 class TestCase extends \Orchestra\Testbench\TestCase
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Banklink;
+namespace Banklink\Banks;
 
 use Banklink\Contracts\Bank;
 use Illuminate\Config\Repository;

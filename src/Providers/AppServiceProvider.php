@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Banklink\Providers;
 
 use Banklink\Banklink;
-use Banklink\BankManager;
+use Banklink\Banks\BankManager;
 use Banklink\Banks\Itau\Actions\Authentication\InitializeAuthenticationSession;
 use Banklink\Banks\Itau\Actions\Authentication\LoadSecurityChallengeComponents;
 use Banklink\Banks\Itau\Actions\Authentication\ProcessITokenAuthentication;
