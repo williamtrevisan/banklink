@@ -6,9 +6,10 @@ namespace Banklink\Banks\Itau\Repositories;
 
 use Banklink\Banks\Itau\Entities\Transaction;
 use Banklink\Banks\Itau\Repositories\Contracts\CheckingAccountRepository;
-use Carbon\Carbon;
 use Illuminate\Http\Client\Factory;
 use Illuminate\Http\Client\PendingRequest;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 
 final readonly class CheckingAccountHttpRepository implements CheckingAccountRepository
 {
@@ -48,9 +49,9 @@ final readonly class CheckingAccountHttpRepository implements CheckingAccountRep
             ->body();
     }
 
-    public function transactionsFrom(Carbon $start, Carbon $end, string $operation): array
+    public function transactionsFrom(Carbon $start, Carbon $end, string $operation): Collection
     {
-        $transactions = $this->http
+        return $this->http
             ->replaceHeaders([
                 'op' => $operation,
             ])
@@ -59,11 +60,8 @@ final readonly class CheckingAccountHttpRepository implements CheckingAccountRep
                 'dataInicio' => $start,
                 'dataFinal' => $end,
             ])
-            ->json('lancamentos');
-
-        return array_map(
-            fn (array $transaction): Transaction => Transaction::fromCheckingAccountTransaction($transaction),
-            array_filter($transactions, fn (array $transaction): bool => ! is_null($transaction['dataLancamento']))
-        );
+            ->collect('lancamentos')
+            ->reject(fn (array $transaction): bool => is_null($transaction['dataLancamento']))
+            ->map(fn (array $transaction): Transaction => Transaction::fromCheckingAccountTransaction($transaction));
     }
 }

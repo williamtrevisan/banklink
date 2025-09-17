@@ -6,15 +6,16 @@ namespace Banklink\Accessors;
 
 use Banklink\Banks\Itau\Pipelines\CardsGetter;
 use Banklink\Entities\Card;
+use Illuminate\Support\Collection;
 
 final class CardsAccessor
 {
     /**
-     * @return Card[]
+     * @return Collection<int, Card>
      *
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    public function all(): array
+    public function all(): Collection
     {
         return app()->make(CardsGetter::class)
             ->get();
@@ -25,8 +26,13 @@ final class CardsAccessor
      */
     public function firstWhere(string $key, mixed $value): ?Card
     {
-        return array_first(
-            array_filter($this->all(), fn (Card $card): bool => $value === $card->{$key}())
-        );
+        return $this->all()
+            ->firstWhere(function (Card $card) use ($key, $value): bool {
+                if (! method_exists($card, $key)) {
+                    return false;
+                }
+
+                return $card->{$key}() === $value;
+            });
     }
 }

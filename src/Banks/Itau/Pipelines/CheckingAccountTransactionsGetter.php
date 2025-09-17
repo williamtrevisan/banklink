@@ -11,15 +11,16 @@ use Banklink\Banks\Itau\Actions\Account\GetCheckingAccountTransactions;
 use Banklink\Entities\Transaction;
 use Illuminate\Pipeline\Pipeline;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 
 final class CheckingAccountTransactionsGetter
 {
     /**
-     * @return Transaction[]
+     * @return Collection<int, Transaction>
      *
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    public function from(Carbon $start, Carbon $end): array
+    public function from(Carbon $start, Carbon $end): Collection
     {
         $transactionOperation = app(Pipeline::class)
             ->through([

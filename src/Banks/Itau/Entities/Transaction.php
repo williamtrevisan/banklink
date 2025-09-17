@@ -6,12 +6,13 @@ namespace Banklink\Banks\Itau\Entities;
 
 use Banklink\Entities;
 use Banklink\Support\Date;
-use DateTimeImmutable;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 
 final class Transaction extends Entities\Transaction
 {
     public function __construct(
-        private readonly DateTimeImmutable $date,
+        private readonly Carbon $date,
         private readonly string $description,
         private readonly string $amount,
         private readonly string $sign,
@@ -19,9 +20,9 @@ final class Transaction extends Entities\Transaction
         private readonly ?Installment $installments = null,
     ) {}
 
-    public static function fromCardTransaction(array $transactions): array
+    public static function fromCardTransaction(array $transactions): Collection
     {
-        return array_map(function (array $transaction): Transaction {
+        return collect($transactions)->map(function (array $transaction): Transaction {
             $hasInstallment = str($transaction['descricao'] ?? '')
                 ->match('/\(?\d{1,2}\/\d{1,2}\)?$/')
                 ->isNotEmpty();
@@ -35,15 +36,13 @@ final class Transaction extends Entities\Transaction
                     ? Installment::from($transaction)
                     : null,
             );
-        }, $transactions);
+        });
     }
 
     public static function fromCheckingAccountTransaction(array $transaction): static
     {
-        $date = DateTimeImmutable::createFromFormat('d/m/Y', $transaction['dataLancamento']);
-
         return new self(
-            date: $date ?: new DateTimeImmutable(),
+            date: Carbon::createFromFormat('d/m/Y', $transaction['dataLancamento']),
             description: $transaction['descricaoLancamento'] ?? '',
             amount: $transaction['valorLancamento'] ?? '',
             sign: $transaction['indicadorOperacao'] === 'credito' ? '+' : '-',
@@ -51,7 +50,7 @@ final class Transaction extends Entities\Transaction
         );
     }
 
-    public function date(): DateTimeImmutable
+    public function date(): Carbon
     {
         return $this->date;
     }

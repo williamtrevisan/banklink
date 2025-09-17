@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Banklink\Entities;
 
-use DateTimeImmutable;
+use Illuminate\Support\Carbon;
 
 abstract class Installment
 {
@@ -12,7 +12,7 @@ abstract class Installment
 
     abstract public function total(): int;
 
-    abstract public function dueDate(): DateTimeImmutable;
+    abstract public function dueDate(): Carbon;
 
     abstract public function amount(): string;
 }

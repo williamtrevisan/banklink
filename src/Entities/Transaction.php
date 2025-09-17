@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Banklink\Entities;
 
-use DateTimeImmutable;
+use Illuminate\Support\Carbon;
 
 abstract class Transaction
 {
-    abstract public function date(): DateTimeImmutable;
+    abstract public function date(): Carbon;
 
     abstract public function description(): string;
 

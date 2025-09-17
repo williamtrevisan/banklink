@@ -7,20 +7,20 @@ namespace Banklink\Banks\Itau\Entities;
 use Banklink\Banks\Itau\Actions\Card\GetCardStatements;
 use Banklink\Entities;
 use Banklink\Enums\StatementStatus;
-use DateInterval;
-use DateTimeImmutable;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 
 final class CardStatement extends Entities\CardStatement
 {
     public function __construct(
         private readonly string $cardId,
         private readonly StatementStatus $status,
-        private readonly DateTimeImmutable $dueDate,
-        private readonly ?DateTimeImmutable $closingDate,
+        private readonly Carbon $dueDate,
+        private readonly ?Carbon $closingDate,
         private readonly string $amount,
         private readonly string $period,
-        /** @var Holder[] */
-        private readonly array $holders,
+        /** @var Collection<int, Holder> */
+        private readonly Collection $holders,
     ) {}
 
     public static function from(string $cardId, array $statement): static
@@ -28,21 +28,17 @@ final class CardStatement extends Entities\CardStatement
         return new self(
             cardId: $cardId,
             status: str_contains((string) $statement['status'], 'fechada') ? StatementStatus::Closed : StatementStatus::Open,
-            dueDate: DateTimeImmutable::createFromFormat('Y-m-d', $statement['dataVencimento']) ?: new DateTimeImmutable(),
+            dueDate: Carbon::createFromFormat('Y-m-d', $statement['dataVencimento']) ?: Carbon::now(),
             closingDate: isset($statement['dataFechamentoFatura'])
-                ? DateTimeImmutable::createFromFormat('Y-m-d', $statement['dataFechamentoFatura']) ?: null
+                ? Carbon::createFromFormat('Y-m-d', $statement['dataFechamentoFatura']) ?: null
                 : null,
             amount: $statement['valorAberto'] ?? '',
-            period: (DateTimeImmutable::createFromFormat('Y-m-d', $statement['dataVencimento']) ?: new DateTimeImmutable())
-                ->sub(new DateInterval('P1M'))
+            period: (Carbon::createFromFormat('Y-m-d', $statement['dataVencimento']) ?: Carbon::now())
+                ->subMonth()
                 ->format('Y-m'),
-            holders: array_map(
-                fn ($holderData): Holder => Holder::from($holderData),
-                array_merge(
-                    $statement['lancamentosNacionais']['titularidades'] ?? [],
-                    $statement['comprasParceladas']['titularidades'] ?? [],
-                )
-            ),
+            holders: collect($statement['lancamentosNacionais']['titularidades'] ?? [])
+                ->merge($statement['comprasParceladas']['titularidades'] ?? [])
+                ->map(fn ($holderData): Holder => Holder::from($holderData)),
         );
     }
 
@@ -56,12 +52,12 @@ final class CardStatement extends Entities\CardStatement
         return $this->status;
     }
 
-    public function dueDate(): DateTimeImmutable
+    public function dueDate(): Carbon
     {
         return $this->dueDate;
     }
 
-    public function closingDate(): ?DateTimeImmutable
+    public function closingDate(): ?Carbon
     {
         return $this->closingDate;
     }
@@ -76,28 +72,29 @@ final class CardStatement extends Entities\CardStatement
         return $this->period;
     }
 
-    /** @return Holder[] */
-    public function holders(): array
+    /** @return Collection<int, Holder> */
+    public function holders(): Collection
     {
         return $this->holders;
     }
 
     /**
-     * @return CardStatement[]
+     * @return Collection<int, CardStatement>
      *
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    public function all(): array
+    public function all(): Collection
     {
-        return app()->make(GetCardStatements::class)
-            ->byCardId($this->cardId);
+        return collect(app()->make(GetCardStatements::class)
+            ->byCardId($this->cardId));
     }
 
     /**
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    public function byPeriod(string $period): array
+    public function byPeriod(string $period): Collection
     {
-        return array_filter($this->all(), fn (CardStatement $statement): bool => $statement->period() === $period);
+        return $this->all()
+            ->where(fn (CardStatement $statement) => $statement->period() === $period);
     }
 }

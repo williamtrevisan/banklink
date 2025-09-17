@@ -6,14 +6,14 @@ namespace Banklink\Banks\Itau\Entities;
 
 use Banklink\Entities;
 use Banklink\Support\Date;
-use DateTimeImmutable;
+use Illuminate\Support\Carbon;
 
 final class Installment extends Entities\Installment
 {
     public function __construct(
         private readonly int $current,
         private readonly int $total,
-        private readonly DateTimeImmutable $dueDate,
+        private readonly Carbon $dueDate,
         private readonly string $amount,
     ) {}
 
@@ -45,7 +45,7 @@ final class Installment extends Entities\Installment
         return $this->total;
     }
 
-    public function dueDate(): DateTimeImmutable
+    public function dueDate(): Carbon
     {
         return $this->dueDate;
     }

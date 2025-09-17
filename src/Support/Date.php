@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Banklink\Support;
 
-use DateTimeImmutable;
+use Illuminate\Support\Carbon;
 
 final class Date
 {
-    public static function normalizePtBrDate(string $date, int $year): DateTimeImmutable
+    public static function normalizePtBrDate(string $date, int $year): Carbon
     {
         $months = [
             'janeiro',
@@ -27,12 +27,12 @@ final class Date
 
         if (preg_match('/(\d{1,2})\s*\/\s*([a-zç]+)/iu', $date, $matches)) {
             [$_, $day, $month] = $matches;
-            $month = array_search($month, $months, true) ?? array_first($months);
+            $month = collect($months)->search($month) ?: collect($months)->first();
             $month = ++$month;
 
-            return DateTimeImmutable::createFromFormat('Y-m-d', "$year-$month-$day");
+            return Carbon::createFromFormat('Y-m-d', "$year-$month-$day");
         }
 
-        return DateTimeImmutable::createFromFormat('Y-m-d', $date);
+        return Carbon::createFromFormat('Y-m-d', $date);
     }
 }

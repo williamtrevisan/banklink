@@ -18,6 +18,7 @@ use Banklink\Contracts\Bank;
 use Banklink\Entities;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 
 beforeEach(function (): void {
     $headers = json_decode(file_get_contents('tests/Fixtures/Authentication/pre-login-headers.json'), true);
@@ -129,16 +130,15 @@ describe('transactions accessor', function (): void {
             ->andReturn(file_get_contents('tests/Fixtures/CheckingAccount/statements.html'));
         $checkingAccountRepository
             ->expects('transactionsFrom')
-            ->andReturnUsing(function (): array {
+            ->andReturnUsing(function (): Collection {
                 $contents = file_get_contents('tests/Fixtures/CheckingAccount/statement.json');
 
                 $statement = json_decode($contents, true);
                 $transactions = $statement['lancamentos'];
 
-                return array_map(
-                    fn (array $transaction): Transaction => Transaction::fromCheckingAccountTransaction($transaction),
-                    array_filter($transactions, fn (array $transaction): bool => ! is_null($transaction['dataLancamento'])),
-                );
+                return collect($transactions)
+                    ->reject(fn (array $transaction): bool => is_null($transaction['dataLancamento']))
+                    ->map(fn (array $transaction): Transaction => Transaction::fromCheckingAccountTransaction($transaction));
             });
 
         $transactions = app()->make(Bank::class)
@@ -148,7 +148,7 @@ describe('transactions accessor', function (): void {
             ->between(Carbon::parse('2025-05-25'), Carbon::parse('2025-06-24'));
 
         expect($transactions)
-            ->toBeArray()
+            ->toBeInstanceOf(Collection::class)
             ->toHaveCount(29)
             ->each->toBeInstanceOf(Transaction::class);
     });
@@ -173,10 +173,8 @@ describe('cards accessor', function (): void {
         $cardRepository
             ->expects('all')
             ->andReturn(
-                array_map(
-                    fn (array $card): Card => Card::from($card),
-                    json_decode(file_get_contents('tests/Fixtures/Card/cards.json'), true),
-                )
+                collect(json_decode(file_get_contents('tests/Fixtures/Card/cards.json'), true))
+                    ->map(fn (array $card): Card => Card::from($card))
             );
 
         $cards = app()->make(Bank::class)
@@ -186,7 +184,7 @@ describe('cards accessor', function (): void {
             ->all();
 
         expect($cards)
-            ->toBeArray()
+            ->toBeInstanceOf(Collection::class)
             ->each->toBeInstanceOf(Entities\Card::class)
             ->and(session()->has('card_statement_operation'))->toBeTrue()
             ->and(session()->has('card_operation'))->toBeTrue();
@@ -200,10 +198,8 @@ describe('cards accessor', function (): void {
         $cardRepository
             ->expects('all')
             ->andReturn(
-                array_map(
-                    fn (array $card): Card => Card::from($card),
-                    json_decode(file_get_contents('tests/Fixtures/Card/cards.json'), true),
-                )
+                collect(json_decode(file_get_contents('tests/Fixtures/Card/cards.json'), true))
+                    ->map(fn (array $card): Card => Card::from($card))
             );
 
         $cards = app()->make(Bank::class)
@@ -228,10 +224,8 @@ describe('statements accessor', function (): void {
         $cardRepository
             ->expects('all')
             ->andReturn(
-                array_map(
-                    fn (array $card): Card => Card::from($card),
-                    json_decode(file_get_contents('tests/Fixtures/Card/cards.json'), true),
-                )
+                collect(json_decode(file_get_contents('tests/Fixtures/Card/cards.json'), true))
+                    ->map(fn (array $card): Card => Card::from($card))
             );
 
         $statements = app()->make(Bank::class)
@@ -253,23 +247,19 @@ describe('statements accessor', function (): void {
         $cardRepository
             ->expects('all')
             ->andReturn(
-                array_map(
-                    fn (array $card): Card => Card::from($card),
-                    json_decode(file_get_contents('tests/Fixtures/Card/cards.json'), true),
-                )
+                collect(json_decode(file_get_contents('tests/Fixtures/Card/cards.json'), true))
+                    ->map(fn (array $card): Card => Card::from($card))
             );
         $cardRepository
             ->expects('statementBy')
-            ->andReturnUsing(function (): array {
+            ->andReturnUsing(function (): Collection {
                 $contents = file_get_contents('tests/Fixtures/Card/statements.json');
 
                 $statements = json_decode($contents, true)['object'];
                 $cardId = $statements['id'];
 
-                return array_map(
-                    fn (array $statement): CardStatement => CardStatement::from($cardId, $statement),
-                    $statements['faturas'],
-                );
+                return collect($statements['faturas'])
+                    ->map(fn (array $statement): CardStatement => CardStatement::from($cardId, $statement));
             });
 
         $statements = app()->make(Bank::class)
@@ -281,7 +271,7 @@ describe('statements accessor', function (): void {
             ->all();
 
         expect($statements)
-            ->toBeArray()
+            ->toBeInstanceOf(Collection::class)
             ->toHaveCount(8)
             ->each->toBeInstanceOf(Entities\CardStatement::class);
     });
@@ -294,23 +284,19 @@ describe('statements accessor', function (): void {
         $cardRepository
             ->expects('all')
             ->andReturn(
-                array_map(
-                    fn (array $card): Card => Card::from($card),
-                    json_decode(file_get_contents('tests/Fixtures/Card/cards.json'), true),
-                )
+                collect(json_decode(file_get_contents('tests/Fixtures/Card/cards.json'), true))
+                    ->map(fn (array $card): Card => Card::from($card))
             );
         $cardRepository
             ->expects('statementBy')
-            ->andReturnUsing(function (): array {
+            ->andReturnUsing(function (): Collection {
                 $contents = file_get_contents('tests/Fixtures/Card/statements.json');
 
                 $statements = json_decode($contents, true)['object'];
                 $cardId = $statements['id'];
 
-                return array_map(
-                    fn (array $statement): CardStatement => CardStatement::from($cardId, $statement),
-                    $statements['faturas'],
-                );
+                return collect($statements['faturas'])
+                    ->map(fn (array $statement): CardStatement => CardStatement::from($cardId, $statement));
             });
 
         $statements = app()->make(Bank::class)
@@ -322,7 +308,7 @@ describe('statements accessor', function (): void {
             ->byPeriod('2025-05');
 
         expect($statements)
-            ->toBeArray()
+            ->toBeInstanceOf(Collection::class)
             ->toHaveCount(1)
             ->each->toBeInstanceOf(Entities\CardStatement::class);
     });

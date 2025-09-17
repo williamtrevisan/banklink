@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Banklink\Entities;
 
+use Illuminate\Support\Collection;
+
 abstract class Holder
 {
     abstract public function name(): string;
@@ -12,6 +14,6 @@ abstract class Holder
 
     abstract public function amount(): string;
 
-    /** @return Transaction[] */
-    abstract public function transactions(): array;
+    /** @return Collection<int, Transaction> */
+    abstract public function transactions(): Collection;
 }

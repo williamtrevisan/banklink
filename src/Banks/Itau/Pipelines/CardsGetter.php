@@ -8,13 +8,14 @@ use Banklink\Banks\Itau\Actions\Card\GetAllCards;
 use Banklink\Banks\Itau\Actions\Card\GetCardDetails;
 use Banklink\Entities\Card;
 use Illuminate\Pipeline\Pipeline;
+use Illuminate\Support\Collection;
 
 final class CardsGetter
 {
     /**
-     * @return Card[]
+     * @return Collection<int, Card>
      */
-    public function get(): array
+    public function get(): Collection
     {
         return app(Pipeline::class)
             ->through([

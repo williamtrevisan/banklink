@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Banklink\Support;
 
 use Symfony\Component\DomCrawler\Crawler;
+use Illuminate\Support\Collection;
 
 final readonly class PageParser
 {
@@ -20,13 +21,13 @@ final readonly class PageParser
         return tap($this, fn () => $this->crawler->add($html));
     }
 
-    public function elements(string $selector): array
+    public function elements(string $selector): Collection
     {
-        $elements = [];
+        $elements = collect();
 
         $this->crawler
             ->filter($selector)
-            ->each(fn ($node): int => array_push($elements, $node));
+            ->each(fn ($node) => $elements->push($node));
 
         return $elements;
     }

@@ -7,6 +7,7 @@ namespace Banklink\Banks\Itau\Actions\Authentication;
 use Banklink\Banks\Itau\Repositories\Contracts\AuthenticationRepository;
 use Banklink\Support\PageParser;
 use Closure;
+use Illuminate\Support\Collection;
 
 final readonly class ProcessPasswordAuthentication
 {
@@ -51,14 +52,11 @@ final readonly class ProcessPasswordAuthentication
         return $letterPassword;
     }
 
-    private function letters(PageParser $pageParser): array
+    private function letters(PageParser $pageParser): Collection
     {
-        return array_reduce(
-            array_filter(
-                $pageParser->elements('.campoTeclado'),
-                fn (\Symfony\Component\DomCrawler\Crawler $node): bool => $node->attr('aria-label') && $node->attr('rel'),
-            ),
-            function (array $mapper, $node): array {
+        return $pageParser->elements('.campoTeclado')
+            ->filter(fn (\Symfony\Component\DomCrawler\Crawler $node): bool => $node->attr('aria-label') && $node->attr('rel'))
+            ->reduce(function (Collection $mapper, $node): Collection {
                 $letter = str_replace('tecla_', '', $node->attr('rel'));
                 $numbers = explode(' ou ', (string) $node->attr('aria-label'));
 
@@ -67,8 +65,6 @@ final readonly class ProcessPasswordAuthentication
                 }
 
                 return $mapper;
-            },
-            initial: [],
-        );
+            }, collect());
     }
 }

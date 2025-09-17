@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Banklink\Banks\Itau\Repositories\Contracts;
 
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 
 interface CheckingAccountRepository
 {
@@ -14,5 +15,5 @@ interface CheckingAccountRepository
 
     public function statements(string $operation): string;
 
-    public function transactionsFrom(Carbon $start, Carbon $end, string $operation): array;
+    public function transactionsFrom(Carbon $start, Carbon $end, string $operation): Collection;
 }

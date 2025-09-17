@@ -9,6 +9,7 @@ use Banklink\Banks\Itau\Entities\CardStatement;
 use Banklink\Banks\Itau\Repositories\Contracts\CardRepository;
 use Illuminate\Http\Client\Factory;
 use Illuminate\Http\Client\PendingRequest;
+use Illuminate\Support\Collection;
 
 final readonly class CardHttpRepository implements CardRepository
 {
@@ -28,9 +29,9 @@ final readonly class CardHttpRepository implements CardRepository
             ->body();
     }
 
-    public function all(): array
+    public function all(): Collection
     {
-        $data = $this->http
+        return $this->http
             ->replaceHeaders([
                 'op' => session()->pull('card_operation'),
             ])
@@ -38,20 +39,18 @@ final readonly class CardHttpRepository implements CardRepository
                 'secao' => 'Cartoes',
                 'item' => 'Home',
             ])
-            ->json('object.data');
-
-        return array_map(fn (array $card): Card => Card::from($card), $data);
+            ->collect('object.data')
+            ->map(fn (array $card): Card => Card::from($card));
     }
 
-    public function statementBy(string $cardId): array
+    public function statementBy(string $cardId): Collection
     {
-        $data = $this->http
+        return $this->http
             ->replaceHeaders([
                 'op' => session()->pull('card_statement_operation'),
             ])
             ->post('/router-app/router', $cardId)
-            ->json('object.faturas');
-
-        return array_map(fn (array $statement): CardStatement => CardStatement::from($cardId, $statement), $data);
+            ->collect('object.faturas')
+            ->map(fn (array $statement): CardStatement => CardStatement::from($cardId, $statement));
     }
 }
