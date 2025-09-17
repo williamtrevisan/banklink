@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace Banklink\Banks\Itau\Repositories;
 
+use Banklink\Banks\Itau\Repositories\Contracts\MenuRepository;
 use Illuminate\Http\Client\Factory;
 use Illuminate\Http\Client\PendingRequest;
 
-final readonly class MenuHttpRepository
+final readonly class MenuHttpRepository implements MenuRepository
 {
     public function __construct(
         private Factory|PendingRequest $http,
