@@ -57,8 +57,8 @@ final readonly class CheckingAccountHttpRepository implements CheckingAccountRep
             ])
             ->asForm()
             ->post('/router-app/router', [
-                'dataInicio' => $start,
-                'dataFinal' => $end,
+                'dataInicio' => $start->format('d-m-Y'),
+                'dataFinal' => $end->format('d-m-Y'),
             ])
             ->collect('lancamentos')
             ->reject(fn (array $transaction): bool => is_null($transaction['dataLancamento']))
