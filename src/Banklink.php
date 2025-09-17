@@ -8,10 +8,12 @@ use Banklink\Contracts\Bank;
 
 final readonly class Banklink
 {
-    public function __construct(private Bank $bank) {}
-
-    public function authenticate(): Bank
+    public function __construct(private Bank $bank)
     {
-        return $this->bank->authenticate();
+    }
+
+    public function authenticate(string $token): Bank
+    {
+        return $this->bank->authenticate($token);
     }
 }
