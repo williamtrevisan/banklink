@@ -23,7 +23,7 @@ final readonly class AuthenticationHttpRepository implements AuthenticationRepos
                 'tipoLogon' => '7',
                 'usuario.agencia' => config()->get('banklink.banks.itau.agency'),
                 'usuario.conta' => config()->get('banklink.banks.itau.account'),
-                'usuario.dac' => config()->get('banklink.banks.itau.digit'),
+                'usuario.dac' => config()->get('banklink.banks.itau.account_digit'),
                 'destino' => '',
             ]);
     }

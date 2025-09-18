@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Banklink\Support;
 
-use Symfony\Component\DomCrawler\Crawler;
 use Illuminate\Support\Collection;
+use Symfony\Component\DomCrawler\Crawler;
 
 final readonly class PageParser
 {

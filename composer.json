@@ -12,6 +12,7 @@
     ],
     "require": {
         "php": "^8.4",
+        "brick/money": "^0.10.3",
         "illuminate/contracts": "^12.0",
         "symfony/dom-crawler": "^7.3"
     },
@@ -30,7 +31,8 @@
             "Banklink\\": "src/"
         },
         "files": [
-            "src/Banklink.php"
+            "src/Banklink.php",
+            "src/Support/helpers.php"
         ]
     },
     "autoload-dev": {

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Banklink\Banks\Itau\Entities;
 
 use Banklink\Entities;
-use Banklink\Support\Date;
+use Brick\Money\Money;
 use Illuminate\Support\Carbon;
 
 final class Installment extends Entities\Installment
@@ -14,14 +14,13 @@ final class Installment extends Entities\Installment
         private readonly int $current,
         private readonly int $total,
         private readonly Carbon $dueDate,
-        private readonly string $amount,
+        private readonly Money $amount,
     ) {}
 
     public static function from(array $transaction): static
     {
         [$description] = str($transaction['descricao'])
             ->split('/\(?\d{1,2}\/\d{1,2}\)?$/', 2);
-
         [$current, $total] = str($transaction['descricao'])
             ->after($description)
             ->trim('()')
@@ -30,8 +29,12 @@ final class Installment extends Entities\Installment
         return new self(
             current: (int) $current,
             total: (int) $total,
-            dueDate: Date::normalizePtBrDate($transaction['data'], now()->year),
-            amount: $transaction['valor'] ?? ''
+            dueDate: rescue(
+                fn (): Carbon => Carbon::parse($transaction['data']),
+                fn (): ?Carbon => Carbon::createFromLocaleFormat('d / F', 'pt_BR', $transaction['data']),
+                report: false,
+            ),
+            amount: money()->of($transaction['valor']),
         );
     }
 

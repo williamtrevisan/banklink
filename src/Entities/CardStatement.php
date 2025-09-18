@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Banklink\Entities;
 
 use Banklink\Enums\StatementStatus;
+use Brick\Money\Money;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 
@@ -26,7 +27,7 @@ abstract class CardStatement
 
     abstract public function closingDate(): ?Carbon;
 
-    abstract public function amount(): string;
+    abstract public function amount(): Money;
 
     abstract public function period(): string;
 

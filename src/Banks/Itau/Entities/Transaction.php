@@ -5,49 +5,67 @@ declare(strict_types=1);
 namespace Banklink\Banks\Itau\Entities;
 
 use Banklink\Entities;
-use Banklink\Support\Date;
+use Banklink\Enums\TransactionDirection;
+use Banklink\Enums\TransactionKind;
+use Banklink\Enums\TransactionPaymentMethod;
+use Banklink\Enums\TransactionType;
+use Brick\Money\Money;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Collection;
 
 final class Transaction extends Entities\Transaction
 {
     public function __construct(
         private readonly Carbon $date,
         private readonly string $description,
-        private readonly string $amount,
-        private readonly string $sign,
-        private readonly string $paymentMethod = 'credit',
+        private readonly Money $amount,
+        private readonly TransactionDirection $direction,
+        private TransactionKind $kind = TransactionKind::Purchase,
+        private readonly TransactionPaymentMethod $paymentMethod = TransactionPaymentMethod::Credit,
         private readonly ?Installment $installments = null,
     ) {}
 
-    public static function fromCardTransaction(array $transactions): Collection
+    public static function fromCardTransaction(array $transaction): static
     {
-        return collect($transactions)->map(function (array $transaction): Transaction {
-            $hasInstallment = str($transaction['descricao'] ?? '')
-                ->match('/\(?\d{1,2}\/\d{1,2}\)?$/')
-                ->isNotEmpty();
+        $description = str($transaction['descricao'])
+            ->deduplicate()
+            ->value();
 
-            return new self(
-                date: Date::normalizePtBrDate($transaction['data'], now()->year),
-                description: $transaction['descricao'] ?? '',
-                amount: $transaction['valor'] ?? '',
-                sign: $transaction['sinalValor'] ?? '',
-                installments: $hasInstallment
-                    ? Installment::from($transaction)
-                    : null,
-            );
+        $transaction = new self(
+            date: rescue(
+                fn (): Carbon => Carbon::parse($transaction['data']),
+                fn (): ?\Illuminate\Support\Carbon => Carbon::createFromLocaleFormat('d / F', 'pt_BR', $transaction['data']),
+                report: false,
+            ),
+            description: $description,
+            amount: money()->of($transaction['valor']),
+            direction: TransactionDirection::fromSign($transaction['sinalValor'] === '-'),
+            installments: str($description)->match('/\(?\d{1,2}\/\d{1,2}\)?$/')->isNotEmpty()
+                ? Installment::from($transaction)
+                : null,
+        );
+
+        return tap($transaction, function (Transaction $transaction): static {
+            $transaction->kind = TransactionKind::fromTransaction($transaction, transactionType: TransactionType::Card);
+
+            return $transaction;
         });
     }
 
     public static function fromCheckingAccountTransaction(array $transaction): static
     {
-        return new self(
+        $transaction = new self(
             date: Carbon::createFromFormat('d/m/Y', $transaction['dataLancamento']),
-            description: $transaction['descricaoLancamento'] ?? '',
-            amount: $transaction['valorLancamento'] ?? '',
-            sign: $transaction['indicadorOperacao'] === 'credito' ? '+' : '-',
-            paymentMethod: $transaction['indicadorOperacao'] ?? 'debit',
+            description: $transaction['descricaoLancamento'],
+            amount: money()->of($transaction['valorLancamento']),
+            direction: TransactionDirection::fromSign($transaction['ePositivo']),
+            paymentMethod: TransactionPaymentMethod::fromOperation($transaction['indicadorOperacao']),
         );
+
+        return tap($transaction, function (Transaction $transaction): static {
+            $transaction->kind = TransactionKind::fromTransaction($transaction, transactionType: TransactionType::CheckingAccount);
+
+            return $transaction;
+        });
     }
 
     public function date(): Carbon
@@ -60,17 +78,22 @@ final class Transaction extends Entities\Transaction
         return $this->description;
     }
 
-    public function amount(): string
+    public function amount(): Money
     {
         return $this->amount;
     }
 
-    public function sign(): string
+    public function direction(): TransactionDirection
     {
-        return $this->sign;
+        return $this->direction;
     }
 
-    public function paymentMethod(): string
+    public function kind(): TransactionKind
+    {
+        return $this->kind;
+    }
+
+    public function paymentMethod(): TransactionPaymentMethod
     {
         return $this->paymentMethod;
     }
@@ -78,5 +101,20 @@ final class Transaction extends Entities\Transaction
     public function installments(): ?Installment
     {
         return $this->installments;
+    }
+
+    public function isRefund(TransactionType $from): bool
+    {
+        if ($from->isCheckingAccount()) {
+            return session()->get('checking_account_transactions')
+                ->some(fn (array $transaction): bool => str_contains((string) $transaction['descricaoLancamento'], $this->description)
+                    && $transaction['valorLancamento'] === $this->amount
+                    && $transaction['ePositivo'] === true);
+        }
+
+        return session()->get('card_transactions')
+            ->some(fn (array $transaction): bool => str_contains((string) $transaction['descricao'], $this->description)
+                && $transaction['valor'] === $this->amount
+                && $transaction['sinalValor'] === '-');
     }
 }

@@ -5,25 +5,25 @@ declare(strict_types=1);
 return [
     /*
     |--------------------------------------------------------------------------
-    | Default Bank Driver
+    | Default bank
     |--------------------------------------------------------------------------
     |
-    | This option controls the default bank "driver" that will be used when
-    | using the Banklink service. You may set this to any of the drivers
-    | defined in the "banks" array below.
+    | Defines which bank configuration should be used by default when
+    | performing fetch operations. The value must match one of the
+    | entries listed in the "banks" section below.
     |
     */
 
-    'default' => env('BANK_DRIVER', 'itau'),
+    'bank' => env('BANK', 'itau'),
 
     /*
     |--------------------------------------------------------------------------
-    | Bank Drivers
+    | Banks
     |--------------------------------------------------------------------------
     |
-    | Here you may configure as many bank drivers as you wish, and you
-    | may even configure multiple drivers of the same bank. Defaults have
-    | been setup for each driver as an example of the required options.
+    | Here you may define all of the banks available for fetch operations.
+    | Example configurations are provided, and you are free to add or
+    | remove entries as needed for your environment.
     |
     */
 
@@ -32,8 +32,44 @@ return [
             'base_url' => env('BANK_BASE_URL', 'https://internetpf5.itau.com.br'),
             'agency' => env('BANK_AGENCY'),
             'account' => env('BANK_ACCOUNT'),
-            'digit' => env('BANK_ACCOUNT_DIGIT'),
+            'account_digit' => env('BANK_ACCOUNT_DIGIT'),
             'password' => env('BANK_PASSWORD'),
+
+            /*
+            |--------------------------------------------------------------------------
+            | Transaction classification patterns
+            |--------------------------------------------------------------------------
+            |
+            | Here you may define regex patterns used to classify transactions based
+            | on the raw description text returned by each bank. Each transaction
+            | kind maps to one or more patterns, and the first match determines
+            | how the transaction will be classified.
+            |
+            */
+
+            'cashback' => [
+                'patterns' => [],
+            ],
+
+            'fee' => [
+                'patterns' => [],
+            ],
+
+            'invoice_payment' => [
+                'patterns' => [],
+            ],
         ],
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Default currency
+    |--------------------------------------------------------------------------
+    |
+    | Defines the default currency for monetary values in your application.
+    | Used by the Money value object unless explicitly overridden.
+    |
+    */
+
+    'currency' => env('BANKLINK_CURRENCY', 'BRL'),
 ];

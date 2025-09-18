@@ -61,6 +61,7 @@ final readonly class CheckingAccountHttpRepository implements CheckingAccountRep
                 'dataFinal' => $end->format('d-m-Y'),
             ])
             ->collect('lancamentos')
+            ->tap(fn (Collection $transactions) => session()->put('checking_account_transactions', $transactions))
             ->reject(fn (array $transaction): bool => is_null($transaction['dataLancamento']))
             ->map(fn (array $transaction): Transaction => Transaction::fromCheckingAccountTransaction($transaction));
     }

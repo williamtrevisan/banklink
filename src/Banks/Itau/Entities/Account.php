@@ -22,7 +22,7 @@ final class Account extends Entities\Account
         return new self(
             agency: $config['agency'],
             number: $config['account'],
-            digit: $config['digit'],
+            digit: $config['account_digit'],
         );
     }
 

@@ -8,9 +8,7 @@ use Banklink\Contracts\Bank;
 
 final readonly class Banklink
 {
-    public function __construct(private Bank $bank)
-    {
-    }
+    public function __construct(private Bank $bank) {}
 
     public function authenticate(string $token): Bank
     {

@@ -32,7 +32,7 @@ final class CardsAccessor
                     return false;
                 }
 
-                return $card->{$key}() === $value;
+                return $value === $card->{$key}();
             });
     }
 }

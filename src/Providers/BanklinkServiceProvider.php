@@ -11,13 +11,13 @@ final class BanklinkServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->publishes([
-            __DIR__ . '/../../config/banklink.php' => config_path('banklink.php'),
+            __DIR__.'/../../config/banklink.php' => config_path('banklink.php'),
         ], 'banklink-config');
     }
 
     public function register(): void
     {
-        $this->mergeConfigFrom(__DIR__ . '/../../config/banklink.php', 'banklink');
+        $this->mergeConfigFrom(__DIR__.'/../../config/banklink.php', 'banklink');
 
         $this->app->register(HttpServiceProvider::class);
         $this->app->register(RepositoryServiceProvider::class);

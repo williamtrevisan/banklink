@@ -21,7 +21,7 @@ final readonly class BankManager
 
     public function driver(): string
     {
-        return $this->config->get('banklink.default', '');
+        return $this->config->get('banklink.bank', '');
     }
 
     public function createBankDriver(): Bank

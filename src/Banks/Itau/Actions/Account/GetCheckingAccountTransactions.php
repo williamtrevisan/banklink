@@ -6,7 +6,6 @@ namespace Banklink\Banks\Itau\Actions\Account;
 
 use Banklink\Banks\Itau\Entities\Transaction;
 use Banklink\Banks\Itau\Repositories\Contracts\CheckingAccountRepository;
-use DateTimeImmutable;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 

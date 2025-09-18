@@ -80,7 +80,7 @@ beforeEach(function (): void {
 
     config()->set('banklink.banks.itau.agency', '9999');
     config()->set('banklink.banks.itau.account', '99999');
-    config()->set('banklink.banks.itau.digit', '9');
+    config()->set('banklink.banks.itau.account_digit', '9');
 });
 
 it('can authenticate', function (): void {
@@ -137,6 +137,7 @@ describe('transactions accessor', function (): void {
                 $transactions = $statement['lancamentos'];
 
                 return collect($transactions)
+                    ->tap(fn (Collection $transactions) => session()->put('checking_account_transactions', $transactions))
                     ->reject(fn (array $transaction): bool => is_null($transaction['dataLancamento']))
                     ->map(fn (array $transaction): Transaction => Transaction::fromCheckingAccountTransaction($transaction));
             });
@@ -305,7 +306,7 @@ describe('statements accessor', function (): void {
             ->cards()
             ->firstWhere('name', 'UNICLASS BLACK CASHBACK')
             ->statements()
-            ->byPeriod('2025-05');
+            ->byPeriod('2025-06');
 
         expect($statements)
             ->toBeInstanceOf(Collection::class)
