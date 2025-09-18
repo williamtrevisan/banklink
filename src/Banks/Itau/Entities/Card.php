@@ -6,6 +6,7 @@ namespace Banklink\Banks\Itau\Entities;
 
 use Banklink\Accessors\StatementsAccessor;
 use Banklink\Entities;
+use Banklink\Enums\CardBrand;
 
 final class Card extends Entities\Card
 {
@@ -13,7 +14,7 @@ final class Card extends Entities\Card
         private readonly string $id,
         private readonly string $name,
         private readonly string $lastFourDigits,
-        private readonly string $brand,
+        private readonly CardBrand $brand,
         private readonly CardLimit $limit,
         private readonly CardStatement $statement,
     ) {}
@@ -26,7 +27,7 @@ final class Card extends Entities\Card
             id: $card['id'],
             name: $card['nome'],
             lastFourDigits: $card['numero'],
-            brand: $card['bandeira'] ?? '',
+            brand: CardBrand::from(str($card['bandeira'])->lower()->value()),
             limit: CardLimit::from($card['limites']),
             statement: CardStatement::from($card['id'], $statement),
         );
@@ -47,7 +48,7 @@ final class Card extends Entities\Card
         return $this->lastFourDigits;
     }
 
-    public function brand(): string
+    public function brand(): CardBrand
     {
         return $this->brand;
     }

@@ -306,7 +306,7 @@ describe('statements accessor', function (): void {
             ->cards()
             ->firstWhere('name', 'UNICLASS BLACK CASHBACK')
             ->statements()
-            ->byPeriod('2025-06');
+            ->byPeriod(Entities\StatementPeriod::fromString('2025-06'));
 
         expect($statements)
             ->toBeInstanceOf(Collection::class)

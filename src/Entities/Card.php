@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Banklink\Entities;
 
 use Banklink\Accessors\StatementsAccessor;
+use Banklink\Enums\CardBrand;
 
 abstract class Card
 {
@@ -14,7 +15,7 @@ abstract class Card
 
     abstract public function lastFourDigits(): string;
 
-    abstract public function brand(): string;
+    abstract public function brand(): CardBrand;
 
     abstract public function limit(): CardLimit;
 

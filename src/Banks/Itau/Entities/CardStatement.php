@@ -6,6 +6,7 @@ namespace Banklink\Banks\Itau\Entities;
 
 use Banklink\Banks\Itau\Actions\Card\GetCardStatements;
 use Banklink\Entities;
+use Banklink\Entities\StatementPeriod;
 use Banklink\Enums\StatementStatus;
 use Brick\Money\Money;
 use Illuminate\Support\Carbon;
@@ -19,7 +20,7 @@ final class CardStatement extends Entities\CardStatement
         private readonly Carbon $dueDate,
         private readonly ?Carbon $closingDate,
         private readonly Money $amount,
-        private readonly string $period,
+        private readonly StatementPeriod $period,
         /** @var Collection<int, Holder> */
         private readonly Collection $holders,
     ) {}
@@ -34,8 +35,7 @@ final class CardStatement extends Entities\CardStatement
                 ? Carbon::createFromFormat('Y-m-d', $statement['dataFechamentoFatura'])
                 : null,
             amount: money()->of($statement['valorAberto'] ?? 0),
-            period: (Carbon::createFromFormat('Y-m-d', $statement['dataVencimento']))
-                ->format('Y-m'),
+            period: StatementPeriod::fromDate(Carbon::createFromFormat('Y-m-d', $statement['dataVencimento'])),
             holders: collect($statement['lancamentosNacionais']['titularidades'] ?? [])
                 ->merge($statement['comprasParceladas']['titularidades'] ?? [])
                 ->map(fn ($holderData): Holder => Holder::from($holderData)),
@@ -67,7 +67,7 @@ final class CardStatement extends Entities\CardStatement
         return $this->amount;
     }
 
-    public function period(): string
+    public function period(): StatementPeriod
     {
         return $this->period;
     }
@@ -85,16 +85,18 @@ final class CardStatement extends Entities\CardStatement
      */
     public function all(): Collection
     {
-        return collect(app()->make(GetCardStatements::class)
-            ->byCardId($this->cardId));
+        return app()->make(GetCardStatements::class)
+            ->byCardId($this->cardId);
     }
 
     /**
+     * @return Collection<int, CardStatement>
+     *
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    public function byPeriod(string $period): Collection
+    public function byPeriod(StatementPeriod $period): Collection
     {
         return $this->all()
-            ->where(fn (CardStatement $statement): bool => $statement->period() === $period);
+            ->where(fn (CardStatement $statement): bool => $statement->period()->value() === $period->value());
     }
 }

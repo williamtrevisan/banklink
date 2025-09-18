@@ -4,34 +4,36 @@ declare(strict_types=1);
 
 namespace Banklink\Banks\Itau\Entities;
 
+use Brick\Money\Money;
+
 final class CardLimit extends \Banklink\Entities\CardLimit
 {
     public function __construct(
-        private readonly string $used,
-        private readonly string $available,
-        private readonly string $total,
+        private readonly Money $used,
+        private readonly Money $available,
+        private readonly Money $total,
     ) {}
 
     public static function from(array $limits): static
     {
         return new self(
-            used: $limits['limiteCreditoUtilizadoValor'] ?? '0,00',
-            available: $limits['limiteCreditoDisponivelValor'] ?? '0,00',
-            total: $limits['limiteCreditoValor'] ?? '0,00'
+            used: money()->of($limits['limiteCreditoUtilizadoValor'] ?? 0),
+            available: money()->of($limits['limiteCreditoDisponivelValor'] ?? 0),
+            total: money()->of($limits['limiteCreditoValor'] ?? 0),
         );
     }
 
-    public function used(): string
+    public function used(): Money
     {
         return $this->used;
     }
 
-    public function available(): string
+    public function available(): Money
     {
         return $this->available;
     }
 
-    public function total(): string
+    public function total(): Money
     {
         return $this->total;
     }

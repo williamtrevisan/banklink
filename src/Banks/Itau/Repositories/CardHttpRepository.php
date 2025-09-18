@@ -49,7 +49,8 @@ final readonly class CardHttpRepository implements CardRepository
             ->replaceHeaders([
                 'op' => session()->pull('card_statement_operation'),
             ])
-            ->post('/router-app/router', $cardId)
+            ->withBody($cardId)
+            ->post('/router-app/router')
             ->collect('object.faturas')
             ->map(fn (array $statement): CardStatement => CardStatement::from($cardId, $statement));
     }

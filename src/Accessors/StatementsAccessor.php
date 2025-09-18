@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Banklink\Accessors;
 
 use Banklink\Entities\CardStatement;
+use Banklink\Entities\StatementPeriod;
 use Illuminate\Support\Collection;
 
 final readonly class StatementsAccessor
@@ -21,10 +22,7 @@ final readonly class StatementsAccessor
         return $this->statement->all();
     }
 
-    /**
-     * @return Collection<int, CardStatement>
-     */
-    public function byPeriod(string $period): Collection
+    public function byPeriod(StatementPeriod $period): Collection
     {
         return $this->statement->byPeriod($period);
     }
