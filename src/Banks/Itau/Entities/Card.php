@@ -7,6 +7,7 @@ namespace Banklink\Banks\Itau\Entities;
 use Banklink\Accessors\StatementsAccessor;
 use Banklink\Entities;
 use Banklink\Enums\CardBrand;
+use Illuminate\Support\Carbon;
 
 final class Card extends Entities\Card
 {
@@ -17,6 +18,7 @@ final class Card extends Entities\Card
         private readonly CardBrand $brand,
         private readonly CardLimit $limit,
         private readonly CardStatement $statement,
+        private readonly int $dueDay,
     ) {}
 
     public static function from(array $card): static
@@ -30,6 +32,7 @@ final class Card extends Entities\Card
             brand: CardBrand::from(str($card['bandeira'])->lower()->value()),
             limit: CardLimit::from($card['limites']),
             statement: CardStatement::from($card['id'], $statement),
+            dueDay: Carbon::parse($card['vencimento'])->day,
         );
     }
 
@@ -61,5 +64,10 @@ final class Card extends Entities\Card
     public function statements(): StatementsAccessor
     {
         return new StatementsAccessor($this->statement);
+    }
+
+    public function dueDay(): int
+    {
+        return $this->dueDay;
     }
 }

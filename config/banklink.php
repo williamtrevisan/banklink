@@ -58,6 +58,17 @@ return [
             'invoice_payment' => [
                 'patterns' => [],
             ],
+
+            /*
+            |--------------------------------------------------------------------------
+            | Days between closing and due Day
+            |--------------------------------------------------------------------------
+            |
+            | Interval in days between the credit card closing date and the due day.
+            |
+            */
+
+            'closing_due_interval_days' => env('BANK_CLOSING_DUE_INTERVAL_DAYS', 7),
         ],
     ],
 
