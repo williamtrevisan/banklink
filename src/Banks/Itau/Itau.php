@@ -32,9 +32,6 @@ final readonly class Itau implements Bank
 
     public function account(): Entities\Account
     {
-        $config = app()->make('config')
-            ->get('banklink.banks.itau');
-
-        return Account::from($config);
+        return Account::from(config());
     }
 }

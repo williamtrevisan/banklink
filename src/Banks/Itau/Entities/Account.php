@@ -7,23 +7,30 @@ namespace Banklink\Banks\Itau\Entities;
 use Banklink\Accessors\CardsAccessor;
 use Banklink\Accessors\TransactionsAccessor;
 use Banklink\Entities;
+use Illuminate\Config\Repository;
 
 final class Account extends Entities\Account
 {
     public function __construct(
+        private readonly string $bank,
         private readonly string $agency,
         private readonly string $number,
         private readonly string $digit,
-        private readonly ?string $balance = null,
     ) {}
 
-    public static function from(array $config): static
+    public static function from(Repository $config): static
     {
         return new self(
-            agency: $config['agency'],
-            number: $config['account'],
-            digit: $config['account_digit'],
+            bank: $bank = $config->get('banklink.bank'),
+            agency: $config->get("banklink.banks.$bank.agency"),
+            number: $config->get("banklink.banks.$bank.account"),
+            digit: $config->get("banklink.banks.$bank.account_digit"),
         );
+    }
+
+    public function bank(): string
+    {
+        return $this->bank;
     }
 
     public function agency(): string
@@ -39,11 +46,6 @@ final class Account extends Entities\Account
     public function digit(): string
     {
         return $this->digit;
-    }
-
-    public function balance(): ?string
-    {
-        return $this->balance;
     }
 
     public function cards(): CardsAccessor
