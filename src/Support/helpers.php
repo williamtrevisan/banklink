@@ -48,10 +48,20 @@ if (! function_exists('money')) {
 
                 public function of(BigNumber|float|int|string $amount): Money
                 {
-                    return Money::of(
-                        str($amount)->replace(['.', ','], ['', '.'])->value(),
-                        config('banklink.currency')
-                    );
+                    return Money::of($this->normalize($amount), config('banklink.currency'));
+                }
+
+                private function normalize(BigNumber|float|int|string $amount): BigNumber|float|int|string
+                {
+                    if (! is_string($amount)) {
+                        return $amount;
+                    }
+
+                    if (str($amount)->contains([','])) {
+                        return str($amount)->replace(['.', ','], ['', '.'])->value();
+                    }
+
+                    return $amount;
                 }
             };
         }
