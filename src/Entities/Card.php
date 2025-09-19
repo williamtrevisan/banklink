@@ -29,7 +29,7 @@ abstract class Card
 
         return now()->addMonth()
             ->setDay($this->dueDay())
-            ->subDays(config()->integer("banklink.banks.$bank.days_before_due_day"))
+            ->subDays(config()->integer("banklink.banks.$bank.closing_due_interval_days"))
             ->day;
     }
 }
