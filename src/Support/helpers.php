@@ -10,7 +10,6 @@ if (! function_exists('banklink')) {
     /**
      * Get a new banklink proxy object from the given token.
      *
-     * @param string|null $token
      * @return ($string is null ? object : Banklink)
      */
     function banklink(?string $token = null)
@@ -33,7 +32,7 @@ if (! function_exists('money')) {
     /**
      * Get a new moneyable object from the given string.
      *
-     * @param string|null  $string
+     * @param  string|null  $string
      * @return ($string is null ? object : Money)
      */
     function money(BigNumber|int|float|string|null $amount = null)
