@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Banklink\Banklink;
+use Banklink\Facades;
 use Brick\Math\BigNumber;
 use Brick\Money\Money;
 
@@ -19,12 +20,12 @@ if (! function_exists('banklink')) {
             {
                 public function __call($method, $parameters)
                 {
-                    return Banklink::$method(...$parameters);
+                    return Facades\Banklink::$method(...$parameters);
                 }
             };
         }
 
-        return Banklink::authenticate($token);
+        return Facades\Banklink::authenticate($token);
     }
 }
 
