@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Banklink\Facades\Banklink;
+use Banklink\Banklink;
 use Brick\Math\BigNumber;
 use Brick\Money\Money;
 
@@ -10,7 +10,12 @@ if (! function_exists('banklink')) {
     /**
      * Get a new banklink proxy object from the given token.
      *
+<<<<<<< HEAD
      * @return ($string is null ? object : Banklink)
+=======
+     * @param string|null $token
+     * @return ($token is null ? object : Banklink)
+>>>>>>> 55c9ffa (feat(itau): implement itau support)
      */
     function banklink(?string $token = null)
     {
@@ -32,8 +37,13 @@ if (! function_exists('money')) {
     /**
      * Get a new moneyable object from the given string.
      *
+<<<<<<< HEAD
      * @param  string|null  $string
      * @return ($string is null ? object : Money)
+=======
+     * @param string|null $amount
+     * @return ($amount is null ? object : Money)
+>>>>>>> 55c9ffa (feat(itau): implement itau support)
      */
     function money(BigNumber|int|float|string|null $amount = null)
     {
