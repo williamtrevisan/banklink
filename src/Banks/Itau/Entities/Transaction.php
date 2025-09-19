@@ -55,7 +55,7 @@ final class Transaction extends Entities\Transaction
     {
         $transaction = new self(
             date: Carbon::createFromFormat('d/m/Y', $transaction['dataLancamento']),
-            description: $transaction['descricaoLancamento'],
+            description: str($transaction['descricaoLancamento'])->deduplicate()->value(),
             amount: money()->of($transaction['valorLancamento']),
             direction: TransactionDirection::fromSign($transaction['ePositivo']),
             paymentMethod: TransactionPaymentMethod::fromOperation($transaction['indicadorOperacao']),
@@ -106,15 +106,27 @@ final class Transaction extends Entities\Transaction
     public function isRefund(TransactionType $from): bool
     {
         if ($from->isCheckingAccount()) {
-            return session()->get('checking_account_transactions')
-                ->some(fn (array $transaction): bool => str_contains((string) $transaction['descricaoLancamento'], $this->description)
-                    && $transaction['valorLancamento'] === $this->amount
-                    && $transaction['ePositivo'] === true);
+            return session()->get('checking_account_transactions', collect())
+                ->some(function (array $transaction): bool {
+                    $description = str($transaction['descricaoLancamento'])
+                        ->deduplicate()
+                        ->value();
+
+                    return str($this->description)->contains($description)
+                        && money()->of($transaction['valorLancamento'])->isEqualTo($this->amount)
+                        && $transaction['ePositivo'] === true;
+                });
         }
 
-        return session()->get('card_transactions')
-            ->some(fn (array $transaction): bool => str_contains((string) $transaction['descricao'], $this->description)
-                && $transaction['valor'] === $this->amount
-                && $transaction['sinalValor'] === '-');
+        return session()->get('card_transactions', collect())
+            ->some(function (array $transaction): bool {
+                $description = str($transaction['descricao'])
+                    ->deduplicate()
+                    ->value();
+
+                return str($this->description)->contains($description)
+                    && money()->of($transaction['valor'])->isEqualTo($this->amount)
+                    && $transaction['sinalValor'] === '-';
+            });
     }
 }

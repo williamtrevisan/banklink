@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Banklink\Entities;
 
+use Banklink\Actions\Classifiers\Contracts\TransactionClassifier;
 use Banklink\Enums\TransactionDirection;
 use Banklink\Enums\TransactionKind;
 use Banklink\Enums\TransactionPaymentMethod;
@@ -49,7 +50,13 @@ abstract class Transaction
         $bank = config()->get('banklink.bank');
 
         return config()
-            ->collection("banks.$bank.$kind->value.patterns", [])
-            ->some(fn (string $pattern) => str($this->description())->isMatch($pattern));
+            ->collection("banklink.banks.$bank.classifiers", [])
+            ->some(function (string $classifierClass) use ($kind): bool {
+                /** @var TransactionClassifier $classifier */
+                $classifier = app()->make($classifierClass);
+
+                return $classifier->kind() === $kind
+                    && $classifier->matches($this->description());
+            });
     }
 }

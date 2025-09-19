@@ -19,8 +19,8 @@ enum TransactionKind: string
         return match (true) {
             $transaction->isCashback() => TransactionKind::Cashback,
             $transaction->isFee() => TransactionKind::Fee,
-            $transaction->isInvoicePayment() => TransactionKind::InvoicePayment,
             $transaction->isRefund(from: $transactionType) => TransactionKind::Refund,
+            $transaction->isInvoicePayment() => TransactionKind::InvoicePayment,
             default => TransactionKind::Purchase,
         };
     }
