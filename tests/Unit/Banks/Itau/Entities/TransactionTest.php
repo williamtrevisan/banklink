@@ -119,5 +119,17 @@ describe('transaction kind', function (): void {
                 ->where(fn (Transaction $transaction): bool => $transaction->kind() === TransactionKind::Refund)
                 ->toHaveCount(1);
         });
+
+        it('correctly identifies refund transaction from single', function (): void {
+            $transaction = data()
+                ->get('checking_account.transactions.refund')
+                ->collect()
+                ->tap(fn (Collection $transactions) => session()->put('checking_account_transactions', $transactions))
+                ->map(fn (array $transaction): Transaction => Transaction::fromCheckingAccountTransaction($transaction))
+                ->last();
+
+            expect($transaction)
+                ->kind()->toBe(TransactionKind::Refund);
+        });
     });
 });

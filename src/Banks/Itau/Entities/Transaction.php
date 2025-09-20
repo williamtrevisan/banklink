@@ -107,6 +107,7 @@ final class Transaction extends Entities\Transaction
     {
         if ($from->isCheckingAccount()) {
             return session()->get('checking_account_transactions', collect())
+                ->reject(fn (array $transaction): bool => str($transaction['descricaoLancamento'])->deduplicate()->value() === $this->description)
                 ->some(function (array $transaction): bool {
                     $description = str($transaction['descricaoLancamento'])
                         ->deduplicate()
@@ -114,11 +115,12 @@ final class Transaction extends Entities\Transaction
 
                     return str($this->description)->contains($description)
                         && money()->of($transaction['valorLancamento'])->isEqualTo($this->amount)
-                        && $transaction['ePositivo'] === true;
+                        && $transaction['ePositivo'] === false;
                 });
         }
 
         return session()->get('card_transactions', collect())
+            ->reject(fn (array $transaction): bool => str($transaction['descricao'])->deduplicate()->value() === $this->description)
             ->some(function (array $transaction): bool {
                 $description = str($transaction['descricao'])
                     ->deduplicate()
@@ -126,7 +128,7 @@ final class Transaction extends Entities\Transaction
 
                 return str($this->description)->contains($description)
                     && money()->of($transaction['valor'])->isEqualTo($this->amount)
-                    && $transaction['sinalValor'] === '-';
+                    && $transaction['sinalValor'] === '+';
             });
     }
 }

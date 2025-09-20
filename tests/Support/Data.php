@@ -41,7 +41,7 @@ final class Data
     public function collect(?string $key = null): Collection
     {
         if (is_null($key)) {
-            return collect($this->items());
+            return collect($this->items);
         }
 
         return collect(data_get($this->items, $key));
@@ -49,6 +49,6 @@ final class Data
 
     public function dd(mixed ...$args): never
     {
-        dd($this->items(), ...$args);
+        dd($this->items, ...$args);
     }
 }

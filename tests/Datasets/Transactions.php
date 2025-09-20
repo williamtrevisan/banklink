@@ -91,17 +91,19 @@ dataset('checking_account.transactions.purchase', [
 
 dataset('checking_account.transactions.refund', [
     [
-        'dataLancamento' => '02/06/2025',
-        'descricaoLancamento' => 'ITAU MC       6902-2590',
-        'valorLancamento' => '1195,71',
-        'ePositivo' => false,
-        'indicadorOperacao' => 'debito',
-    ],
-    [
-        'dataLancamento' => '02/06/2025',
-        'descricaoLancamento' => 'EST ITAU MC   6902-2590',
-        'valorLancamento' => '1195,71',
-        'ePositivo' => true,
-        'indicadorOperacao' => 'debito',
+        [
+            'dataLancamento' => '02/06/2025',
+            'descricaoLancamento' => 'ITAU MC       6902-2590',
+            'valorLancamento' => '1195,71',
+            'ePositivo' => false,
+            'indicadorOperacao' => 'debito',
+        ],
+        [
+            'dataLancamento' => '02/06/2025',
+            'descricaoLancamento' => 'EST ITAU MC   6902-2590',
+            'valorLancamento' => '1195,71',
+            'ePositivo' => true,
+            'indicadorOperacao' => 'debito',
+        ],
     ],
 ]);
