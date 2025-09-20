@@ -26,6 +26,8 @@ abstract class CardStatement
 
     abstract public function amount(): Money;
 
+    abstract public function period(): StatementPeriod;
+
     /** @return Collection<int, Holder> */
     abstract public function holders(): Collection;
 }

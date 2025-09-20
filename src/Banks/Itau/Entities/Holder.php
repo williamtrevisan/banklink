@@ -6,6 +6,7 @@ namespace Banklink\Banks\Itau\Entities;
 
 use Banklink\Entities;
 use Brick\Money\Money;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 
 final class Holder extends Entities\Holder
@@ -18,7 +19,7 @@ final class Holder extends Entities\Holder
         private readonly Collection $transactions,
     ) {}
 
-    public static function from(array $data, int $statementDueDay): static
+    public static function from(array $data, Carbon $dueDate): static
     {
         $transactions = collect($data['lancamentos'] ?? [])
             ->tap(function (Collection $transactions): void {
@@ -28,7 +29,7 @@ final class Holder extends Entities\Holder
 
                 session()->put('card_transactions', $transactions);
             })
-            ->map(fn (array $transaction): Transaction => Transaction::fromCardTransaction($transaction, $statementDueDay));
+            ->map(fn (array $transaction): Transaction => Transaction::fromCardTransaction($transaction, $dueDate));
 
         return new self(
             name: $data['nomeCliente'],

@@ -26,7 +26,7 @@ final class Transaction extends Entities\Transaction
         private readonly ?StatementPeriod $statementPeriod = null,
     ) {}
 
-    public static function fromCardTransaction(array $transaction, int $statementDueDay): static
+    public static function fromCardTransaction(array $transaction, Carbon $dueDate): static
     {
         $transaction = new self(
             date: $date = rescue(
@@ -37,10 +37,12 @@ final class Transaction extends Entities\Transaction
             description: $description = str($transaction['descricao'])->deduplicate()->value(),
             amount: money()->of($transaction['valor']),
             direction: TransactionDirection::fromSign($transaction['sinalValor'] === '-'),
-            installments: str($description)->match('/\(?\d{1,2}\/\d{1,2}\)?$/')->isNotEmpty()
+            installments: $installments = str($description)->match('/\(?\d{1,2}\/\d{1,2}\)?$/')->isNotEmpty()
                 ? Installment::from($transaction)
                 : null,
-            statementPeriod: StatementPeriod::fromDate($date, $statementDueDay),
+            statementPeriod: $installments instanceof Installment
+                ? StatementPeriod::fromString($dueDate->format('Y-m'))
+                : StatementPeriod::fromDate($date, $dueDate->day),
         );
 
         return tap($transaction, function (Transaction $transaction): static {
