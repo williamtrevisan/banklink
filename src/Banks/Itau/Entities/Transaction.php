@@ -40,9 +40,7 @@ final class Transaction extends Entities\Transaction
             installments: $installments = str($description)->match('/\(?\d{1,2}\/\d{1,2}\)?$/')->isNotEmpty()
                 ? Installment::from($transaction)
                 : null,
-            statementPeriod: $installments instanceof Installment
-                ? StatementPeriod::fromString($dueDate->format('Y-m'))
-                : StatementPeriod::fromDate($date, $dueDate->day),
+            statementPeriod: StatementPeriod::fromString($dueDate->format('Y-m')),
         );
 
         return tap($transaction, function (Transaction $transaction): static {
