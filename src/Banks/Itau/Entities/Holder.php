@@ -18,7 +18,7 @@ final class Holder extends Entities\Holder
         private readonly Collection $transactions,
     ) {}
 
-    public static function from(array $data): static
+    public static function from(array $data, int $statementDueDay): static
     {
         $transactions = collect($data['lancamentos'] ?? [])
             ->tap(function (Collection $transactions): void {
@@ -28,7 +28,7 @@ final class Holder extends Entities\Holder
 
                 session()->put('card_transactions', $transactions);
             })
-            ->map(fn (array $transaction): Transaction => Transaction::fromCardTransaction($transaction));
+            ->map(fn (array $transaction): Transaction => Transaction::fromCardTransaction($transaction, $statementDueDay));
 
         return new self(
             name: $data['nomeCliente'],

@@ -22,14 +22,4 @@ abstract class Card
     abstract public function statements(): StatementsAccessor;
 
     abstract public function dueDay(): int;
-
-    final public function closingDay(): int
-    {
-        $bank = config('banklink.bank');
-
-        return now()->addMonth()
-            ->setDay($this->dueDay())
-            ->subDays(config()->integer("banklink.banks.$bank.closing_due_interval_days"))
-            ->day;
-    }
 }

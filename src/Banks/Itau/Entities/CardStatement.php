@@ -6,7 +6,6 @@ namespace Banklink\Banks\Itau\Entities;
 
 use Banklink\Banks\Itau\Actions\Card\GetCardStatements;
 use Banklink\Entities;
-use Banklink\Entities\StatementPeriod;
 use Banklink\Enums\StatementStatus;
 use Brick\Money\Money;
 use Illuminate\Support\Carbon;
@@ -20,7 +19,6 @@ final class CardStatement extends Entities\CardStatement
         private readonly Carbon $dueDate,
         private readonly ?Carbon $closingDate,
         private readonly Money $amount,
-        private readonly StatementPeriod $period,
         /** @var Collection<int, Holder> */
         private readonly Collection $holders,
     ) {}
@@ -30,15 +28,14 @@ final class CardStatement extends Entities\CardStatement
         return new self(
             cardId: $cardId,
             status: str_contains((string) $statement['status'], 'fechada') ? StatementStatus::Closed : StatementStatus::Open,
-            dueDate: Carbon::createFromFormat('Y-m-d', $statement['dataVencimento']),
+            dueDate: $dueDate = Carbon::createFromFormat('Y-m-d', $statement['dataVencimento']),
             closingDate: isset($statement['dataFechamentoFatura'])
                 ? Carbon::createFromFormat('Y-m-d', $statement['dataFechamentoFatura'])
                 : null,
             amount: money()->of($statement['valorAberto'] ?? 0),
-            period: StatementPeriod::fromDate(Carbon::createFromFormat('Y-m-d', $statement['dataVencimento'])),
             holders: collect($statement['lancamentosNacionais']['titularidades'] ?? [])
                 ->merge($statement['comprasParceladas']['titularidades'] ?? [])
-                ->map(fn ($holderData): Holder => Holder::from($holderData)),
+                ->map(fn ($holderData): Holder => Holder::from($holderData, $dueDate->day)),
         );
     }
 
@@ -67,11 +64,6 @@ final class CardStatement extends Entities\CardStatement
         return $this->amount;
     }
 
-    public function period(): StatementPeriod
-    {
-        return $this->period;
-    }
-
     /** @return Collection<int, Holder> */
     public function holders(): Collection
     {
@@ -87,16 +79,5 @@ final class CardStatement extends Entities\CardStatement
     {
         return app()->make(GetCardStatements::class)
             ->byCardId($this->cardId);
-    }
-
-    /**
-     * @return Collection<int, CardStatement>
-     *
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
-     */
-    public function byPeriod(StatementPeriod $period): Collection
-    {
-        return $this->all()
-            ->where(fn (CardStatement $statement): bool => $statement->period()->value() === $period->value());
     }
 }

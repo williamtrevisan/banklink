@@ -19,9 +19,18 @@ final readonly class StatementPeriod implements Stringable
         return $this->period;
     }
 
-    public static function fromDate(Carbon $date): self
+    public static function fromDate(Carbon $date, int $dueDay): self
     {
-        return new self(period: $date->format('Y-m'));
+        $bank = config('banklink.bank');
+
+        $period = $date
+            ->clone()
+            ->addMonth()
+            ->setDay($dueDay)
+            ->subDays(config()->integer("banklink.banks.$bank.closing_due_interval_days"))
+            ->format('Y-m');
+
+        return new self(period: $period);
     }
 
     public static function fromString(string $period): self
@@ -40,14 +49,14 @@ final readonly class StatementPeriod implements Stringable
 
     public function year(): string
     {
-        [$year] = str($this->period())->explode('-');
+        [$year] = str($this->period)->explode('-');
 
         return $year;
     }
 
     public function month(): string
     {
-        [, $month] = str($this->period())->explode('-');
+        [, $month] = str($this->period)->explode('-');
 
         return $month;
     }

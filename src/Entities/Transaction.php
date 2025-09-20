@@ -28,6 +28,8 @@ abstract class Transaction
 
     abstract public function installments(): ?Installment;
 
+    abstract public function statementPeriod(): ?StatementPeriod;
+
     abstract public function isRefund(TransactionType $from): bool;
 
     final public function isCashback(): bool

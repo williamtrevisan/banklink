@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Banklink\Banks\Itau\Entities;
 
 use Banklink\Entities;
+use Banklink\Entities\StatementPeriod;
 use Banklink\Enums\TransactionDirection;
 use Banklink\Enums\TransactionKind;
 use Banklink\Enums\TransactionPaymentMethod;
@@ -22,26 +23,24 @@ final class Transaction extends Entities\Transaction
         private TransactionKind $kind = TransactionKind::Purchase,
         private readonly TransactionPaymentMethod $paymentMethod = TransactionPaymentMethod::Credit,
         private readonly ?Installment $installments = null,
+        private readonly ?StatementPeriod $statementPeriod = null,
     ) {}
 
-    public static function fromCardTransaction(array $transaction): static
+    public static function fromCardTransaction(array $transaction, int $statementDueDay): static
     {
-        $description = str($transaction['descricao'])
-            ->deduplicate()
-            ->value();
-
         $transaction = new self(
-            date: rescue(
+            date: $date = rescue(
                 fn (): Carbon => Carbon::parse($transaction['data']),
-                fn (): ?\Illuminate\Support\Carbon => Carbon::createFromLocaleFormat('d / F', 'pt_BR', $transaction['data']),
+                fn (): ?Carbon => Carbon::createFromLocaleFormat('d / F', 'pt_BR', $transaction['data']),
                 report: false,
             ),
-            description: $description,
+            description: $description = str($transaction['descricao'])->deduplicate()->value(),
             amount: money()->of($transaction['valor']),
             direction: TransactionDirection::fromSign($transaction['sinalValor'] === '-'),
             installments: str($description)->match('/\(?\d{1,2}\/\d{1,2}\)?$/')->isNotEmpty()
                 ? Installment::from($transaction)
                 : null,
+            statementPeriod: StatementPeriod::fromDate($date, $statementDueDay),
         );
 
         return tap($transaction, function (Transaction $transaction): static {
@@ -101,6 +100,11 @@ final class Transaction extends Entities\Transaction
     public function installments(): ?Installment
     {
         return $this->installments;
+    }
+
+    public function statementPeriod(): ?StatementPeriod
+    {
+        return $this->statementPeriod;
     }
 
     public function isRefund(TransactionType $from): bool

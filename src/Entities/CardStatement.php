@@ -16,11 +16,6 @@ abstract class CardStatement
      */
     abstract public function all(): Collection;
 
-    /**
-     * @return Collection<int, CardStatement>
-     */
-    abstract public function byPeriod(StatementPeriod $period): Collection;
-
     abstract public function cardId(): string;
 
     abstract public function status(): StatementStatus;
@@ -30,8 +25,6 @@ abstract class CardStatement
     abstract public function closingDate(): ?Carbon;
 
     abstract public function amount(): Money;
-
-    abstract public function period(): StatementPeriod;
 
     /** @return Collection<int, Holder> */
     abstract public function holders(): Collection;
