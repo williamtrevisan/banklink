@@ -23,7 +23,8 @@ final class Card extends Entities\Card
 
     public static function from(array $card): static
     {
-        $statement = collect($card['faturas'])->firstWhere('status', 'aberta');
+        $statement = collect($card['faturas'])
+            ->firstWhere(fn (array $statement) => str($statement['descricao'])->contains('aberta'));
 
         return new self(
             id: $card['id'],

@@ -29,7 +29,7 @@ final class Transaction extends Entities\Transaction
     public static function fromCardTransaction(array $transaction, Carbon $dueDate): static
     {
         $transaction = new self(
-            date: $date = rescue(
+            date: rescue(
                 fn (): Carbon => Carbon::parse($transaction['data']),
                 fn (): ?Carbon => Carbon::createFromLocaleFormat('d / F', 'pt_BR', $transaction['data']),
                 report: false,
@@ -37,7 +37,7 @@ final class Transaction extends Entities\Transaction
             description: $description = str($transaction['descricao'])->deduplicate()->value(),
             amount: money()->of($transaction['valor']),
             direction: TransactionDirection::fromSign($transaction['sinalValor'] === '-'),
-            installments: $installments = str($description)->match('/\(?\d{1,2}\/\d{1,2}\)?$/')->isNotEmpty()
+            installments: str($description)->match('/\(?\d{1,2}\/\d{1,2}\)?$/')->isNotEmpty()
                 ? Installment::from($transaction)
                 : null,
             statementPeriod: StatementPeriod::fromString($dueDate->format('Y-m')),
