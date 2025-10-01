@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Banklink\Accessors\Contracts;
 
 use Banklink\Entities\Card;
