@@ -6,14 +6,15 @@ namespace Banklink\Accessors;
 
 use Banklink\Banks\Itau\Pipelines\CardsGetter;
 use Banklink\Entities\Card;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Support\Collection;
 
-final class CardsAccessor
+final class CardsAccessor implements Contracts\CardsAccessor
 {
     /**
      * @return Collection<int, Card>
      *
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws BindingResolutionException
      */
     public function all(): Collection
     {
@@ -22,7 +23,7 @@ final class CardsAccessor
     }
 
     /**
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws BindingResolutionException
      */
     public function firstWhere(string $key, mixed $value): ?Card
     {

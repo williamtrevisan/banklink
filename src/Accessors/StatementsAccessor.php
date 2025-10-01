@@ -8,7 +8,7 @@ use Banklink\Entities\CardStatement;
 use Banklink\Entities\StatementPeriod;
 use Illuminate\Support\Collection;
 
-final readonly class StatementsAccessor
+final readonly class StatementsAccessor implements Contracts\StatementsAccessor
 {
     public function __construct(
         private CardStatement $statement

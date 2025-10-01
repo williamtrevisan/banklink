@@ -6,15 +6,16 @@ namespace Banklink\Accessors;
 
 use Banklink\Banks\Itau\Pipelines\CheckingAccountTransactionsGetter;
 use Banklink\Entities\Transaction;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 
-final class TransactionsAccessor
+final class TransactionsAccessor implements Contracts\TransactionsAccessor
 {
     /**
      * @return Collection<int, Transaction>
      *
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws BindingResolutionException
      */
     public function between(Carbon $start, Carbon $end): Collection
     {
@@ -25,7 +26,7 @@ final class TransactionsAccessor
     /**
      * @return Collection<int, Transaction>
      *
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws BindingResolutionException
      */
     public function today(): Collection
     {
