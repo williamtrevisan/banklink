@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Banklink\Banks\Itau\Entities;
 
-use Banklink\Accessors\Contracts\StatementsAccessor;
+use Banklink\Accessors;
 use Banklink\Entities;
 use Banklink\Enums\CardBrand;
 use Illuminate\Support\Carbon;
@@ -62,9 +62,9 @@ final class Card extends Entities\Card
         return $this->limit;
     }
 
-    public function statements(): StatementsAccessor
+    public function statements(): Accessors\Contracts\StatementsAccessor
     {
-        return new StatementsAccessor($this->statement);
+        return new Accessors\StatementsAccessor($this->statement);
     }
 
     public function dueDay(): int

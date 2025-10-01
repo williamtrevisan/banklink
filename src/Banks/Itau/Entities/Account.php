@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace Banklink\Banks\Itau\Entities;
 
-use Banklink\Accessors\CardsAccessor;
-use Banklink\Accessors\TransactionsAccessor;
+use Banklink\Accessors;
 use Banklink\Entities;
 use Illuminate\Config\Repository;
 
@@ -48,13 +47,13 @@ final class Account extends Entities\Account
         return $this->digit;
     }
 
-    public function cards(): CardsAccessor
+    public function cards(): Accessors\Contracts\CardsAccessor
     {
-        return app()->make(CardsAccessor::class);
+        return app()->make(Accessors\CardsAccessor::class);
     }
 
-    public function transactions(): TransactionsAccessor
+    public function transactions(): Accessors\Contracts\TransactionsAccessor
     {
-        return app()->make(TransactionsAccessor::class);
+        return app()->make(Accessors\TransactionsAccessor::class);
     }
 }

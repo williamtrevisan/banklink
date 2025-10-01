@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Banklink\Entities;
 
-use Banklink\Accessors\StatementsAccessor;
+use Banklink\Accessors\Contracts\StatementsAccessor;
 use Banklink\Enums\CardBrand;
 
 abstract class Card
