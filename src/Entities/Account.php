@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Banklink\Entities;
 
-use Banklink\Accessors\CardsAccessor;
-use Banklink\Accessors\TransactionsAccessor;
+use Banklink\Accessors\Contracts\CardsAccessor;
+use Banklink\Accessors\Contracts\TransactionsAccessor;
 
 abstract class Account
 {

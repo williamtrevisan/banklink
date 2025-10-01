@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Banklink\Banks\Itau\Entities;
 
-use Banklink\Accessors\StatementsAccessor;
+use Banklink\Accessors\Contracts\StatementsAccessor;
 use Banklink\Entities;
 use Banklink\Enums\CardBrand;
 use Illuminate\Support\Carbon;
