@@ -6,7 +6,6 @@ namespace Banklink\Banks\Itau\Entities;
 
 use Banklink\Entities;
 use Brick\Money\Money;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 
 final class Holder extends Entities\Holder
