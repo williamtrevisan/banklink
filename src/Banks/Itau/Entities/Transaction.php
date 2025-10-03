@@ -16,8 +16,8 @@ use Illuminate\Support\Carbon;
 final class Transaction extends Entities\Transaction
 {
     public function __construct(
-        private readonly Entities\CardStatement $statement,
-        private readonly Entities\Holder $holder,
+        private readonly ?Entities\CardStatement $statement,
+        private readonly ?Entities\Holder $holder,
         private readonly Carbon $date,
         private readonly string $description,
         private readonly Money $amount,
