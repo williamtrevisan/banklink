@@ -8,6 +8,7 @@ use Banklink\Banks\Itau\Pipelines\CardsGetter;
 use Banklink\Entities\Card;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 
 final class CardsAccessor implements Contracts\CardsAccessor
 {
@@ -18,8 +19,15 @@ final class CardsAccessor implements Contracts\CardsAccessor
      */
     public function all(): Collection
     {
-        return app()->make(CardsGetter::class)
-            ->get();
+        $bank = config()->get('banklink.bank');
+        $agency = config()->get("banks.$bank.agency");
+        $account = config()->get("banks.$bank.account");
+
+        return Cache::remember(
+            key: "banklink.$bank.$agency.$account.cards.all",
+            ttl: now()->addMonth(),
+            callback: fn () => app()->make(CardsGetter::class)->get(),
+        );
     }
 
     /**

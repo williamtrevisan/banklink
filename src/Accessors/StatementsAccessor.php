@@ -7,6 +7,7 @@ namespace Banklink\Accessors;
 use Banklink\Entities\CardStatement;
 use Banklink\Entities\StatementPeriod;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 
 final readonly class StatementsAccessor implements Contracts\StatementsAccessor
 {
@@ -19,11 +20,14 @@ final readonly class StatementsAccessor implements Contracts\StatementsAccessor
      */
     public function all(): Collection
     {
-        return $this->statement->all();
-    }
+        $bank = config('banklink.bank');
+        $agency = config("banks.$bank.agency");
+        $account = config("banks.$bank.account");
 
-    public function byPeriod(StatementPeriod $period): Collection
-    {
-        return $this->statement->byPeriod($period);
+        return Cache::remember(
+            key: "banklink.$bank.$agency.$account.statements.all",
+            ttl: now()->addMonth(),
+            callback: fn () => $this->statement->all(),
+        );
     }
 }

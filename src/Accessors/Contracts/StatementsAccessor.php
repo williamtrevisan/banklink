@@ -14,6 +14,4 @@ interface StatementsAccessor
      * @return Collection<int, CardStatement>
      */
     public function all(): Collection;
-
-    public function byPeriod(StatementPeriod $period): Collection;
 }
