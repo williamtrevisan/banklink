@@ -33,7 +33,9 @@ final class CardStatement extends Entities\CardStatement
             cardId: $cardId,
             status: StatementStatus::fromString($statement['faturaTimeline']['status']),
             dueDate: $dueDate = Carbon::createFromFormat('Y-m-d', $statement['dataVencimento']),
-            closingDate: $dueDate->subDays(config()->integer("banklink.banks.$bank.closing_due_interval_days")),
+            closingDate: $dueDate
+                ->copy()
+                ->subDays(config()->integer("banklink.banks.$bank.closing_due_interval_days")),
             amount: money()->of($statement['valorAberto'] ?? 0),
             period: StatementPeriod::fromString($dueDate->format('Y-m')),
             holders: collect($statement['lancamentosNacionais']['titularidades'] ?? [])
