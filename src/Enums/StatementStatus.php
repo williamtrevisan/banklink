@@ -6,8 +6,18 @@ namespace Banklink\Enums;
 
 enum StatementStatus: string
 {
-    case Open = 'open';
     case Closed = 'closed';
+    case Open = 'open';
+    case Paid = 'paid';
+
+    public static function fromString(string $status): self
+    {
+        return match ($status) {
+            'fechada' => StatementStatus::Closed,
+            'paga' => StatementStatus::Paid,
+            default => StatementStatus::Open,
+        };
+    }
 
     public function isOpen(): bool
     {

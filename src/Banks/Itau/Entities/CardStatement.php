@@ -27,13 +27,13 @@ final class CardStatement extends Entities\CardStatement
 
     public static function from(string $cardId, array $statement): static
     {
+        $bank = config()->get('banklink.bank');
+
         return new self(
             cardId: $cardId,
-            status: str_contains((string) $statement['status'], 'fechada') ? StatementStatus::Closed : StatementStatus::Open,
+            status: StatementStatus::fromString($statement['faturaTimeline']['status']),
             dueDate: $dueDate = Carbon::createFromFormat('Y-m-d', $statement['dataVencimento']),
-            closingDate: isset($statement['dataFechamentoFatura'])
-                ? Carbon::createFromFormat('Y-m-d', $statement['dataFechamentoFatura'])
-                : null,
+            closingDate: $dueDate->subDays(config()->integer("banklink.banks.$bank.closing_due_interval_days")),
             amount: money()->of($statement['valorAberto'] ?? 0),
             period: StatementPeriod::fromString($dueDate->format('Y-m')),
             holders: collect($statement['lancamentosNacionais']['titularidades'] ?? [])
