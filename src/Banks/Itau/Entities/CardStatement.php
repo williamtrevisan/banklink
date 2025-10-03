@@ -88,6 +88,6 @@ final class CardStatement extends Entities\CardStatement
     public function all(): Collection
     {
         return app()->make(GetCardStatements::class)
-            ->byCardId($this->card->id());
+            ->byCardId($this->card);
     }
 }

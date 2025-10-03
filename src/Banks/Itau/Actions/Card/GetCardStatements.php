@@ -6,6 +6,7 @@ namespace Banklink\Banks\Itau\Actions\Card;
 
 use Banklink\Banks\Itau\Entities\CardStatement;
 use Banklink\Banks\Itau\Repositories\Contracts\CardRepository;
+use Banklink\Entities\Card;
 use Illuminate\Support\Collection;
 
 final readonly class GetCardStatements
@@ -17,8 +18,8 @@ final readonly class GetCardStatements
     /**
      * @return Collection<int, CardStatement>
      */
-    public function byCardId(string $cardId): Collection
+    public function byCardId(Card $card): Collection
     {
-        return $this->cardRepository->statementBy($cardId);
+        return $this->cardRepository->statementBy($card);
     }
 }

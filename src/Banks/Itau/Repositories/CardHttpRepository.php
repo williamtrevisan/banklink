@@ -43,15 +43,15 @@ final readonly class CardHttpRepository implements CardRepository
             ->map(fn (array $card): Card => Card::from($card));
     }
 
-    public function statementBy(string $cardId): Collection
+    public function statementBy(\Banklink\Entities\Card $card): Collection
     {
         return $this->http
             ->replaceHeaders([
                 'op' => session()->pull('card_statement_operation'),
             ])
-            ->withBody($cardId)
+            ->withBody($card->id())
             ->post('/router-app/router')
             ->collect('object.faturas')
-            ->map(fn (array $statement): CardStatement => CardStatement::from($cardId, $statement));
+            ->map(fn (array $statement): CardStatement => CardStatement::from($card, $statement));
     }
 }

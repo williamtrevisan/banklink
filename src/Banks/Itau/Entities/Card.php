@@ -17,7 +17,7 @@ final class Card extends Entities\Card
         private readonly string $lastFourDigits,
         private readonly CardBrand $brand,
         private readonly CardLimit $limit,
-        private readonly CardStatement $statement,
+        private readonly ?CardStatement $statement,
         private readonly int $dueDay,
     ) {}
 
@@ -26,15 +26,19 @@ final class Card extends Entities\Card
         $statement = collect($card['faturas'])
             ->firstWhere(fn (array $statement) => str($statement['descricao'])->contains('aberta'));
 
-        return new self(
+        $card = new self(
             id: $card['id'],
             name: $card['nome'],
             lastFourDigits: $card['numero'],
             brand: CardBrand::from(str($card['bandeira'])->lower()->value()),
             limit: CardLimit::from($card['limites']),
-            statement: CardStatement::from($card['id'], $statement),
+            statement: null,
             dueDay: Carbon::parse($card['vencimento'])->day,
         );
+
+        $card->statement = CardStatement::from($card, $statement);
+
+        return $card;
     }
 
     public function id(): string
