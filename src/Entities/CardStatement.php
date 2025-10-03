@@ -16,7 +16,7 @@ abstract class CardStatement
      */
     abstract public function all(): Collection;
 
-    abstract public function cardId(): string;
+    abstract public function card(): Card;
 
     abstract public function status(): StatementStatus;
 

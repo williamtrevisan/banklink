@@ -15,7 +15,7 @@ use Illuminate\Support\Collection;
 final class CardStatement extends Entities\CardStatement
 {
     public function __construct(
-        private readonly string $cardId,
+        private readonly Entities\Card $card,
         private readonly StatementStatus $status,
         private readonly Carbon $dueDate,
         private readonly ?Carbon $closingDate,
@@ -25,12 +25,12 @@ final class CardStatement extends Entities\CardStatement
         private readonly Collection $holders,
     ) {}
 
-    public static function from(string $cardId, array $statement): static
+    public static function from(Entities\Card $card, array $statement): static
     {
         $bank = config()->get('banklink.bank');
 
         return new self(
-            cardId: $cardId,
+            card: $card,
             status: StatementStatus::fromString($statement['faturaTimeline']['status']),
             dueDate: $dueDate = Carbon::createFromFormat('Y-m-d', $statement['dataVencimento']),
             closingDate: $dueDate
@@ -44,9 +44,9 @@ final class CardStatement extends Entities\CardStatement
         );
     }
 
-    public function cardId(): string
+    public function card(): Entities\Card
     {
-        return $this->cardId;
+        return $this->card;
     }
 
     public function status(): StatementStatus
@@ -88,6 +88,6 @@ final class CardStatement extends Entities\CardStatement
     public function all(): Collection
     {
         return app()->make(GetCardStatements::class)
-            ->byCardId($this->cardId);
+            ->byCardId($this->card->id());
     }
 }
