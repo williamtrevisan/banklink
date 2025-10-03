@@ -26,7 +26,7 @@ final class Card extends Entities\Card
         $statement = collect($card['faturas'])
             ->firstWhere(fn (array $statement) => str($statement['descricao'])->contains('aberta'));
 
-        $card = new self(
+        $card = new static(
             id: $card['id'],
             name: $card['nome'],
             lastFourDigits: $card['numero'],
@@ -36,9 +36,20 @@ final class Card extends Entities\Card
             dueDay: Carbon::parse($card['vencimento'])->day,
         );
 
-        $card->statement = CardStatement::from($card, $statement);
+        return $card->withStatement(CardStatement::from($card, $statement));
+    }
 
-        return $card;
+    public function withStatement(CardStatement $statement): static
+    {
+        return new static(
+            id: $this->id,
+            name: $this->name,
+            lastFourDigits: $this->lastFourDigits,
+            brand: $this->brand,
+            limit: $this->limit,
+            statement: $statement,
+            dueDay: $this->dueDay,
+        );
     }
 
     public function id(): string
