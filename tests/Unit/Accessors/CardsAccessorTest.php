@@ -21,10 +21,9 @@ it('caches cards for one month', function () {
     $master = $this->mock(Card::class);
     $cards = collect([$visa, $master]);
 
-    $accessor = new class($cards) implements CardsAccessor {
-        public function __construct(private Collection $cards)
-        {
-        }
+    $accessor = new class($cards) implements CardsAccessor
+    {
+        public function __construct(private Collection $cards) {}
 
         public function all(): Collection
         {
@@ -62,10 +61,9 @@ it('uses account-specific cache keys', function () {
     $card = $this->mock(Card::class);
     $cards = collect([$card]);
 
-    $accessor = new class($cards) implements CardsAccessor {
-        public function __construct(private Collection $cards)
-        {
-        }
+    $accessor = new class($cards) implements CardsAccessor
+    {
+        public function __construct(private Collection $cards) {}
 
         public function all(): Collection
         {
@@ -115,12 +113,12 @@ it('firstWhere uses cached cards', function () {
     $cards = collect([$visa, $master]);
     $invocations = 0;
 
-    $accessor = new class($cards, $invocations) implements CardsAccessor {
+    $accessor = new class($cards, $invocations) implements CardsAccessor
+    {
         public function __construct(
             private Collection $cards,
             private int &$invocations
-        ) {
-        }
+        ) {}
 
         public function all(): Collection
         {
@@ -133,6 +131,7 @@ it('firstWhere uses cached cards', function () {
                 ttl: now()->addMonth(),
                 callback: function () {
                     $this->invocations++;
+
                     return $this->cards;
                 },
             );

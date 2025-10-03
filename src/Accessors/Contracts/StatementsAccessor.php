@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Banklink\Accessors\Contracts;
 
 use Banklink\Entities\CardStatement;
-use Banklink\Entities\StatementPeriod;
 use Illuminate\Support\Collection;
 
 interface StatementsAccessor

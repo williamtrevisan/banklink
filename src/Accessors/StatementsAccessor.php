@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Banklink\Accessors;
 
 use Banklink\Entities\CardStatement;
-use Banklink\Entities\StatementPeriod;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 

@@ -24,12 +24,12 @@ it('caches statements for one month', function () {
 
     $invocations = 0;
 
-    $accessor = new class($statements, $invocations) implements StatementsAccessor {
+    $accessor = new class($statements, $invocations) implements StatementsAccessor
+    {
         public function __construct(
             private Collection $statements,
             private int &$invocations
-        ) {
-        }
+        ) {}
 
         public function all(): Collection
         {
@@ -42,6 +42,7 @@ it('caches statements for one month', function () {
                 ttl: now()->addMonth(),
                 callback: function () {
                     $this->invocations++;
+
                     return $this->statements;
                 },
             );
@@ -59,12 +60,12 @@ it('uses account-specific cache keys', function () {
     $statements = collect([$this->mock(CardStatement::class)]);
     $invocations = 0;
 
-    $accessor = new class($statements, $invocations) implements StatementsAccessor {
+    $accessor = new class($statements, $invocations) implements StatementsAccessor
+    {
         public function __construct(
             private Collection $statements,
             private int &$invocations
-        ) {
-        }
+        ) {}
 
         public function all(): Collection
         {
@@ -77,6 +78,7 @@ it('uses account-specific cache keys', function () {
                 ttl: now()->addMonth(),
                 callback: function () {
                     $this->invocations++;
+
                     return $this->statements;
                 },
             );

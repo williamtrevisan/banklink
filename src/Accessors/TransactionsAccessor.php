@@ -60,6 +60,6 @@ final class TransactionsAccessor implements Contracts\TransactionsAccessor
 
         return empty($params)
             ? $baseKey
-            : $baseKey . '.' . md5(serialize($params));
+            : $baseKey.'.'.md5(serialize($params));
     }
 }
