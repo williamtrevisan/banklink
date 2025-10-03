@@ -21,6 +21,15 @@ final class Holder extends Entities\Holder
 
     public static function from(Entities\CardStatement $statement, array $data): static
     {
+        $transactions = collect($data['lancamentos'] ?? [])
+            ->tap(function (Collection $transactions): void {
+                if ($transactions->isEmpty()) {
+                    return;
+                }
+
+                session()->put('card_transactions', $transactions);
+            });
+
         $holder = new self(
             statement: $statement,
             name: $data['nomeCliente'],
@@ -29,17 +38,9 @@ final class Holder extends Entities\Holder
             transactions: collect(),
         );
 
-        $transactions = collect($data['lancamentos'] ?? [])
-            ->tap(function (Collection $transactions): void {
-                if ($transactions->isEmpty()) {
-                    return;
-                }
-
-                session()->put('card_transactions', $transactions);
-            })
-            ->map(fn (array $transaction): Transaction => Transaction::fromCardTransaction($statement, $holder, $transaction));
-
-        return $holder->withTransactions($transactions);
+        return $holder->withTransactions(
+            $transactions->map(fn (array $transaction): Transaction => Transaction::fromCardTransaction($statement, $holder, $transaction))
+        );
     }
 
     public function withTransactions(Collection $transactions): static
