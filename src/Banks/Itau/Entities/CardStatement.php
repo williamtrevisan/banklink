@@ -29,7 +29,7 @@ final class CardStatement extends Entities\CardStatement
     {
         $bank = config()->get('banklink.bank');
 
-        $statement = new self(
+        $cardStatement = new self(
             card: $card,
             status: StatementStatus::fromString($statement['faturaTimeline']['status']),
             dueDate: $dueDate = Carbon::createFromFormat('Y-m-d', $statement['dataVencimento']),
@@ -43,9 +43,9 @@ final class CardStatement extends Entities\CardStatement
 
         $holders = collect($statement['lancamentosNacionais']['titularidades'] ?? [])
             ->merge($statement['comprasParceladas']['titularidades'] ?? [])
-            ->map(fn ($holderData): Holder => Holder::from($statement, $holderData));
+            ->map(fn ($holderData): Holder => Holder::from($cardStatement, $holderData));
 
-        return $statement->withHolders($holders);
+        return $cardStatement->withHolders($holders);
     }
 
     public function withHolders(Collection $holders): static
