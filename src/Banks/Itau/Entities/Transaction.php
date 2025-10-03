@@ -16,6 +16,8 @@ use Illuminate\Support\Carbon;
 final class Transaction extends Entities\Transaction
 {
     public function __construct(
+        private readonly Entities\CardStatement $statement,
+        private readonly Entities\Holder $holder,
         private readonly Carbon $date,
         private readonly string $description,
         private readonly Money $amount,
@@ -23,12 +25,13 @@ final class Transaction extends Entities\Transaction
         private TransactionKind $kind = TransactionKind::Purchase,
         private readonly TransactionPaymentMethod $paymentMethod = TransactionPaymentMethod::Credit,
         private readonly ?Installment $installments = null,
-        private readonly ?StatementPeriod $statementPeriod = null,
     ) {}
 
-    public static function fromCardTransaction(array $transaction, Carbon $dueDate): static
+    public static function fromCardTransaction(Entities\CardStatement $statement, Entities\Holder $holder, array $transaction): static
     {
         $transaction = new self(
+            statement: $statement,
+            holder: $holder,
             date: rescue(
                 fn (): Carbon => Carbon::parse($transaction['data']),
                 fn (): ?Carbon => Carbon::createFromLocaleFormat('d / F', 'pt_BR', $transaction['data']),
@@ -40,19 +43,16 @@ final class Transaction extends Entities\Transaction
             installments: str($description)->match('/\(?\d{1,2}\/\d{1,2}\)?$/')->isNotEmpty()
                 ? Installment::from($transaction)
                 : null,
-            statementPeriod: StatementPeriod::fromString($dueDate->format('Y-m')),
         );
 
-        return tap($transaction, function (Transaction $transaction): static {
-            $transaction->kind = TransactionKind::fromTransaction($transaction, transactionType: TransactionType::Card);
-
-            return $transaction;
-        });
+        return $transaction->withTransactionKind(TransactionKind::fromTransaction($transaction, transactionType: TransactionType::Card));
     }
 
     public static function fromCheckingAccountTransaction(array $transaction): static
     {
         $transaction = new self(
+            statement: null,
+            holder: null,
             date: Carbon::createFromFormat('d/m/Y', $transaction['dataLancamento']),
             description: str($transaction['descricaoLancamento'])->deduplicate()->value(),
             amount: money()->of($transaction['valorLancamento']),
@@ -65,6 +65,31 @@ final class Transaction extends Entities\Transaction
 
             return $transaction;
         });
+    }
+
+    public function withTransactionKind(TransactionKind $kind): static
+    {
+        return new static(
+            statement: $this->statement,
+            holder: $this->holder,
+            date: $this->date,
+            description: $this->description,
+            amount: $this->amount,
+            direction: $this->direction,
+            kind: $kind,
+            paymentMethod: $this->paymentMethod,
+            installments: $this->installments,
+        );
+    }
+
+    public function statement(): ?Entities\CardStatement
+    {
+        return $this->statement;
+    }
+
+    public function holder(): ?Entities\Holder
+    {
+        return $this->holder;
     }
 
     public function date(): Carbon

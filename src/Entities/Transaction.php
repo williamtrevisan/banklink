@@ -14,6 +14,10 @@ use Illuminate\Support\Carbon;
 
 abstract class Transaction
 {
+    abstract public function statement(): ?CardStatement;
+
+    abstract public function holder(): ?Holder;
+
     abstract public function date(): Carbon;
 
     abstract public function description(): string;

@@ -9,6 +9,8 @@ use Illuminate\Support\Collection;
 
 abstract class Holder
 {
+    abstract public function statement(): CardStatement;
+
     abstract public function name(): string;
 
     abstract public function lastFourDigits(): string;
