@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Banklink;
 
 use Banklink\Contracts\Bank;
+use Illuminate\Support\Facades\Cache;
 
 final readonly class Banklink
 {
@@ -12,6 +13,14 @@ final readonly class Banklink
 
     public function authenticate(string $token): Bank
     {
-        return $this->bank->authenticate($token);
+        $bank = config()->get('banklink.bank');
+        $agency = config()->get("banks.$bank.agency");
+        $account = config()->get("banks.$bank.account");
+
+        return Cache::remember(
+            key: "banklink.$bank.$agency.$account",
+            ttl: now()->addMonth(),
+            callback: fn () => $this->bank->authenticate($token),
+        );
     }
 }
