@@ -18,14 +18,16 @@ final class CheckingAccountBalanceGetter
      */
     public function get(): Money
     {
-        return app(Pipeline::class)
+        $transactionOperation = app(Pipeline::class)
             ->through([
                 GetCheckingAccountNavigation::class,
                 GetCheckingAccountSubNavigation::class,
                 GetCheckingAccountStatement::class,
-                GetCheckingAccountBalance::class,
             ])
             ->via('get')
             ->thenReturn();
+
+        return app()->make(GetCheckingAccountBalance::class)
+            ->from($transactionOperation);
     }
 }
