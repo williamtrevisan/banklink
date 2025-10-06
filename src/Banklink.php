@@ -18,8 +18,9 @@ final readonly class Banklink
         $agency = config()->get("banks.$bank.agency");
         $account = config()->get("banks.$bank.account");
 
-        if (! cache()->has($key = "banklink.$bank.$agency.$account")) {
-            throw new InvalidArgumentException('The token parameter is required.');
+        if (! cache()->has($key = "banklink.$bank.$agency.$account") && is_null($token))
+        {
+            throw new \InvalidArgumentException('The token parameter is required.');
         }
 
         return Cache::remember(
