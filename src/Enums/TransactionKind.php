@@ -24,4 +24,9 @@ enum TransactionKind: string
             default => TransactionKind::Purchase,
         };
     }
+
+    public function is(TransactionKind $kind): bool
+    {
+        return $this === $kind;
+    }
 }
