@@ -5,8 +5,11 @@ declare(strict_types=1);
 namespace Banklink\Banks\Itau\Entities;
 
 use Banklink\Accessors;
+use Banklink\Banks\Itau\Pipelines\CheckingAccountBalanceGetter;
 use Banklink\Entities;
+use Brick\Money\Money;
 use Illuminate\Config\Repository;
+use Illuminate\Support\Facades\Cache;
 
 final class Account extends Entities\Account
 {
@@ -45,6 +48,19 @@ final class Account extends Entities\Account
     public function digit(): string
     {
         return $this->digit;
+    }
+
+    public function balance(): Money
+    {
+        $bank = config()->get('banklink.bank');
+        $agency = config()->get("banks.$bank.agency");
+        $account = config()->get("banks.$bank.account");
+
+        return Cache::remember(
+            "banklink.$bank.$agency.$account.balance",
+            ttl: now()->addHour(),
+            callback: fn () => app()->make(CheckingAccountBalanceGetter::class)->get(),
+        );
     }
 
     public function cards(): Accessors\Contracts\CardsAccessor

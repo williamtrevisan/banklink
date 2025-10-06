@@ -19,9 +19,9 @@ final readonly class StatementsAccessor implements Contracts\StatementsAccessor
      */
     public function all(): Collection
     {
-        $bank = config('banklink.bank');
-        $agency = config("banks.$bank.agency");
-        $account = config("banks.$bank.account");
+        $bank = config()->get('banklink.bank');
+        $agency = config()->get("banks.$bank.agency");
+        $account = config()->get("banks.$bank.account");
 
         return Cache::remember(
             key: "banklink.$bank.$agency.$account.statements.all",

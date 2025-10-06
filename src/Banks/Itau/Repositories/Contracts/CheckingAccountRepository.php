@@ -15,5 +15,7 @@ interface CheckingAccountRepository
 
     public function statements(string $operation): string;
 
+    public function balance(string $operation): Collection;
+
     public function transactionsFrom(Carbon $start, Carbon $end, string $operation): Collection;
 }

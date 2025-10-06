@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Banklink\Banks\Itau\Actions\Account;
+namespace Banklink\Banks\Itau\Actions\CheckingAccount;
 
 use Banklink\Banks\Itau\Repositories\Contracts\CheckingAccountRepository;
 use Banklink\Support\PageParser;

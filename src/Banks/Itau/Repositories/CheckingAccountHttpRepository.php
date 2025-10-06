@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Banklink\Banks\Itau\Repositories;
 
+use Banklink\Banks\Itau\Entities\AccountBalance;
 use Banklink\Banks\Itau\Entities\Transaction;
 use Banklink\Banks\Itau\Repositories\Contracts\CheckingAccountRepository;
 use Illuminate\Http\Client\Factory;
@@ -47,6 +48,20 @@ final readonly class CheckingAccountHttpRepository implements CheckingAccountRep
             ])
             ->post('/router-app/router')
             ->body();
+    }
+
+    public function balance(string $operation): Collection
+    {
+        return $this->http
+            ->replaceHeaders([
+                'op' => $operation,
+            ])
+            ->asForm()
+            ->post('/router-app/router', [
+                'dataInicio' => now()->startOfMonth()->format('d-m-Y'),
+                'dataFinal' => now()->lastOfMonth()->format('d-m-Y'),
+            ])
+            ->collect('saldoResumido.saldoContaCorrente');
     }
 
     public function transactionsFrom(Carbon $start, Carbon $end, string $operation): Collection
