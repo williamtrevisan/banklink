@@ -61,7 +61,7 @@ abstract class Transaction
                 /** @var TransactionClassifier $classifier */
                 $classifier = app()->make($classifierClass);
 
-                return $classifier->kind() === $kind
+                return $classifier->kind()->is($kind)
                     && $classifier->matches($this->description());
             });
     }
