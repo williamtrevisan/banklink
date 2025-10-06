@@ -28,6 +28,6 @@ final class CheckingAccountBalanceGetter
             ->thenReturn();
 
         return app()->make(GetCheckingAccountBalance::class)
-            ->from($transactionOperation);
+            ->get($transactionOperation);
     }
 }
