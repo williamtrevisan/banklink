@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Banklink\Banks\Itau\Repositories;
 
-use Banklink\Banks\Itau\Entities\AccountBalance;
 use Banklink\Banks\Itau\Entities\Transaction;
 use Banklink\Banks\Itau\Repositories\Contracts\CheckingAccountRepository;
 use Illuminate\Http\Client\Factory;

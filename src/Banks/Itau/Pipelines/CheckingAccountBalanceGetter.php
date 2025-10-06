@@ -14,8 +14,6 @@ use Illuminate\Pipeline\Pipeline;
 final class CheckingAccountBalanceGetter
 {
     /**
-     * @return Money
-     *
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function get(): Money
