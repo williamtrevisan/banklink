@@ -25,8 +25,12 @@ enum TransactionKind: string
         };
     }
 
-    public function is(TransactionKind $kind): bool
+    public function is(string|TransactionKind $kind): bool
     {
+        if (is_string($kind)) {
+            return $this->value === $kind;
+        }
+
         return $this === $kind;
     }
 }
