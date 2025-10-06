@@ -18,8 +18,10 @@ final readonly class CheckingAccountHttpRepository implements CheckingAccountRep
     public function navigation(): string
     {
         return $this->http
-            ->withHeaders([
+            ->replaceHeaders([
                 'op' => session()->get('checking_account_operation'),
+            ])
+            ->withHeaders([
                 'X-Auth-Token' => session()->get('auth_token'),
                 'X-Flow-ID' => session()->get('flow_id'),
                 'X-Client-ID' => session()->get('client_id'),
